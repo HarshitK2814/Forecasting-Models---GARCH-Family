@@ -1,0 +1,159 @@
+Code,Check,Pass,Detail
+SPX,dates monotonic,True,
+SPX,no duplicate dates,True,0 dupes
+SPX,no weekend dates,True,
+SPX,single symbol,True,
+SPX,Return equals log(C_t/C_t-1),True,max abs diff 3.29e-11
+SPX,no realized measure survives outside RV_Valid,True,0 non-null cells
+SPX,RV strictly positive where valid,True,
+SPX,RV_Valid implies SessionClass FULL,True,
+SPX,identity RS_pos+RS_neg=RV,True,rel err 3.54e-08
+SPX,identity ContVar+Jump=RV,True,rel err 1.98e-08
+SPX,identity RVol^2=RV,True,rel err 2.55e-08
+SPX,identity exp(LogRV)=RV,True,rel err 5.46e-08
+SPX,annualised RVol in a sane range,True,"[2.4, 102.7]"
+SPX,vol index in a sane range,True,"[9.1, 82.7]"
+SPX,US 10y yield in percent not decimals,True,"[0.50, 9.09]"
+SPX,RV_w is a trailing 5-day mean,True,max abs diff 5.40e-13
+SPX,derived columns are prefix-stable (no look-ahead),True,
+SPX,ScaleFactor_HL is a single full-sample constant (documented in-sample quantity),True,
+SPX,return not duplicated across adjacent rows,True,"corr(r_t, r_t+1)=-0.079"
+SPX,InSample_B implies a return,True,
+SPX,BalancedRV_B implies RV_Valid,True,
+SPX,BalancedRV_B implies InSample_B,True,
+SPX,US10Y_pct has no value before its first observation,True,
+SPX,DXY has no value before its first observation,True,
+SPX,HYG_px has no value before its first observation,True,
+SPX,no infinities,True,0 inf cells
+NDX,dates monotonic,True,
+NDX,no duplicate dates,True,0 dupes
+NDX,no weekend dates,True,
+NDX,single symbol,True,
+NDX,Return equals log(C_t/C_t-1),True,max abs diff 4.60e-11
+NDX,no realized measure survives outside RV_Valid,True,0 non-null cells
+NDX,RV strictly positive where valid,True,
+NDX,RV_Valid implies SessionClass FULL,True,
+NDX,identity RS_pos+RS_neg=RV,True,rel err 1.94e-08
+NDX,identity ContVar+Jump=RV,True,rel err 1.44e-08
+NDX,identity RVol^2=RV,True,rel err 1.88e-08
+NDX,identity exp(LogRV)=RV,True,rel err 2.96e-08
+NDX,annualised RVol in a sane range,True,"[2.8, 109.0]"
+NDX,vol index in a sane range,True,"[10.3, 80.1]"
+NDX,US 10y yield in percent not decimals,True,"[0.50, 9.09]"
+NDX,RV_w is a trailing 5-day mean,True,max abs diff 5.20e-13
+NDX,derived columns are prefix-stable (no look-ahead),True,
+NDX,ScaleFactor_HL is a single full-sample constant (documented in-sample quantity),True,
+NDX,return not duplicated across adjacent rows,True,"corr(r_t, r_t+1)=-0.055"
+NDX,InSample_B implies a return,True,
+NDX,BalancedRV_B implies RV_Valid,True,
+NDX,BalancedRV_B implies InSample_B,True,
+NDX,US10Y_pct has no value before its first observation,True,
+NDX,DXY has no value before its first observation,True,
+NDX,HYG_px has no value before its first observation,True,
+NDX,no infinities,True,0 inf cells
+UKX,dates monotonic,True,
+UKX,no duplicate dates,True,0 dupes
+UKX,no weekend dates,True,
+UKX,single symbol,True,
+UKX,Return equals log(C_t/C_t-1),True,max abs diff 4.25e-11
+UKX,no realized measure survives outside RV_Valid,True,0 non-null cells
+UKX,RV strictly positive where valid,True,
+UKX,RV_Valid implies SessionClass FULL,True,
+UKX,identity RS_pos+RS_neg=RV,True,rel err 2.20e-08
+UKX,identity ContVar+Jump=RV,True,rel err 1.57e-08
+UKX,identity RVol^2=RV,True,rel err 1.72e-08
+UKX,identity exp(LogRV)=RV,True,rel err 3.14e-08
+UKX,annualised RVol in a sane range,True,"[3.4, 81.5]"
+UKX,vol index in a sane range,True,"[7.6, 81.0]"
+UKX,US 10y yield in percent not decimals,True,"[0.50, 9.09]"
+UKX,RV_w is a trailing 5-day mean,True,max abs diff 6.00e-13
+UKX,derived columns are prefix-stable (no look-ahead),True,
+UKX,ScaleFactor_HL is a single full-sample constant (documented in-sample quantity),True,
+UKX,return not duplicated across adjacent rows,True,"corr(r_t, r_t+1)=-0.015"
+UKX,InSample_B implies a return,True,
+UKX,BalancedRV_B implies RV_Valid,True,
+UKX,BalancedRV_B implies InSample_B,True,
+UKX,US10Y_pct has no value before its first observation,True,
+UKX,DXY has no value before its first observation,True,
+UKX,HYG_px has no value before its first observation,True,
+UKX,no infinities,True,0 inf cells
+DAX,dates monotonic,True,
+DAX,no duplicate dates,True,0 dupes
+DAX,no weekend dates,True,
+DAX,single symbol,True,
+DAX,Return equals log(C_t/C_t-1),True,max abs diff 4.65e-11
+DAX,no realized measure survives outside RV_Valid,True,0 non-null cells
+DAX,RV strictly positive where valid,True,
+DAX,RV_Valid implies SessionClass FULL,True,
+DAX,identity RS_pos+RS_neg=RV,True,rel err 2.10e-08
+DAX,identity ContVar+Jump=RV,True,rel err 1.95e-08
+DAX,identity RVol^2=RV,True,rel err 1.97e-08
+DAX,identity exp(LogRV)=RV,True,rel err 3.40e-08
+DAX,annualised RVol in a sane range,True,"[2.7, 92.7]"
+DAX,vol index in a sane range,True,"[11.0, 86.0]"
+DAX,US 10y yield in percent not decimals,True,"[0.50, 9.09]"
+DAX,RV_w is a trailing 5-day mean,True,max abs diff 6.00e-13
+DAX,derived columns are prefix-stable (no look-ahead),True,
+DAX,ScaleFactor_HL is a single full-sample constant (documented in-sample quantity),True,
+DAX,return not duplicated across adjacent rows,True,"corr(r_t, r_t+1)=-0.008"
+DAX,InSample_B implies a return,True,
+DAX,BalancedRV_B implies RV_Valid,True,
+DAX,BalancedRV_B implies InSample_B,True,
+DAX,US10Y_pct has no value before its first observation,True,
+DAX,DXY has no value before its first observation,True,
+DAX,HYG_px has no value before its first observation,True,
+DAX,no infinities,True,0 inf cells
+NKY,dates monotonic,True,
+NKY,no duplicate dates,True,0 dupes
+NKY,no weekend dates,True,
+NKY,single symbol,True,
+NKY,Return equals log(C_t/C_t-1),True,max abs diff 4.19e-11
+NKY,no realized measure survives outside RV_Valid,True,0 non-null cells
+NKY,RV strictly positive where valid,True,
+NKY,RV_Valid implies SessionClass FULL,True,
+NKY,identity RS_pos+RS_neg=RV,True,rel err 1.53e-08
+NKY,identity ContVar+Jump=RV,True,rel err 1.96e-08
+NKY,identity RVol^2=RV,True,rel err 1.94e-08
+NKY,identity exp(LogRV)=RV,True,rel err 2.55e-08
+NKY,annualised RVol in a sane range,True,"[3.4, 81.6]"
+NKY,vol index in a sane range,True,"[7.6, 81.0]"
+NKY,US 10y yield in percent not decimals,True,"[0.50, 9.09]"
+NKY,RV_w is a trailing 5-day mean,True,max abs diff 5.60e-13
+NKY,derived columns are prefix-stable (no look-ahead),True,
+NKY,ScaleFactor_HL is a single full-sample constant (documented in-sample quantity),True,
+NKY,return not duplicated across adjacent rows,True,"corr(r_t, r_t+1)=-0.030"
+NKY,InSample_B implies a return,True,
+NKY,BalancedRV_B implies RV_Valid,True,
+NKY,BalancedRV_B implies InSample_B,True,
+NKY,US10Y_pct has no value before its first observation,True,
+NKY,DXY has no value before its first observation,True,
+NKY,HYG_px has no value before its first observation,True,
+NKY,no infinities,True,0 inf cells
+HSI,dates monotonic,True,
+HSI,no duplicate dates,True,0 dupes
+HSI,no weekend dates,True,
+HSI,single symbol,True,
+HSI,Return equals log(C_t/C_t-1),True,max abs diff 4.97e-11
+HSI,no realized measure survives outside RV_Valid,True,0 non-null cells
+HSI,RV strictly positive where valid,True,
+HSI,RV_Valid implies SessionClass FULL,True,
+HSI,identity RS_pos+RS_neg=RV,True,rel err 7.11e-09
+HSI,identity ContVar+Jump=RV,True,rel err 7.64e-09
+HSI,identity RVol^2=RV,True,rel err 5.65e-09
+HSI,identity exp(LogRV)=RV,True,rel err 1.78e-08
+HSI,annualised RVol in a sane range,True,"[3.5, 86.4]"
+HSI,vol index in a sane range,True,"[13.1, 92.5]"
+HSI,US 10y yield in percent not decimals,True,"[0.50, 9.09]"
+HSI,RV_w is a trailing 5-day mean,True,max abs diff 4.40e-13
+HSI,derived columns are prefix-stable (no look-ahead),True,
+HSI,ScaleFactor_HL is a single full-sample constant (documented in-sample quantity),True,
+HSI,return not duplicated across adjacent rows,True,"corr(r_t, r_t+1)=0.011"
+HSI,InSample_B implies a return,True,
+HSI,BalancedRV_B implies RV_Valid,True,
+HSI,BalancedRV_B implies InSample_B,True,
+HSI,US10Y_pct has no value before its first observation,True,
+HSI,DXY has no value before its first observation,True,
+HSI,HYG_px has no value before its first observation,True,
+HSI,no infinities,True,0 inf cells
+ALL,BalancedRV_B identical across indices,True,"[1994, 1994, 1994, 1994, 1994, 1994]"
+ALL,BalancedRV_B intersection is exact,True,1994 vs 1994

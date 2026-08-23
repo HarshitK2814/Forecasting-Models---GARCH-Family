@@ -1,0 +1,7 @@
+Code,Rows,Rows_SampleB,First,Last,Dup_Dates,Dates_Monotonic,Weekend_Dates,Max_Calendar_Gap_Days,Gaps_Over_7d,ZeroReturn_N,ZeroReturn_Pct,ZeroReturn_MaxRun,RepeatedClose_MaxRun,ZeroReturn_Pct_SampleB,NonPositive_Price,Negative_RV,Zero_RV,NonPositive_VolIdx,AbsReturn_Over_15pct,OHLC_Violations,NBars_Median,NBars_Expected,ShortSessions_Under50pct,ShortSessions_Under80pct,CFD_vs_Daily_MedAbsDiff_bps,CFD_vs_Daily_P99_bps,CFD_vs_Daily_Corr
+SPX,9227,3241,1990-01-02,2026-08-21,0,True,0,7,0,5,0.054,1,1,0.031,0,0,0,0,0,0,78.0,78,10,53,26.93,244.28,0.75636
+NDX,9227,3230,1990-01-02,2026-08-21,0,True,0,7,0,6,0.065,1,1,0.0,0,0,0,0,1,0,78.0,78,12,53,35.17,295.67,0.73531
+UKX,9255,3178,1990-01-02,2026-08-21,0,True,0,5,0,14,0.151,1,1,0.126,0,0,0,0,0,0,102.0,102,19,51,28.4,209.36,0.62634
+DAX,9270,3267,1990-01-02,2026-08-21,0,True,0,6,0,0,0.0,0,0,0.0,0,0,0,0,0,0,102.0,102,4,12,33.84,262.93,0.74305
+NKY,8990,2868,1990-01-04,2026-08-21,0,True,0,11,1,1,0.011,1,1,0.035,0,0,0,0,0,0,60.0,60,8,217,56.36,421.23,0.52712
+HSI,9041,3083,1990-01-02,2026-08-21,0,True,0,6,0,5,0.055,1,1,0.0,0,0,0,0,1,0,66.0,66,37,51,45.61,317.08,0.61744

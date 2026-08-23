@@ -1,0 +1,4 @@
+Sample,N_Indices,Indices,Start,End,Binding_Index,Common_Days,Approx_Years,Note
+A,5,SPX NDX UKX NKY HSI,2011-09-20,2026-08-21,NKY,3056,12.13,"5 indices, no euro area, longest window. Robustness."
+B,6,SPX NDX UKX DAX NKY HSI,2013-09-30,2026-08-21,DAX,2685,10.65,PRIMARY. All six. NKY on the declared VXEFA proxy.
+C,6,SPX NDX UKX DAX NKY HSI,2018-01-22,2026-08-21,NKY,1892,7.51,"All six on their own vol index, from the Nikkei VI start. Robustness."

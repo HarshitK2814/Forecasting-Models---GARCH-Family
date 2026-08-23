@@ -1,0 +1,22 @@
+# Data acquisition environment - GARCH-EVT / Realized GARCH / Quantile Regression project
+# Researcher A. Verified working 2026-08-22 on Python 3.12 / Windows 11.
+#
+# certifi is PINNED DELIBERATELY. The workstation shipped certifi 2024.08.30, whose CA
+# bundle had expired roots - every HTTPS fetch failed with CERTIFICATE_VERIFY_FAILED.
+# Do not let it drift backwards.
+
+certifi>=2026.7.22
+requests>=2.32
+pandas>=2.2
+numpy>=1.26
+yfinance>=0.2.65
+xlsxwriter>=3.2
+openpyxl>=3.1
+
+# Optional: columnar mirror of the large intraday tables
+pyarrow>=15.0
+
+# Modelling stage (not needed for data acquisition)
+# arch>=7.0
+# statsmodels>=0.14
+# scipy>=1.11

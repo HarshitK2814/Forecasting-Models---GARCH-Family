@@ -1,0 +1,1196 @@
+file,check,status,detail
+daily\DAX\DAX_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9270 rows
+daily\DAX\DAX_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+daily\DAX\DAX_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+daily\DAX\DAX_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,ok
+daily\DAX\DAX_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=6d; gaps>14d=0
+daily\HSI\HSI_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9041 rows
+daily\HSI\HSI_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+daily\HSI\HSI_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+daily\HSI\HSI_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,ok
+daily\HSI\HSI_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=6d; gaps>14d=0
+daily\NDX\NDX_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9227 rows
+daily\NDX\NDX_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+daily\NDX\NDX_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+daily\NDX\NDX_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,ok
+daily\NDX\NDX_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+daily\NKY\NKY_daily_1990-01-04_2026-08-21.csv,C1_schema,PASS,8990 rows
+daily\NKY\NKY_daily_1990-01-04_2026-08-21.csv,C2_unique,PASS,0
+daily\NKY\NKY_daily_1990-01-04_2026-08-21.csv,C3_monotonic,PASS,
+daily\NKY\NKY_daily_1990-01-04_2026-08-21.csv,C4_ranges,PASS,ok
+daily\NKY\NKY_daily_1990-01-04_2026-08-21.csv,C5_continuity,PASS,max_gap=11d; gaps>14d=0
+daily\SPX\SPX_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9227 rows
+daily\SPX\SPX_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+daily\SPX\SPX_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+daily\SPX\SPX_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,ok
+daily\SPX\SPX_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+daily\UKX\UKX_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9255 rows
+daily\UKX\UKX_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+daily\UKX\UKX_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+daily\UKX\UKX_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,ok
+daily\UKX\UKX_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\GVZ\GVZ_daily_2009-09-18_2026-08-21.csv,C1_schema,PASS,4255 rows
+volatility\GVZ\GVZ_daily_2009-09-18_2026-08-21.csv,C2_unique,PASS,0
+volatility\GVZ\GVZ_daily_2009-09-18_2026-08-21.csv,C3_monotonic,PASS,
+volatility\GVZ\GVZ_daily_2009-09-18_2026-08-21.csv,C4_ranges,PASS,"min=8.88 max=48.98 out_of_(0,250]=0"
+volatility\GVZ\GVZ_daily_2009-09-18_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\NKVI\NKVI_daily_2018-01-22_2026-08-21.csv,C1_schema,PASS,2088 rows
+volatility\NKVI\NKVI_daily_2018-01-22_2026-08-21.csv,C2_unique,PASS,0
+volatility\NKVI\NKVI_daily_2018-01-22_2026-08-21.csv,C3_monotonic,PASS,
+volatility\NKVI\NKVI_daily_2018-01-22_2026-08-21.csv,C4_ranges,PASS,"min=12.98 max=70.69 out_of_(0,250]=0"
+volatility\NKVI\NKVI_daily_2018-01-22_2026-08-21.csv,C5_continuity,PASS,max_gap=11d; gaps>14d=0
+volatility\OVX\OVX_daily_2009-09-18_2026-08-21.csv,C1_schema,PASS,4255 rows
+volatility\OVX\OVX_daily_2009-09-18_2026-08-21.csv,C2_unique,PASS,0
+volatility\OVX\OVX_daily_2009-09-18_2026-08-21.csv,C3_monotonic,PASS,
+volatility\OVX\OVX_daily_2009-09-18_2026-08-21.csv,C4_ranges,WARN,"min=14.50 max=325.15 out_of_(0,250]=1"
+volatility\OVX\OVX_daily_2009-09-18_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\RVX\RVX_daily_2009-09-16_2026-08-21.csv,C1_schema,PASS,4254 rows
+volatility\RVX\RVX_daily_2009-09-16_2026-08-21.csv,C2_unique,PASS,0
+volatility\RVX\RVX_daily_2009-09-16_2026-08-21.csv,C3_monotonic,PASS,
+volatility\RVX\RVX_daily_2009-09-16_2026-08-21.csv,C4_ranges,PASS,"min=11.83 max=83.19 out_of_(0,250]=0"
+volatility\RVX\RVX_daily_2009-09-16_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\SKEW\SKEW_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9211 rows
+volatility\SKEW\SKEW_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+volatility\SKEW\SKEW_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+volatility\SKEW\SKEW_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,"min=101.23 max=183.12 out_of_(0,250]=0"
+volatility\SKEW\SKEW_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=13d; gaps>14d=0
+volatility\V1X\V1X_daily_2005-02-01_2026-08-21.csv,C1_schema,PASS,5474 rows
+volatility\V1X\V1X_daily_2005-02-01_2026-08-21.csv,C2_unique,PASS,0
+volatility\V1X\V1X_daily_2005-02-01_2026-08-21.csv,C3_monotonic,PASS,
+volatility\V1X\V1X_daily_2005-02-01_2026-08-21.csv,C4_ranges,PASS,"min=10.98 max=86.01 out_of_(0,250]=0"
+volatility\V1X\V1X_daily_2005-02-01_2026-08-21.csv,C5_continuity,PASS,max_gap=6d; gaps>14d=0
+volatility\V2TX\V2TX_daily_1999-01-04_2026-08-21.csv,C1_schema,PASS,7035 rows
+volatility\V2TX\V2TX_daily_1999-01-04_2026-08-21.csv,C2_unique,PASS,0
+volatility\V2TX\V2TX_daily_1999-01-04_2026-08-21.csv,C3_monotonic,PASS,
+volatility\V2TX\V2TX_daily_1999-01-04_2026-08-21.csv,C4_ranges,PASS,"min=10.68 max=87.51 out_of_(0,250]=0"
+volatility\V2TX\V2TX_daily_1999-01-04_2026-08-21.csv,C5_continuity,PASS,max_gap=6d; gaps>14d=0
+volatility\V6I1\V6I1_daily_1999-01-04_2026-08-19.csv,C1_schema,PASS,6329 rows
+volatility\V6I1\V6I1_daily_1999-01-04_2026-08-19.csv,C2_unique,PASS,0
+volatility\V6I1\V6I1_daily_1999-01-04_2026-08-19.csv,C3_monotonic,PASS,
+volatility\V6I1\V6I1_daily_1999-01-04_2026-08-19.csv,C4_ranges,PASS,"min=9.54 max=120.84 out_of_(0,250]=0"
+volatility\V6I1\V6I1_daily_1999-01-04_2026-08-19.csv,C5_continuity,PASS,max_gap=9d; gaps>14d=0
+volatility\VIX3M\VIX3M_daily_2009-09-18_2026-08-21.csv,C1_schema,PASS,4257 rows
+volatility\VIX3M\VIX3M_daily_2009-09-18_2026-08-21.csv,C2_unique,PASS,0
+volatility\VIX3M\VIX3M_daily_2009-09-18_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VIX3M\VIX3M_daily_2009-09-18_2026-08-21.csv,C4_ranges,PASS,"min=11.85 max=72.98 out_of_(0,250]=0"
+volatility\VIX3M\VIX3M_daily_2009-09-18_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\VIX6M\VIX6M_daily_2008-01-02_2026-08-21.csv,C1_schema,PASS,4689 rows
+volatility\VIX6M\VIX6M_daily_2008-01-02_2026-08-21.csv,C2_unique,PASS,0
+volatility\VIX6M\VIX6M_daily_2008-01-02_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VIX6M\VIX6M_daily_2008-01-02_2026-08-21.csv,C4_ranges,PASS,"min=13.75 max=61.47 out_of_(0,250]=0"
+volatility\VIX6M\VIX6M_daily_2008-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\VIX9D\VIX9D_daily_2011-01-04_2026-08-21.csv,C1_schema,PASS,3931 rows
+volatility\VIX9D\VIX9D_daily_2011-01-04_2026-08-21.csv,C2_unique,PASS,0
+volatility\VIX9D\VIX9D_daily_2011-01-04_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VIX9D\VIX9D_daily_2011-01-04_2026-08-21.csv,C4_ranges,PASS,"min=7.10 max=106.66 out_of_(0,250]=0"
+volatility\VIX9D\VIX9D_daily_2011-01-04_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\VIX\VIX_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9256 rows
+volatility\VIX\VIX_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+volatility\VIX\VIX_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VIX\VIX_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,"min=9.14 max=82.69 out_of_(0,250]=0"
+volatility\VIX\VIX_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+volatility\VVIX\VVIX_daily_2006-03-06_2026-08-21.csv,C1_schema,PASS,5088 rows
+volatility\VVIX\VVIX_daily_2006-03-06_2026-08-21.csv,C2_unique,PASS,0
+volatility\VVIX\VVIX_daily_2006-03-06_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VVIX\VVIX_daily_2006-03-06_2026-08-21.csv,C4_ranges,PASS,"min=15.71 max=207.59 out_of_(0,250]=0"
+volatility\VVIX\VVIX_daily_2006-03-06_2026-08-21.csv,C5_continuity,WARN,max_gap=21d; gaps>14d=2
+volatility\VXD\VXD_daily_2009-09-18_2026-08-21.csv,C1_schema,PASS,4257 rows
+volatility\VXD\VXD_daily_2009-09-18_2026-08-21.csv,C2_unique,PASS,0
+volatility\VXD\VXD_daily_2009-09-18_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VXD\VXD_daily_2009-09-18_2026-08-21.csv,C4_ranges,PASS,"min=2.71 max=67.07 out_of_(0,250]=0"
+volatility\VXD\VXD_daily_2009-09-18_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\VXEEM\VXEEM_daily_2011-03-16_2026-08-21.csv,C1_schema,PASS,3878 rows
+volatility\VXEEM\VXEEM_daily_2011-03-16_2026-08-21.csv,C2_unique,PASS,0
+volatility\VXEEM\VXEEM_daily_2011-03-16_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VXEEM\VXEEM_daily_2011-03-16_2026-08-21.csv,C4_ranges,PASS,"min=13.11 max=92.46 out_of_(0,250]=0"
+volatility\VXEEM\VXEEM_daily_2011-03-16_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\VXEFA\VXEFA_daily_2008-01-02_2026-08-21.csv,C1_schema,PASS,4685 rows
+volatility\VXEFA\VXEFA_daily_2008-01-02_2026-08-21.csv,C2_unique,PASS,0
+volatility\VXEFA\VXEFA_daily_2008-01-02_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VXEFA\VXEFA_daily_2008-01-02_2026-08-21.csv,C4_ranges,PASS,"min=7.62 max=81.02 out_of_(0,250]=0"
+volatility\VXEFA\VXEFA_daily_2008-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+volatility\VXN\VXN_daily_2009-09-14_2026-08-21.csv,C1_schema,PASS,4263 rows
+volatility\VXN\VXN_daily_2009-09-14_2026-08-21.csv,C2_unique,PASS,0
+volatility\VXN\VXN_daily_2009-09-14_2026-08-21.csv,C3_monotonic,PASS,
+volatility\VXN\VXN_daily_2009-09-14_2026-08-21.csv,C4_ranges,PASS,"min=10.31 max=80.08 out_of_(0,250]=0"
+volatility\VXN\VXN_daily_2009-09-14_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+realized_volatility\DAX_RV_daily.csv,C1_schema,PASS,3307 rows
+realized_volatility\DAX_RV_daily.csv,C2_unique,PASS,0
+realized_volatility\DAX_RV_daily.csv,C3_monotonic,PASS,
+realized_volatility\DAX_RV_daily.csv,C4_ranges,PASS,ann_vol median=10.9% p99=37.8% max=92.7%; nonpos=0; >300%=0
+realized_volatility\DAX_RV_daily.csv,C5_continuity,PASS,median_bars=102; days_with<50%bars=4 (0.1%)
+realized_volatility\HSI_RV_daily.csv,C1_schema,PASS,3576 rows
+realized_volatility\HSI_RV_daily.csv,C2_unique,PASS,0
+realized_volatility\HSI_RV_daily.csv,C3_monotonic,PASS,
+realized_volatility\HSI_RV_daily.csv,C4_ranges,PASS,ann_vol median=11.8% p99=33.8% max=86.4%; nonpos=0; >300%=0
+realized_volatility\HSI_RV_daily.csv,C5_continuity,PASS,median_bars=66; days_with<50%bars=42 (1.2%)
+realized_volatility\NDX_RV_daily.csv,C1_schema,PASS,3733 rows
+realized_volatility\NDX_RV_daily.csv,C2_unique,PASS,0
+realized_volatility\NDX_RV_daily.csv,C3_monotonic,PASS,
+realized_volatility\NDX_RV_daily.csv,C4_ranges,PASS,ann_vol median=11.0% p99=42.9% max=109.0%; nonpos=0; >300%=0
+realized_volatility\NDX_RV_daily.csv,C5_continuity,PASS,median_bars=78; days_with<50%bars=26 (0.7%)
+realized_volatility\NKY_RV_daily.csv,C1_schema,PASS,3543 rows
+realized_volatility\NKY_RV_daily.csv,C2_unique,PASS,0
+realized_volatility\NKY_RV_daily.csv,C3_monotonic,PASS,
+realized_volatility\NKY_RV_daily.csv,C4_ranges,PASS,ann_vol median=9.4% p99=35.3% max=92.6%; nonpos=0; >300%=0
+realized_volatility\NKY_RV_daily.csv,C5_continuity,PASS,median_bars=60; days_with<50%bars=8 (0.2%)
+realized_volatility\SPX_RV_daily.csv,C1_schema,PASS,3755 rows
+realized_volatility\SPX_RV_daily.csv,C2_unique,PASS,0
+realized_volatility\SPX_RV_daily.csv,C3_monotonic,PASS,
+realized_volatility\SPX_RV_daily.csv,C4_ranges,PASS,ann_vol median=8.1% p99=34.8% max=102.7%; nonpos=0; >300%=0
+realized_volatility\SPX_RV_daily.csv,C5_continuity,PASS,median_bars=78; days_with<50%bars=33 (0.9%)
+realized_volatility\UKX_RV_daily.csv,C1_schema,PASS,3728 rows
+realized_volatility\UKX_RV_daily.csv,C2_unique,PASS,0
+realized_volatility\UKX_RV_daily.csv,C3_monotonic,PASS,
+realized_volatility\UKX_RV_daily.csv,C4_ranges,PASS,ann_vol median=8.9% p99=28.0% max=81.5%; nonpos=0; >300%=0
+realized_volatility\UKX_RV_daily.csv,C5_continuity,PASS,median_bars=102; days_with<50%bars=21 (0.6%)
+macro\BRENT\BRENT_daily_2007-07-30_2026-08-21.csv,C1_schema,PASS,4745 rows
+macro\BRENT\BRENT_daily_2007-07-30_2026-08-21.csv,C2_unique,PASS,0
+macro\BRENT\BRENT_daily_2007-07-30_2026-08-21.csv,C3_monotonic,PASS,
+macro\BRENT\BRENT_daily_2007-07-30_2026-08-21.csv,C4_ranges,WARN,OHLC_violations:69
+macro\BRENT\BRENT_daily_2007-07-30_2026-08-21.csv,C5_continuity,WARN,max_gap=17d; gaps>14d=1
+macro\DXY\DXY_daily_1990-01-01_2026-08-21.csv,C1_schema,PASS,9336 rows
+macro\DXY\DXY_daily_1990-01-01_2026-08-21.csv,C2_unique,PASS,0
+macro\DXY\DXY_daily_1990-01-01_2026-08-21.csv,C3_monotonic,PASS,
+macro\DXY\DXY_daily_1990-01-01_2026-08-21.csv,C4_ranges,PASS,min=71.3300 max=120.9000
+macro\DXY\DXY_daily_1990-01-01_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\EURUSD\EURUSD_daily_2003-12-01_2026-08-21.csv,C1_schema,PASS,5896 rows
+macro\EURUSD\EURUSD_daily_2003-12-01_2026-08-21.csv,C2_unique,PASS,0
+macro\EURUSD\EURUSD_daily_2003-12-01_2026-08-21.csv,C3_monotonic,PASS,
+macro\EURUSD\EURUSD_daily_2003-12-01_2026-08-21.csv,C4_ranges,WARN,OHLC_violations:128
+macro\EURUSD\EURUSD_daily_2003-12-01_2026-08-21.csv,C5_continuity,WARN,max_gap=18d; gaps>14d=1
+macro\EWG\EWG_daily_1996-03-18_2026-08-21.csv,C1_schema,PASS,7657 rows
+macro\EWG\EWG_daily_1996-03-18_2026-08-21.csv,C2_unique,PASS,0
+macro\EWG\EWG_daily_1996-03-18_2026-08-21.csv,C3_monotonic,PASS,
+macro\EWG\EWG_daily_1996-03-18_2026-08-21.csv,C4_ranges,PASS,min=8.2500 max=44.5600
+macro\EWG\EWG_daily_1996-03-18_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\EWH\EWH_daily_1996-03-18_2026-08-21.csv,C1_schema,PASS,7657 rows
+macro\EWH\EWH_daily_1996-03-18_2026-08-21.csv,C2_unique,PASS,0
+macro\EWH\EWH_daily_1996-03-18_2026-08-21.csv,C3_monotonic,PASS,
+macro\EWH\EWH_daily_1996-03-18_2026-08-21.csv,C4_ranges,PASS,min=5.5625 max=28.1000
+macro\EWH\EWH_daily_1996-03-18_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\EWJ\EWJ_daily_1996-03-18_2026-08-21.csv,C1_schema,PASS,7657 rows
+macro\EWJ\EWJ_daily_1996-03-18_2026-08-21.csv,C2_unique,PASS,0
+macro\EWJ\EWJ_daily_1996-03-18_2026-08-21.csv,C3_monotonic,PASS,
+macro\EWJ\EWJ_daily_1996-03-18_2026-08-21.csv,C4_ranges,PASS,min=24.9600 max=98.4700
+macro\EWJ\EWJ_daily_1996-03-18_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\EWU\EWU_daily_1996-03-18_2026-08-21.csv,C1_schema,PASS,7657 rows
+macro\EWU\EWU_daily_1996-03-18_2026-08-21.csv,C2_unique,PASS,0
+macro\EWU\EWU_daily_1996-03-18_2026-08-21.csv,C3_monotonic,PASS,
+macro\EWU\EWU_daily_1996-03-18_2026-08-21.csv,C4_ranges,PASS,min=18.0000 max=54.4400
+macro\EWU\EWU_daily_1996-03-18_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\GBPUSD\GBPUSD_daily_2003-12-01_2026-08-23.csv,C1_schema,PASS,5909 rows
+macro\GBPUSD\GBPUSD_daily_2003-12-01_2026-08-23.csv,C2_unique,PASS,0
+macro\GBPUSD\GBPUSD_daily_2003-12-01_2026-08-23.csv,C3_monotonic,PASS,
+macro\GBPUSD\GBPUSD_daily_2003-12-01_2026-08-23.csv,C4_ranges,WARN,OHLC_violations:103
+macro\GBPUSD\GBPUSD_daily_2003-12-01_2026-08-23.csv,C5_continuity,PASS,max_gap=6d; gaps>14d=0
+macro\GOLD\GOLD_daily_2000-08-30_2026-08-21.csv,C1_schema,PASS,6518 rows
+macro\GOLD\GOLD_daily_2000-08-30_2026-08-21.csv,C2_unique,PASS,0
+macro\GOLD\GOLD_daily_2000-08-30_2026-08-21.csv,C3_monotonic,PASS,
+macro\GOLD\GOLD_daily_2000-08-30_2026-08-21.csv,C4_ranges,WARN,OHLC_violations:441
+macro\GOLD\GOLD_daily_2000-08-30_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+macro\HYG\HYG_daily_2007-04-11_2026-08-21.csv,C1_schema,PASS,4873 rows
+macro\HYG\HYG_daily_2007-04-11_2026-08-21.csv,C2_unique,PASS,0
+macro\HYG\HYG_daily_2007-04-11_2026-08-21.csv,C3_monotonic,PASS,
+macro\HYG\HYG_daily_2007-04-11_2026-08-21.csv,C4_ranges,PASS,min=61.6400 max=106.0900
+macro\HYG\HYG_daily_2007-04-11_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+macro\IEF\IEF_daily_2002-07-30_2026-08-21.csv,C1_schema,PASS,6055 rows
+macro\IEF\IEF_daily_2002-07-30_2026-08-21.csv,C2_unique,PASS,0
+macro\IEF\IEF_daily_2002-07-30_2026-08-21.csv,C3_monotonic,PASS,
+macro\IEF\IEF_daily_2002-07-30_2026-08-21.csv,C4_ranges,PASS,min=79.5900 max=123.0600
+macro\IEF\IEF_daily_2002-07-30_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+macro\LQD\LQD_daily_2002-07-30_2026-08-21.csv,C1_schema,PASS,6055 rows
+macro\LQD\LQD_daily_2002-07-30_2026-08-21.csv,C2_unique,PASS,0
+macro\LQD\LQD_daily_2002-07-30_2026-08-21.csv,C3_monotonic,PASS,
+macro\LQD\LQD_daily_2002-07-30_2026-08-21.csv,C4_ranges,PASS,min=81.7000 max=139.1500
+macro\LQD\LQD_daily_2002-07-30_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+macro\QQQ\QQQ_daily_1999-03-10_2026-08-21.csv,C1_schema,PASS,6906 rows
+macro\QQQ\QQQ_daily_1999-03-10_2026-08-21.csv,C2_unique,PASS,0
+macro\QQQ\QQQ_daily_1999-03-10_2026-08-21.csv,C3_monotonic,PASS,
+macro\QQQ\QQQ_daily_1999-03-10_2026-08-21.csv,C4_ranges,PASS,min=20.0600 max=746.1600
+macro\QQQ\QQQ_daily_1999-03-10_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\SPY\SPY_daily_1993-01-29_2026-08-21.csv,C1_schema,PASS,8448 rows
+macro\SPY\SPY_daily_1993-01-29_2026-08-21.csv,C2_unique,PASS,0
+macro\SPY\SPY_daily_1993-01-29_2026-08-21.csv,C3_monotonic,PASS,
+macro\SPY\SPY_daily_1993-01-29_2026-08-21.csv,C4_ranges,PASS,min=43.4062 max=777.8800
+macro\SPY\SPY_daily_1993-01-29_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\TLT\TLT_daily_2002-07-30_2026-08-21.csv,C1_schema,PASS,6055 rows
+macro\TLT\TLT_daily_2002-07-30_2026-08-21.csv,C2_unique,PASS,0
+macro\TLT\TLT_daily_2002-07-30_2026-08-21.csv,C3_monotonic,PASS,
+macro\TLT\TLT_daily_2002-07-30_2026-08-21.csv,C4_ranges,PASS,min=80.6500 max=171.5700
+macro\TLT\TLT_daily_2002-07-30_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+macro\US10Y\US10Y_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9196 rows
+macro\US10Y\US10Y_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+macro\US10Y\US10Y_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+macro\US10Y\US10Y_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,min=0.4990 max=9.0900
+macro\US10Y\US10Y_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\US13W\US13W_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9196 rows
+macro\US13W\US13W_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+macro\US13W\US13W_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+macro\US13W\US13W_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,|logret|>50%:271
+macro\US13W\US13W_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\US30Y\US30Y_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9196 rows
+macro\US30Y\US30Y_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+macro\US30Y\US30Y_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+macro\US30Y\US30Y_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,min=0.9370 max=9.1800
+macro\US30Y\US30Y_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\US5Y\US5Y_daily_1990-01-02_2026-08-21.csv,C1_schema,PASS,9196 rows
+macro\US5Y\US5Y_daily_1990-01-02_2026-08-21.csv,C2_unique,PASS,0
+macro\US5Y\US5Y_daily_1990-01-02_2026-08-21.csv,C3_monotonic,PASS,
+macro\US5Y\US5Y_daily_1990-01-02_2026-08-21.csv,C4_ranges,PASS,min=0.1950 max=9.1000
+macro\US5Y\US5Y_daily_1990-01-02_2026-08-21.csv,C5_continuity,PASS,max_gap=7d; gaps>14d=0
+macro\USDHKD\USDHKD_daily_2001-07-16_2026-08-23.csv,C1_schema,PASS,6355 rows
+macro\USDHKD\USDHKD_daily_2001-07-16_2026-08-23.csv,C2_unique,PASS,0
+macro\USDHKD\USDHKD_daily_2001-07-16_2026-08-23.csv,C3_monotonic,PASS,
+macro\USDHKD\USDHKD_daily_2001-07-16_2026-08-23.csv,C4_ranges,WARN,OHLC_violations:115
+macro\USDHKD\USDHKD_daily_2001-07-16_2026-08-23.csv,C5_continuity,WARN,max_gap=214d; gaps>14d=2
+macro\USDJPY\USDJPY_daily_1996-10-30_2026-08-21.csv,C1_schema,PASS,7730 rows
+macro\USDJPY\USDJPY_daily_1996-10-30_2026-08-21.csv,C2_unique,PASS,0
+macro\USDJPY\USDJPY_daily_1996-10-30_2026-08-21.csv,C3_monotonic,PASS,
+macro\USDJPY\USDJPY_daily_1996-10-30_2026-08-21.csv,C4_ranges,WARN,OHLC_violations:275
+macro\USDJPY\USDJPY_daily_1996-10-30_2026-08-21.csv,C5_continuity,WARN,max_gap=18d; gaps>14d=1
+macro\WTI\WTI_daily_2000-08-23_2026-08-21.csv,C1_schema,PASS,6527 rows
+macro\WTI\WTI_daily_2000-08-23_2026-08-21.csv,C2_unique,PASS,0
+macro\WTI\WTI_daily_2000-08-23_2026-08-21.csv,C3_monotonic,PASS,
+macro\WTI\WTI_daily_2000-08-23_2026-08-21.csv,C4_ranges,WARN,OHLC_violations:7
+macro\WTI\WTI_daily_2000-08-23_2026-08-21.csv,C5_continuity,PASS,max_gap=5d; gaps>14d=0
+intraday\1min\DAX\DAX_1min_2013.csv,C1_schema,PASS,29416 bars
+intraday\1min\DAX\DAX_1min_2013.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2013.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8502.7-9599.0
+intraday\1min\DAX\DAX_1min_2013.csv,C5_continuity,PASS,63 session-days; mean 466.9 bars/day; 2013-09-30 15:13:00+00:00 -> 2013-12-30 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2014.csv,C1_schema,PASS,128797 bars
+intraday\1min\DAX\DAX_1min_2014.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2014.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8363.5-10092.0
+intraday\1min\DAX\DAX_1min_2014.csv,C5_continuity,PASS,255 session-days; mean 505.1 bars/day; 2014-01-02 08:00:00+00:00 -> 2014-12-30 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2015.csv,C1_schema,PASS,129928 bars
+intraday\1min\DAX\DAX_1min_2015.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2015.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 9332.0-12393.5
+intraday\1min\DAX\DAX_1min_2015.csv,C5_continuity,PASS,255 session-days; mean 509.5 bars/day; 2015-01-02 08:00:00+00:00 -> 2015-12-30 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2016.csv,C1_schema,PASS,130381 bars
+intraday\1min\DAX\DAX_1min_2016.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2016.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8698.5-11480.2
+intraday\1min\DAX\DAX_1min_2016.csv,C5_continuity,PASS,256 session-days; mean 509.3 bars/day; 2016-01-04 08:00:00+00:00 -> 2016-12-30 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2017.csv,C1_schema,PASS,129309 bars
+intraday\1min\DAX\DAX_1min_2017.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2017.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 11417.8-13522.8
+intraday\1min\DAX\DAX_1min_2017.csv,C5_continuity,PASS,254 session-days; mean 509.1 bars/day; 2017-01-02 08:00:00+00:00 -> 2017-12-29 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2018.csv,C1_schema,PASS,128769 bars
+intraday\1min\DAX\DAX_1min_2018.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2018.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10279.7-13596.3
+intraday\1min\DAX\DAX_1min_2018.csv,C5_continuity,PASS,253 session-days; mean 509.0 bars/day; 2018-01-02 08:00:00+00:00 -> 2018-12-28 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2019.csv,C1_schema,PASS,130637 bars
+intraday\1min\DAX\DAX_1min_2019.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2019.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10388.4-13424.7
+intraday\1min\DAX\DAX_1min_2019.csv,C5_continuity,PASS,258 session-days; mean 506.3 bars/day; 2019-01-02 08:00:00+00:00 -> 2019-12-31 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2020.csv,C1_schema,PASS,131794 bars
+intraday\1min\DAX\DAX_1min_2020.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2020.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2020.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8248.9-13905.3
+intraday\1min\DAX\DAX_1min_2020.csv,C5_continuity,PASS,259 session-days; mean 508.9 bars/day; 2020-01-02 08:00:00+00:00 -> 2020-12-31 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2021.csv,C1_schema,PASS,131489 bars
+intraday\1min\DAX\DAX_1min_2021.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2021.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 13311.2-16288.9
+intraday\1min\DAX\DAX_1min_2021.csv,C5_continuity,PASS,258 session-days; mean 509.6 bars/day; 2021-01-04 08:00:00+00:00 -> 2021-12-31 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2022.csv,C1_schema,PASS,131562 bars
+intraday\1min\DAX\DAX_1min_2022.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2022.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 11861.4-16284.8
+intraday\1min\DAX\DAX_1min_2022.csv,C5_continuity,PASS,258 session-days; mean 509.9 bars/day; 2022-01-03 08:00:00+00:00 -> 2022-12-30 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2023.csv,C1_schema,PASS,130505 bars
+intraday\1min\DAX\DAX_1min_2023.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2023.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 13976.8-16999.9
+intraday\1min\DAX\DAX_1min_2023.csv,C5_continuity,PASS,256 session-days; mean 509.8 bars/day; 2023-01-02 08:00:00+00:00 -> 2023-12-29 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2024.csv,C1_schema,PASS,131951 bars
+intraday\1min\DAX\DAX_1min_2024.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2024.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16346.8-20522.2
+intraday\1min\DAX\DAX_1min_2024.csv,C5_continuity,PASS,259 session-days; mean 509.5 bars/day; 2024-01-02 08:00:00+00:00 -> 2024-12-31 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2025.csv,C1_schema,PASS,131340 bars
+intraday\1min\DAX\DAX_1min_2025.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2025.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18875.2-24769.8
+intraday\1min\DAX\DAX_1min_2025.csv,C5_continuity,PASS,258 session-days; mean 509.1 bars/day; 2025-01-02 08:00:00+00:00 -> 2025-12-31 16:29:00+00:00
+intraday\1min\DAX\DAX_1min_2026.csv,C1_schema,PASS,84048 bars
+intraday\1min\DAX\DAX_1min_2026.csv,C2_unique,PASS,0
+intraday\1min\DAX\DAX_1min_2026.csv,C3_monotonic,PASS,
+intraday\1min\DAX\DAX_1min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 21865.4-26575.3
+intraday\1min\DAX\DAX_1min_2026.csv,C5_continuity,PASS,165 session-days; mean 509.4 bars/day; 2026-01-02 08:00:00+00:00 -> 2026-08-21 15:29:00+00:00
+intraday\1min\HSI\HSI_1min_2011.csv,C1_schema,PASS,1504 bars
+intraday\1min\HSI\HSI_1min_2011.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2011.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 17383.2-19415.0
+intraday\1min\HSI\HSI_1min_2011.csv,C5_continuity,PASS,5 session-days; mean 300.8 bars/day; 2011-09-19 01:30:00+00:00 -> 2011-09-23 07:59:00+00:00
+intraday\1min\HSI\HSI_1min_2012.csv,C1_schema,PASS,73094 bars
+intraday\1min\HSI\HSI_1min_2012.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2012.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18056.4-22716.4
+intraday\1min\HSI\HSI_1min_2012.csv,C5_continuity,PASS,225 session-days; mean 324.9 bars/day; 2012-02-06 01:30:00+00:00 -> 2012-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2013.csv,C1_schema,PASS,75777 bars
+intraday\1min\HSI\HSI_1min_2013.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2013.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 19429.0-24088.0
+intraday\1min\HSI\HSI_1min_2013.csv,C5_continuity,PASS,233 session-days; mean 325.2 bars/day; 2013-01-02 01:30:00+00:00 -> 2013-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2014.csv,C1_schema,PASS,79941 bars
+intraday\1min\HSI\HSI_1min_2014.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2014.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 21121.0-25380.0
+intraday\1min\HSI\HSI_1min_2014.csv,C5_continuity,PASS,245 session-days; mean 326.3 bars/day; 2014-01-02 07:00:00+00:00 -> 2014-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2015.csv,C1_schema,PASS,81888 bars
+intraday\1min\HSI\HSI_1min_2015.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2015.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 20348.0-28604.1
+intraday\1min\HSI\HSI_1min_2015.csv,C5_continuity,PASS,255 session-days; mean 321.1 bars/day; 2015-01-02 01:30:00+00:00 -> 2015-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2016.csv,C1_schema,PASS,80480 bars
+intraday\1min\HSI\HSI_1min_2016.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2016.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18286.5-24382.0
+intraday\1min\HSI\HSI_1min_2016.csv,C5_continuity,PASS,245 session-days; mean 328.5 bars/day; 2016-01-04 01:30:00+00:00 -> 2016-12-30 07:59:00+00:00
+intraday\1min\HSI\HSI_1min_2017.csv,C1_schema,PASS,79787 bars
+intraday\1min\HSI\HSI_1min_2017.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2017.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22050.6-30217.0
+intraday\1min\HSI\HSI_1min_2017.csv,C5_continuity,PASS,244 session-days; mean 327.0 bars/day; 2017-01-04 03:09:00+00:00 -> 2017-12-29 07:59:00+00:00
+intraday\1min\HSI\HSI_1min_2018.csv,C1_schema,PASS,80496 bars
+intraday\1min\HSI\HSI_1min_2018.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2018.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 24532.9-33430.1
+intraday\1min\HSI\HSI_1min_2018.csv,C5_continuity,PASS,247 session-days; mean 325.9 bars/day; 2018-01-02 01:35:00+00:00 -> 2018-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2019.csv,C1_schema,PASS,80652 bars
+intraday\1min\HSI\HSI_1min_2019.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2019.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 24858.3-30301.0
+intraday\1min\HSI\HSI_1min_2019.csv,C5_continuity,PASS,247 session-days; mean 326.5 bars/day; 2019-01-02 01:30:00+00:00 -> 2019-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2020.csv,C1_schema,PASS,80986 bars
+intraday\1min\HSI\HSI_1min_2020.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2020.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2020.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 20963.9-29131.4
+intraday\1min\HSI\HSI_1min_2020.csv,C5_continuity,PASS,248 session-days; mean 326.6 bars/day; 2020-01-02 01:30:00+00:00 -> 2020-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2021.csv,C1_schema,PASS,80761 bars
+intraday\1min\HSI\HSI_1min_2021.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2021.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22668.1-31073.4
+intraday\1min\HSI\HSI_1min_2021.csv,C5_continuity,PASS,247 session-days; mean 327.0 bars/day; 2021-01-04 01:30:00+00:00 -> 2021-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2022.csv,C1_schema,PASS,80363 bars
+intraday\1min\HSI\HSI_1min_2022.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2022.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 14619.5-24969.2
+intraday\1min\HSI\HSI_1min_2022.csv,C5_continuity,PASS,245 session-days; mean 328.0 bars/day; 2022-01-04 01:30:00+00:00 -> 2022-12-30 07:59:00+00:00
+intraday\1min\HSI\HSI_1min_2023.csv,C1_schema,PASS,79956 bars
+intraday\1min\HSI\HSI_1min_2023.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2023.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 15976.0-22663.3
+intraday\1min\HSI\HSI_1min_2023.csv,C5_continuity,PASS,243 session-days; mean 329.0 bars/day; 2023-01-03 01:30:00+00:00 -> 2023-12-29 07:59:00+00:00
+intraday\1min\HSI\HSI_1min_2024.csv,C1_schema,PASS,80539 bars
+intraday\1min\HSI\HSI_1min_2024.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2024.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 14792.6-23234.0
+intraday\1min\HSI\HSI_1min_2024.csv,C5_continuity,PASS,246 session-days; mean 327.4 bars/day; 2024-01-02 01:30:00+00:00 -> 2024-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2025.csv,C1_schema,PASS,80268 bars
+intraday\1min\HSI\HSI_1min_2025.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2025.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18675.3-27375.1
+intraday\1min\HSI\HSI_1min_2025.csv,C5_continuity,PASS,245 session-days; mean 327.6 bars/day; 2025-01-02 01:30:00+00:00 -> 2025-12-31 03:59:00+00:00
+intraday\1min\HSI\HSI_1min_2026.csv,C1_schema,PASS,51204 bars
+intraday\1min\HSI\HSI_1min_2026.csv,C2_unique,PASS,0
+intraday\1min\HSI\HSI_1min_2026.csv,C3_monotonic,PASS,
+intraday\1min\HSI\HSI_1min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22522.7-28047.0
+intraday\1min\HSI\HSI_1min_2026.csv,C5_continuity,PASS,156 session-days; mean 328.2 bars/day; 2026-01-02 01:30:00+00:00 -> 2026-08-21 07:59:00+00:00
+intraday\1min\NDX\NDX_1min_2011.csv,C1_schema,PASS,1508 bars
+intraday\1min\NDX\NDX_1min_2011.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2011.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2161.0-2336.8
+intraday\1min\NDX\NDX_1min_2011.csv,C5_continuity,PASS,4 session-days; mean 377.0 bars/day; 2011-09-19 13:30:00+00:00 -> 2011-09-22 19:12:00+00:00
+intraday\1min\NDX\NDX_1min_2012.csv,C1_schema,PASS,91726 bars
+intraday\1min\NDX\NDX_1min_2012.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2012.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2423.8-2878.1
+intraday\1min\NDX\NDX_1min_2012.csv,C5_continuity,PASS,238 session-days; mean 385.4 bars/day; 2012-01-19 16:15:00+00:00 -> 2012-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2013.csv,C1_schema,PASS,86950 bars
+intraday\1min\NDX\NDX_1min_2013.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2013.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2700.7-3591.2
+intraday\1min\NDX\NDX_1min_2013.csv,C5_continuity,PASS,241 session-days; mean 360.8 bars/day; 2013-01-02 14:30:00+00:00 -> 2013-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2014.csv,C1_schema,PASS,95409 bars
+intraday\1min\NDX\NDX_1min_2014.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2014.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3413.5-4345.9
+intraday\1min\NDX\NDX_1min_2014.csv,C5_continuity,PASS,255 session-days; mean 374.2 bars/day; 2014-01-02 14:30:00+00:00 -> 2014-12-31 19:00:00+00:00
+intraday\1min\NDX\NDX_1min_2015.csv,C1_schema,PASS,98748 bars
+intraday\1min\NDX\NDX_1min_2015.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2015.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3951.7-4739.4
+intraday\1min\NDX\NDX_1min_2015.csv,C5_continuity,PASS,258 session-days; mean 382.7 bars/day; 2015-01-02 14:30:00+00:00 -> 2015-12-31 18:00:00+00:00
+intraday\1min\NDX\NDX_1min_2016.csv,C1_schema,PASS,99266 bars
+intraday\1min\NDX\NDX_1min_2016.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2016.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3889.9-4991.4
+intraday\1min\NDX\NDX_1min_2016.csv,C5_continuity,PASS,258 session-days; mean 384.8 bars/day; 2016-01-04 14:30:00+00:00 -> 2016-12-30 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2017.csv,C1_schema,PASS,97010 bars
+intraday\1min\NDX\NDX_1min_2017.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2017.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4882.0-6521.0
+intraday\1min\NDX\NDX_1min_2017.csv,C5_continuity,PASS,253 session-days; mean 383.4 bars/day; 2017-01-03 14:30:00+00:00 -> 2017-12-29 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2018.csv,C1_schema,PASS,98188 bars
+intraday\1min\NDX\NDX_1min_2018.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2018.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5872.8-7700.3
+intraday\1min\NDX\NDX_1min_2018.csv,C5_continuity,PASS,256 session-days; mean 383.5 bars/day; 2018-01-02 14:30:00+00:00 -> 2018-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2019.csv,C1_schema,PASS,99039 bars
+intraday\1min\NDX\NDX_1min_2019.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2019.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6146.8-8805.4
+intraday\1min\NDX\NDX_1min_2019.csv,C5_continuity,PASS,258 session-days; mean 383.9 bars/day; 2019-01-02 14:30:00+00:00 -> 2019-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2020.csv,C1_schema,PASS,99533 bars
+intraday\1min\NDX\NDX_1min_2020.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2020.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2020.csv,C4_ranges,WARN,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=1; px range 6771.1-12921.1
+intraday\1min\NDX\NDX_1min_2020.csv,C5_continuity,PASS,259 session-days; mean 384.3 bars/day; 2020-01-02 14:30:00+00:00 -> 2020-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2021.csv,C1_schema,PASS,99368 bars
+intraday\1min\NDX\NDX_1min_2021.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2021.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 12215.6-16757.5
+intraday\1min\NDX\NDX_1min_2021.csv,C5_continuity,PASS,258 session-days; mean 385.1 bars/day; 2021-01-04 14:30:00+00:00 -> 2021-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2022.csv,C1_schema,PASS,99174 bars
+intraday\1min\NDX\NDX_1min_2022.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2022.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10441.4-16503.1
+intraday\1min\NDX\NDX_1min_2022.csv,C5_continuity,PASS,258 session-days; mean 384.4 bars/day; 2022-01-03 14:30:00+00:00 -> 2022-12-30 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2023.csv,C1_schema,PASS,98274 bars
+intraday\1min\NDX\NDX_1min_2023.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2023.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10702.8-16953.6
+intraday\1min\NDX\NDX_1min_2023.csv,C5_continuity,PASS,256 session-days; mean 383.9 bars/day; 2023-01-03 14:30:00+00:00 -> 2023-12-29 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2024.csv,C1_schema,PASS,99199 bars
+intraday\1min\NDX\NDX_1min_2024.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2024.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16248.4-22130.8
+intraday\1min\NDX\NDX_1min_2024.csv,C5_continuity,PASS,259 session-days; mean 383.0 bars/day; 2024-01-02 14:30:00+00:00 -> 2024-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2025.csv,C1_schema,PASS,98411 bars
+intraday\1min\NDX\NDX_1min_2025.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2025.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16567.3-26177.1
+intraday\1min\NDX\NDX_1min_2025.csv,C5_continuity,PASS,257 session-days; mean 382.9 bars/day; 2025-01-02 14:30:00+00:00 -> 2025-12-31 20:59:00+00:00
+intraday\1min\NDX\NDX_1min_2026.csv,C1_schema,PASS,63378 bars
+intraday\1min\NDX\NDX_1min_2026.csv,C2_unique,PASS,0
+intraday\1min\NDX\NDX_1min_2026.csv,C3_monotonic,PASS,
+intraday\1min\NDX\NDX_1min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22846.7-30750.1
+intraday\1min\NDX\NDX_1min_2026.csv,C5_continuity,PASS,165 session-days; mean 384.1 bars/day; 2026-01-02 14:30:00+00:00 -> 2026-08-21 19:59:00+00:00
+intraday\1min\NKY\NKY_1min_2011.csv,C1_schema,PASS,692 bars
+intraday\1min\NKY\NKY_1min_2011.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2011.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8545.5-8770.7
+intraday\1min\NKY\NKY_1min_2011.csv,C5_continuity,PASS,3 session-days; mean 230.7 bars/day; 2011-09-20 00:00:00+00:00 -> 2011-09-22 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2012.csv,C1_schema,PASS,66855 bars
+intraday\1min\NKY\NKY_1min_2012.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2012.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8249.8-10432.3
+intraday\1min\NKY\NKY_1min_2012.csv,C5_continuity,PASS,225 session-days; mean 297.1 bars/day; 2012-02-06 00:00:00+00:00 -> 2012-12-28 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2013.csv,C1_schema,PASS,65815 bars
+intraday\1min\NKY\NKY_1min_2013.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2013.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10398.6-16308.0
+intraday\1min\NKY\NKY_1min_2013.csv,C5_continuity,PASS,227 session-days; mean 289.9 bars/day; 2013-01-04 00:00:00+00:00 -> 2013-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2014.csv,C1_schema,PASS,75684 bars
+intraday\1min\NKY\NKY_1min_2014.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2014.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 13868.0-18018.0
+intraday\1min\NKY\NKY_1min_2014.csv,C5_continuity,PASS,256 session-days; mean 295.6 bars/day; 2014-01-02 00:00:00+00:00 -> 2014-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2015.csv,C1_schema,PASS,22682 bars
+intraday\1min\NKY\NKY_1min_2015.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2015.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16590.0-20018.3
+intraday\1min\NKY\NKY_1min_2015.csv,C5_continuity,PASS,87 session-days; mean 260.7 bars/day; 2015-01-02 00:00:00+00:00 -> 2015-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2016.csv,C1_schema,PASS,61545 bars
+intraday\1min\NKY\NKY_1min_2016.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2016.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 14832.5-19589.5
+intraday\1min\NKY\NKY_1min_2016.csv,C5_continuity,PASS,258 session-days; mean 238.5 bars/day; 2016-01-04 01:00:00+00:00 -> 2016-12-30 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2017.csv,C1_schema,PASS,49212 bars
+intraday\1min\NKY\NKY_1min_2017.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2017.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18222.0-23372.0
+intraday\1min\NKY\NKY_1min_2017.csv,C5_continuity,PASS,257 session-days; mean 191.5 bars/day; 2017-01-03 01:00:00+00:00 -> 2017-12-29 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2018.csv,C1_schema,PASS,68579 bars
+intraday\1min\NKY\NKY_1min_2018.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2018.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18963.0-24440.0
+intraday\1min\NKY\NKY_1min_2018.csv,C5_continuity,PASS,258 session-days; mean 265.8 bars/day; 2018-01-02 01:05:00+00:00 -> 2018-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2019.csv,C1_schema,PASS,66292 bars
+intraday\1min\NKY\NKY_1min_2019.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2019.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 19229.5-24090.0
+intraday\1min\NKY\NKY_1min_2019.csv,C5_continuity,PASS,258 session-days; mean 256.9 bars/day; 2019-01-02 00:00:00+00:00 -> 2019-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2020.csv,C1_schema,PASS,74322 bars
+intraday\1min\NKY\NKY_1min_2020.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2020.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2020.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16346.3-27605.4
+intraday\1min\NKY\NKY_1min_2020.csv,C5_continuity,PASS,259 session-days; mean 287.0 bars/day; 2020-01-02 00:00:00+00:00 -> 2020-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2021.csv,C1_schema,PASS,76462 bars
+intraday\1min\NKY\NKY_1min_2021.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2021.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 26959.3-30777.5
+intraday\1min\NKY\NKY_1min_2021.csv,C5_continuity,PASS,259 session-days; mean 295.2 bars/day; 2021-01-04 00:00:00+00:00 -> 2021-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2022.csv,C1_schema,PASS,74960 bars
+intraday\1min\NKY\NKY_1min_2022.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2022.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 24683.3-29391.0
+intraday\1min\NKY\NKY_1min_2022.csv,C5_continuity,PASS,258 session-days; mean 290.5 bars/day; 2022-01-03 00:00:00+00:00 -> 2022-12-30 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2023.csv,C1_schema,PASS,74143 bars
+intraday\1min\NKY\NKY_1min_2023.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2023.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 25607.3-33856.4
+intraday\1min\NKY\NKY_1min_2023.csv,C5_continuity,PASS,257 session-days; mean 288.5 bars/day; 2023-01-03 00:00:00+00:00 -> 2023-12-29 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2024.csv,C1_schema,PASS,77052 bars
+intraday\1min\NKY\NKY_1min_2024.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2024.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 30420.3-42404.4
+intraday\1min\NKY\NKY_1min_2024.csv,C5_continuity,PASS,258 session-days; mean 298.7 bars/day; 2024-01-02 00:00:00+00:00 -> 2024-12-31 05:59:00+00:00
+intraday\1min\NKY\NKY_1min_2025.csv,C1_schema,PASS,76979 bars
+intraday\1min\NKY\NKY_1min_2025.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2025.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 30683.5-52624.4
+intraday\1min\NKY\NKY_1min_2025.csv,C5_continuity,PASS,258 session-days; mean 298.4 bars/day; 2025-01-02 00:00:00+00:00 -> 2025-12-31 05:58:00+00:00
+intraday\1min\NKY\NKY_1min_2026.csv,C1_schema,PASS,49429 bars
+intraday\1min\NKY\NKY_1min_2026.csv,C2_unique,PASS,0
+intraday\1min\NKY\NKY_1min_2026.csv,C3_monotonic,PASS,
+intraday\1min\NKY\NKY_1min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 50482.4-72800.3
+intraday\1min\NKY\NKY_1min_2026.csv,C5_continuity,PASS,165 session-days; mean 299.6 bars/day; 2026-01-02 00:00:00+00:00 -> 2026-08-21 05:59:00+00:00
+intraday\1min\SPX\SPX_1min_2011.csv,C1_schema,PASS,1312 bars
+intraday\1min\SPX\SPX_1min_2011.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2011.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1118.0-1220.1
+intraday\1min\SPX\SPX_1min_2011.csv,C5_continuity,PASS,4 session-days; mean 328.0 bars/day; 2011-09-19 13:51:00+00:00 -> 2011-09-22 19:12:00+00:00
+intraday\1min\SPX\SPX_1min_2012.csv,C1_schema,PASS,87004 bars
+intraday\1min\SPX\SPX_1min_2012.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2012.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1266.9-1474.4
+intraday\1min\SPX\SPX_1min_2012.csv,C5_continuity,PASS,245 session-days; mean 355.1 bars/day; 2012-01-16 14:30:00+00:00 -> 2012-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2013.csv,C1_schema,PASS,86944 bars
+intraday\1min\SPX\SPX_1min_2013.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2013.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1443.2-1848.9
+intraday\1min\SPX\SPX_1min_2013.csv,C5_continuity,PASS,248 session-days; mean 350.6 bars/day; 2013-01-02 14:50:00+00:00 -> 2013-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2014.csv,C1_schema,PASS,91531 bars
+intraday\1min\SPX\SPX_1min_2014.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2014.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1738.1-2092.4
+intraday\1min\SPX\SPX_1min_2014.csv,C5_continuity,PASS,258 session-days; mean 354.8 bars/day; 2014-01-02 14:30:00+00:00 -> 2014-12-31 18:59:00+00:00
+intraday\1min\SPX\SPX_1min_2015.csv,C1_schema,PASS,98272 bars
+intraday\1min\SPX\SPX_1min_2015.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2015.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1855.2-2134.5
+intraday\1min\SPX\SPX_1min_2015.csv,C5_continuity,PASS,258 session-days; mean 380.9 bars/day; 2015-01-02 14:30:00+00:00 -> 2015-12-31 17:59:00+00:00
+intraday\1min\SPX\SPX_1min_2016.csv,C1_schema,PASS,98877 bars
+intraday\1min\SPX\SPX_1min_2016.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2016.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1809.6-2277.4
+intraday\1min\SPX\SPX_1min_2016.csv,C5_continuity,PASS,258 session-days; mean 383.2 bars/day; 2016-01-04 14:30:00+00:00 -> 2016-12-30 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2017.csv,C1_schema,PASS,94231 bars
+intraday\1min\SPX\SPX_1min_2017.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2017.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2244.1-2694.6
+intraday\1min\SPX\SPX_1min_2017.csv,C5_continuity,PASS,257 session-days; mean 366.7 bars/day; 2017-01-03 14:30:00+00:00 -> 2017-12-29 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2018.csv,C1_schema,PASS,97372 bars
+intraday\1min\SPX\SPX_1min_2018.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2018.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2340.1-2940.2
+intraday\1min\SPX\SPX_1min_2018.csv,C5_continuity,PASS,257 session-days; mean 378.9 bars/day; 2018-01-02 14:30:00+00:00 -> 2018-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2019.csv,C1_schema,PASS,97589 bars
+intraday\1min\SPX\SPX_1min_2019.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2019.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2447.8-3246.9
+intraday\1min\SPX\SPX_1min_2019.csv,C5_continuity,PASS,258 session-days; mean 378.3 bars/day; 2019-01-02 14:30:00+00:00 -> 2019-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2020.csv,C1_schema,PASS,99227 bars
+intraday\1min\SPX\SPX_1min_2020.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2020.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2020.csv,C4_ranges,WARN,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=1; px range 2189.0-3756.7
+intraday\1min\SPX\SPX_1min_2020.csv,C5_continuity,PASS,259 session-days; mean 383.1 bars/day; 2020-01-02 14:30:00+00:00 -> 2020-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2021.csv,C1_schema,PASS,98947 bars
+intraday\1min\SPX\SPX_1min_2021.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2021.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3664.6-4807.5
+intraday\1min\SPX\SPX_1min_2021.csv,C5_continuity,PASS,258 session-days; mean 383.5 bars/day; 2021-01-04 14:30:00+00:00 -> 2021-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2022.csv,C1_schema,PASS,99167 bars
+intraday\1min\SPX\SPX_1min_2022.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2022.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3491.0-4816.0
+intraday\1min\SPX\SPX_1min_2022.csv,C5_continuity,PASS,258 session-days; mean 384.4 bars/day; 2022-01-03 14:30:00+00:00 -> 2022-12-30 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2023.csv,C1_schema,PASS,98189 bars
+intraday\1min\SPX\SPX_1min_2023.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2023.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3795.2-4792.9
+intraday\1min\SPX\SPX_1min_2023.csv,C5_continuity,PASS,256 session-days; mean 383.6 bars/day; 2023-01-03 14:30:00+00:00 -> 2023-12-29 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2024.csv,C1_schema,PASS,99118 bars
+intraday\1min\SPX\SPX_1min_2024.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2024.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4683.2-6099.3
+intraday\1min\SPX\SPX_1min_2024.csv,C5_continuity,PASS,259 session-days; mean 382.7 bars/day; 2024-01-02 14:30:00+00:00 -> 2024-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2025.csv,C1_schema,PASS,98405 bars
+intraday\1min\SPX\SPX_1min_2025.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2025.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4841.9-6943.8
+intraday\1min\SPX\SPX_1min_2025.csv,C5_continuity,PASS,257 session-days; mean 382.9 bars/day; 2025-01-02 14:30:00+00:00 -> 2025-12-31 20:59:00+00:00
+intraday\1min\SPX\SPX_1min_2026.csv,C1_schema,PASS,63406 bars
+intraday\1min\SPX\SPX_1min_2026.csv,C2_unique,PASS,0
+intraday\1min\SPX\SPX_1min_2026.csv,C3_monotonic,PASS,
+intraday\1min\SPX\SPX_1min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6317.2-7815.9
+intraday\1min\SPX\SPX_1min_2026.csv,C5_continuity,PASS,165 session-days; mean 384.3 bars/day; 2026-01-02 14:30:00+00:00 -> 2026-08-21 19:59:00+00:00
+intraday\1min\UKX\UKX_1min_2011.csv,C1_schema,PASS,2363 bars
+intraday\1min\UKX\UKX_1min_2011.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2011.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4928.2-5376.9
+intraday\1min\UKX\UKX_1min_2011.csv,C5_continuity,PASS,5 session-days; mean 472.6 bars/day; 2011-09-19 07:00:00+00:00 -> 2011-09-23 13:02:00+00:00
+intraday\1min\UKX\UKX_1min_2012.csv,C1_schema,PASS,119981 bars
+intraday\1min\UKX\UKX_1min_2012.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2012.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5230.7-5996.6
+intraday\1min\UKX\UKX_1min_2012.csv,C5_continuity,PASS,239 session-days; mean 502.0 bars/day; 2012-01-19 16:11:00+00:00 -> 2012-12-31 12:50:00+00:00
+intraday\1min\UKX\UKX_1min_2013.csv,C1_schema,PASS,117536 bars
+intraday\1min\UKX\UKX_1min_2013.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2013.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5969.2-6819.2
+intraday\1min\UKX\UKX_1min_2013.csv,C5_continuity,PASS,247 session-days; mean 475.9 bars/day; 2013-01-02 08:00:00+00:00 -> 2013-12-31 16:26:00+00:00
+intraday\1min\UKX\UKX_1min_2014.csv,C1_schema,PASS,127874 bars
+intraday\1min\UKX\UKX_1min_2014.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2014.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6071.1-6902.8
+intraday\1min\UKX\UKX_1min_2014.csv,C5_continuity,PASS,255 session-days; mean 501.5 bars/day; 2014-01-02 08:00:00+00:00 -> 2014-12-31 12:00:00+00:00
+intraday\1min\UKX\UKX_1min_2015.csv,C1_schema,PASS,129769 bars
+intraday\1min\UKX\UKX_1min_2015.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2015.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5777.0-7122.2
+intraday\1min\UKX\UKX_1min_2015.csv,C5_continuity,PASS,256 session-days; mean 506.9 bars/day; 2015-01-02 08:00:00+00:00 -> 2015-12-31 12:00:00+00:00
+intraday\1min\UKX\UKX_1min_2016.csv,C1_schema,PASS,129580 bars
+intraday\1min\UKX\UKX_1min_2016.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2016.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5501.0-7135.7
+intraday\1min\UKX\UKX_1min_2016.csv,C5_continuity,PASS,255 session-days; mean 508.2 bars/day; 2016-01-04 08:00:00+00:00 -> 2016-12-30 16:29:00+00:00
+intraday\1min\UKX\UKX_1min_2017.csv,C1_schema,PASS,128635 bars
+intraday\1min\UKX\UKX_1min_2017.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2017.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7091.5-7702.3
+intraday\1min\UKX\UKX_1min_2017.csv,C5_continuity,PASS,254 session-days; mean 506.4 bars/day; 2017-01-03 08:00:00+00:00 -> 2017-12-29 16:29:00+00:00
+intraday\1min\UKX\UKX_1min_2018.csv,C1_schema,PASS,129417 bars
+intraday\1min\UKX\UKX_1min_2018.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2018.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6537.8-7902.8
+intraday\1min\UKX\UKX_1min_2018.csv,C5_continuity,PASS,255 session-days; mean 507.5 bars/day; 2018-01-02 08:00:00+00:00 -> 2018-12-31 12:29:00+00:00
+intraday\1min\UKX\UKX_1min_2019.csv,C1_schema,PASS,130203 bars
+intraday\1min\UKX\UKX_1min_2019.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2019.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6599.9-7715.0
+intraday\1min\UKX\UKX_1min_2019.csv,C5_continuity,PASS,257 session-days; mean 506.6 bars/day; 2019-01-02 08:00:00+00:00 -> 2019-12-31 16:29:00+00:00
+intraday\1min\UKX\UKX_1min_2020.csv,C1_schema,PASS,130578 bars
+intraday\1min\UKX\UKX_1min_2020.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2020.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2020.csv,C4_ranges,WARN,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=1; px range 4846.5-7688.9
+intraday\1min\UKX\UKX_1min_2020.csv,C5_continuity,PASS,257 session-days; mean 508.1 bars/day; 2020-01-02 08:00:00+00:00 -> 2020-12-31 12:49:00+00:00
+intraday\1min\UKX\UKX_1min_2021.csv,C1_schema,PASS,129886 bars
+intraday\1min\UKX\UKX_1min_2021.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2021.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6396.3-7456.7
+intraday\1min\UKX\UKX_1min_2021.csv,C5_continuity,PASS,255 session-days; mean 509.4 bars/day; 2021-01-04 08:00:00+00:00 -> 2021-12-31 16:29:00+00:00
+intraday\1min\UKX\UKX_1min_2022.csv,C1_schema,PASS,130911 bars
+intraday\1min\UKX\UKX_1min_2022.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2022.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6711.7-7686.7
+intraday\1min\UKX\UKX_1min_2022.csv,C5_continuity,PASS,257 session-days; mean 509.4 bars/day; 2022-01-03 08:00:00+00:00 -> 2022-12-30 16:29:00+00:00
+intraday\1min\UKX\UKX_1min_2023.csv,C1_schema,PASS,127756 bars
+intraday\1min\UKX\UKX_1min_2023.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2023.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7207.1-8044.8
+intraday\1min\UKX\UKX_1min_2023.csv,C5_continuity,PASS,255 session-days; mean 501.0 bars/day; 2023-01-02 09:26:00+00:00 -> 2023-12-29 16:28:00+00:00
+intraday\1min\UKX\UKX_1min_2024.csv,C1_schema,PASS,130331 bars
+intraday\1min\UKX\UKX_1min_2024.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2024.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7403.3-8473.5
+intraday\1min\UKX\UKX_1min_2024.csv,C5_continuity,PASS,259 session-days; mean 503.2 bars/day; 2024-01-02 08:00:00+00:00 -> 2024-12-31 16:29:00+00:00
+intraday\1min\UKX\UKX_1min_2025.csv,C1_schema,PASS,130672 bars
+intraday\1min\UKX\UKX_1min_2025.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2025.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7537.1-9958.4
+intraday\1min\UKX\UKX_1min_2025.csv,C5_continuity,PASS,257 session-days; mean 508.5 bars/day; 2025-01-03 08:00:00+00:00 -> 2025-12-31 16:29:00+00:00
+intraday\1min\UKX\UKX_1min_2026.csv,C1_schema,PASS,84003 bars
+intraday\1min\UKX\UKX_1min_2026.csv,C2_unique,PASS,0
+intraday\1min\UKX\UKX_1min_2026.csv,C3_monotonic,PASS,
+intraday\1min\UKX\UKX_1min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 9667.4-10991.3
+intraday\1min\UKX\UKX_1min_2026.csv,C5_continuity,PASS,165 session-days; mean 509.1 bars/day; 2026-01-02 08:00:00+00:00 -> 2026-08-21 15:29:00+00:00
+intraday\5min\DAX\DAX_5min_2013.csv,C1_schema,PASS,5950 bars
+intraday\5min\DAX\DAX_5min_2013.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2013.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8502.7-9596.3
+intraday\5min\DAX\DAX_5min_2013.csv,C5_continuity,PASS,63 session-days; mean 94.4 bars/day; 2013-09-30 15:10:00+00:00 -> 2013-12-30 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2014.csv,C1_schema,PASS,25806 bars
+intraday\5min\DAX\DAX_5min_2014.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2014.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8363.5-10092.0
+intraday\5min\DAX\DAX_5min_2014.csv,C5_continuity,PASS,255 session-days; mean 101.2 bars/day; 2014-01-02 08:00:00+00:00 -> 2014-12-30 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2015.csv,C1_schema,PASS,25996 bars
+intraday\5min\DAX\DAX_5min_2015.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2015.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 9335.8-12388.2
+intraday\5min\DAX\DAX_5min_2015.csv,C5_continuity,PASS,255 session-days; mean 101.9 bars/day; 2015-01-02 08:00:00+00:00 -> 2015-12-30 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2016.csv,C1_schema,PASS,26100 bars
+intraday\5min\DAX\DAX_5min_2016.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2016.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2016.csv,C4_ranges,WARN,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=1; px range 8698.5-11480.0
+intraday\5min\DAX\DAX_5min_2016.csv,C5_continuity,PASS,256 session-days; mean 102.0 bars/day; 2016-01-04 08:00:00+00:00 -> 2016-12-30 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2017.csv,C1_schema,PASS,25896 bars
+intraday\5min\DAX\DAX_5min_2017.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2017.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 11418.6-13515.5
+intraday\5min\DAX\DAX_5min_2017.csv,C5_continuity,PASS,254 session-days; mean 102.0 bars/day; 2017-01-02 08:00:00+00:00 -> 2017-12-29 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2018.csv,C1_schema,PASS,25799 bars
+intraday\5min\DAX\DAX_5min_2018.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2018.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10285.9-13594.8
+intraday\5min\DAX\DAX_5min_2018.csv,C5_continuity,PASS,253 session-days; mean 102.0 bars/day; 2018-01-02 08:00:00+00:00 -> 2018-12-28 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2019.csv,C1_schema,PASS,26273 bars
+intraday\5min\DAX\DAX_5min_2019.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2019.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10388.4-13423.2
+intraday\5min\DAX\DAX_5min_2019.csv,C5_continuity,PASS,258 session-days; mean 101.8 bars/day; 2019-01-02 08:00:00+00:00 -> 2019-12-31 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2020.csv,C1_schema,PASS,26379 bars
+intraday\5min\DAX\DAX_5min_2020.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2020.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2020.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8248.9-13905.3
+intraday\5min\DAX\DAX_5min_2020.csv,C5_continuity,PASS,259 session-days; mean 101.8 bars/day; 2020-01-02 08:00:00+00:00 -> 2020-12-31 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2021.csv,C1_schema,PASS,26316 bars
+intraday\5min\DAX\DAX_5min_2021.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2021.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 13315.3-16288.9
+intraday\5min\DAX\DAX_5min_2021.csv,C5_continuity,PASS,258 session-days; mean 102.0 bars/day; 2021-01-04 08:00:00+00:00 -> 2021-12-31 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2022.csv,C1_schema,PASS,26316 bars
+intraday\5min\DAX\DAX_5min_2022.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2022.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 11865.3-16282.7
+intraday\5min\DAX\DAX_5min_2022.csv,C5_continuity,PASS,258 session-days; mean 102.0 bars/day; 2022-01-03 08:00:00+00:00 -> 2022-12-30 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2023.csv,C1_schema,PASS,26110 bars
+intraday\5min\DAX\DAX_5min_2023.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2023.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 13976.8-16989.7
+intraday\5min\DAX\DAX_5min_2023.csv,C5_continuity,PASS,256 session-days; mean 102.0 bars/day; 2023-01-02 08:00:00+00:00 -> 2023-12-29 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2024.csv,C1_schema,PASS,26399 bars
+intraday\5min\DAX\DAX_5min_2024.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2024.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16351.3-20512.7
+intraday\5min\DAX\DAX_5min_2024.csv,C5_continuity,PASS,259 session-days; mean 101.9 bars/day; 2024-01-02 08:00:00+00:00 -> 2024-12-31 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2025.csv,C1_schema,PASS,26281 bars
+intraday\5min\DAX\DAX_5min_2025.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2025.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 19007.3-24769.8
+intraday\5min\DAX\DAX_5min_2025.csv,C5_continuity,PASS,258 session-days; mean 101.9 bars/day; 2025-01-02 08:00:00+00:00 -> 2025-12-31 16:25:00+00:00
+intraday\5min\DAX\DAX_5min_2026.csv,C1_schema,PASS,16816 bars
+intraday\5min\DAX\DAX_5min_2026.csv,C2_unique,PASS,0
+intraday\5min\DAX\DAX_5min_2026.csv,C3_monotonic,PASS,
+intraday\5min\DAX\DAX_5min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 21865.4-26575.3
+intraday\5min\DAX\DAX_5min_2026.csv,C5_continuity,PASS,165 session-days; mean 101.9 bars/day; 2026-01-02 08:00:00+00:00 -> 2026-08-21 15:25:00+00:00
+intraday\5min\HSI\HSI_5min_2011.csv,C1_schema,PASS,307 bars
+intraday\5min\HSI\HSI_5min_2011.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2011.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 17383.2-19236.7
+intraday\5min\HSI\HSI_5min_2011.csv,C5_continuity,PASS,5 session-days; mean 61.4 bars/day; 2011-09-19 01:30:00+00:00 -> 2011-09-23 07:55:00+00:00
+intraday\5min\HSI\HSI_5min_2012.csv,C1_schema,PASS,14635 bars
+intraday\5min\HSI\HSI_5min_2012.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2012.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18060.5-22710.1
+intraday\5min\HSI\HSI_5min_2012.csv,C5_continuity,PASS,225 session-days; mean 65.0 bars/day; 2012-02-06 01:30:00+00:00 -> 2012-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2013.csv,C1_schema,PASS,15176 bars
+intraday\5min\HSI\HSI_5min_2013.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2013.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 19447.0-24080.0
+intraday\5min\HSI\HSI_5min_2013.csv,C5_continuity,PASS,233 session-days; mean 65.1 bars/day; 2013-01-02 01:30:00+00:00 -> 2013-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2014.csv,C1_schema,PASS,16002 bars
+intraday\5min\HSI\HSI_5min_2014.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2014.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 21127.0-25374.0
+intraday\5min\HSI\HSI_5min_2014.csv,C5_continuity,PASS,245 session-days; mean 65.3 bars/day; 2014-01-02 07:00:00+00:00 -> 2014-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2015.csv,C1_schema,PASS,16388 bars
+intraday\5min\HSI\HSI_5min_2015.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2015.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 20350.2-28598.0
+intraday\5min\HSI\HSI_5min_2015.csv,C5_continuity,PASS,255 session-days; mean 64.3 bars/day; 2015-01-02 01:30:00+00:00 -> 2015-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2016.csv,C1_schema,PASS,16111 bars
+intraday\5min\HSI\HSI_5min_2016.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2016.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18287.8-24382.0
+intraday\5min\HSI\HSI_5min_2016.csv,C5_continuity,PASS,245 session-days; mean 65.8 bars/day; 2016-01-04 01:30:00+00:00 -> 2016-12-30 07:55:00+00:00
+intraday\5min\HSI\HSI_5min_2017.csv,C1_schema,PASS,15984 bars
+intraday\5min\HSI\HSI_5min_2017.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2017.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22050.6-30217.0
+intraday\5min\HSI\HSI_5min_2017.csv,C5_continuity,PASS,244 session-days; mean 65.5 bars/day; 2017-01-04 03:05:00+00:00 -> 2017-12-29 07:55:00+00:00
+intraday\5min\HSI\HSI_5min_2018.csv,C1_schema,PASS,16118 bars
+intraday\5min\HSI\HSI_5min_2018.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2018.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 24537.4-33399.6
+intraday\5min\HSI\HSI_5min_2018.csv,C5_continuity,PASS,247 session-days; mean 65.3 bars/day; 2018-01-02 01:35:00+00:00 -> 2018-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2019.csv,C1_schema,PASS,16145 bars
+intraday\5min\HSI\HSI_5min_2019.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2019.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 24865.8-30292.0
+intraday\5min\HSI\HSI_5min_2019.csv,C5_continuity,PASS,247 session-days; mean 65.4 bars/day; 2019-01-02 01:30:00+00:00 -> 2019-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2020.csv,C1_schema,PASS,16201 bars
+intraday\5min\HSI\HSI_5min_2020.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2020.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2020.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 21009.8-29125.3
+intraday\5min\HSI\HSI_5min_2020.csv,C5_continuity,PASS,248 session-days; mean 65.3 bars/day; 2020-01-02 01:30:00+00:00 -> 2020-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2021.csv,C1_schema,PASS,16155 bars
+intraday\5min\HSI\HSI_5min_2021.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2021.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22686.7-31073.4
+intraday\5min\HSI\HSI_5min_2021.csv,C5_continuity,PASS,247 session-days; mean 65.4 bars/day; 2021-01-04 01:30:00+00:00 -> 2021-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2022.csv,C1_schema,PASS,16074 bars
+intraday\5min\HSI\HSI_5min_2022.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2022.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 14619.5-24968.6
+intraday\5min\HSI\HSI_5min_2022.csv,C5_continuity,PASS,245 session-days; mean 65.6 bars/day; 2022-01-04 01:30:00+00:00 -> 2022-12-30 07:55:00+00:00
+intraday\5min\HSI\HSI_5min_2023.csv,C1_schema,PASS,15996 bars
+intraday\5min\HSI\HSI_5min_2023.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2023.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 15978.9-22652.4
+intraday\5min\HSI\HSI_5min_2023.csv,C5_continuity,PASS,243 session-days; mean 65.8 bars/day; 2023-01-03 01:30:00+00:00 -> 2023-12-29 07:55:00+00:00
+intraday\5min\HSI\HSI_5min_2024.csv,C1_schema,PASS,16114 bars
+intraday\5min\HSI\HSI_5min_2024.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2024.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 14832.7-23146.3
+intraday\5min\HSI\HSI_5min_2024.csv,C5_continuity,PASS,246 session-days; mean 65.5 bars/day; 2024-01-02 01:30:00+00:00 -> 2024-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2025.csv,C1_schema,PASS,16057 bars
+intraday\5min\HSI\HSI_5min_2025.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2025.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18686.1-27375.1
+intraday\5min\HSI\HSI_5min_2025.csv,C5_continuity,PASS,245 session-days; mean 65.5 bars/day; 2025-01-02 01:30:00+00:00 -> 2025-12-31 03:55:00+00:00
+intraday\5min\HSI\HSI_5min_2026.csv,C1_schema,PASS,10247 bars
+intraday\5min\HSI\HSI_5min_2026.csv,C2_unique,PASS,0
+intraday\5min\HSI\HSI_5min_2026.csv,C3_monotonic,PASS,
+intraday\5min\HSI\HSI_5min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22536.2-28042.6
+intraday\5min\HSI\HSI_5min_2026.csv,C5_continuity,PASS,156 session-days; mean 65.7 bars/day; 2026-01-02 01:30:00+00:00 -> 2026-08-21 07:55:00+00:00
+intraday\5min\NDX\NDX_5min_2011.csv,C1_schema,PASS,303 bars
+intraday\5min\NDX\NDX_5min_2011.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2011.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2161.7-2336.6
+intraday\5min\NDX\NDX_5min_2011.csv,C5_continuity,PASS,4 session-days; mean 75.8 bars/day; 2011-09-19 13:30:00+00:00 -> 2011-09-22 19:10:00+00:00
+intraday\5min\NDX\NDX_5min_2012.csv,C1_schema,PASS,18381 bars
+intraday\5min\NDX\NDX_5min_2012.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2012.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2424.1-2877.7
+intraday\5min\NDX\NDX_5min_2012.csv,C5_continuity,PASS,238 session-days; mean 77.2 bars/day; 2012-01-19 16:15:00+00:00 -> 2012-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2013.csv,C1_schema,PASS,17580 bars
+intraday\5min\NDX\NDX_5min_2013.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2013.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2700.8-3590.9
+intraday\5min\NDX\NDX_5min_2013.csv,C5_continuity,PASS,241 session-days; mean 72.9 bars/day; 2013-01-02 14:30:00+00:00 -> 2013-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2014.csv,C1_schema,PASS,19150 bars
+intraday\5min\NDX\NDX_5min_2014.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2014.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3415.1-4345.9
+intraday\5min\NDX\NDX_5min_2014.csv,C5_continuity,PASS,255 session-days; mean 75.1 bars/day; 2014-01-02 14:30:00+00:00 -> 2014-12-31 19:00:00+00:00
+intraday\5min\NDX\NDX_5min_2015.csv,C1_schema,PASS,19777 bars
+intraday\5min\NDX\NDX_5min_2015.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2015.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3973.3-4739.4
+intraday\5min\NDX\NDX_5min_2015.csv,C5_continuity,PASS,258 session-days; mean 76.7 bars/day; 2015-01-02 14:30:00+00:00 -> 2015-12-31 18:00:00+00:00
+intraday\5min\NDX\NDX_5min_2016.csv,C1_schema,PASS,19861 bars
+intraday\5min\NDX\NDX_5min_2016.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2016.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3892.6-4989.3
+intraday\5min\NDX\NDX_5min_2016.csv,C5_continuity,PASS,258 session-days; mean 77.0 bars/day; 2016-01-04 14:30:00+00:00 -> 2016-12-30 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2017.csv,C1_schema,PASS,19417 bars
+intraday\5min\NDX\NDX_5min_2017.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2017.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4882.1-6520.6
+intraday\5min\NDX\NDX_5min_2017.csv,C5_continuity,PASS,253 session-days; mean 76.7 bars/day; 2017-01-03 14:30:00+00:00 -> 2017-12-29 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2018.csv,C1_schema,PASS,19646 bars
+intraday\5min\NDX\NDX_5min_2018.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2018.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5872.8-7697.8
+intraday\5min\NDX\NDX_5min_2018.csv,C5_continuity,PASS,256 session-days; mean 76.7 bars/day; 2018-01-02 14:30:00+00:00 -> 2018-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2019.csv,C1_schema,PASS,19814 bars
+intraday\5min\NDX\NDX_5min_2019.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2019.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6146.8-8805.1
+intraday\5min\NDX\NDX_5min_2019.csv,C5_continuity,PASS,258 session-days; mean 76.8 bars/day; 2019-01-02 14:30:00+00:00 -> 2019-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2020.csv,C1_schema,PASS,19911 bars
+intraday\5min\NDX\NDX_5min_2020.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2020.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2020.csv,C4_ranges,WARN,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=1; px range 6772.8-12914.4
+intraday\5min\NDX\NDX_5min_2020.csv,C5_continuity,PASS,259 session-days; mean 76.9 bars/day; 2020-01-02 14:30:00+00:00 -> 2020-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2021.csv,C1_schema,PASS,19875 bars
+intraday\5min\NDX\NDX_5min_2021.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2021.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 12236.4-16755.3
+intraday\5min\NDX\NDX_5min_2021.csv,C5_continuity,PASS,258 session-days; mean 77.0 bars/day; 2021-01-04 14:30:00+00:00 -> 2021-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2022.csv,C1_schema,PASS,19838 bars
+intraday\5min\NDX\NDX_5min_2022.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2022.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10462.3-16499.4
+intraday\5min\NDX\NDX_5min_2022.csv,C5_continuity,PASS,258 session-days; mean 76.9 bars/day; 2022-01-03 14:30:00+00:00 -> 2022-12-30 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2023.csv,C1_schema,PASS,19661 bars
+intraday\5min\NDX\NDX_5min_2023.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2023.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10712.0-16950.6
+intraday\5min\NDX\NDX_5min_2023.csv,C5_continuity,PASS,256 session-days; mean 76.8 bars/day; 2023-01-03 14:30:00+00:00 -> 2023-12-29 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2024.csv,C1_schema,PASS,19845 bars
+intraday\5min\NDX\NDX_5min_2024.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2024.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16258.1-22129.9
+intraday\5min\NDX\NDX_5min_2024.csv,C5_continuity,PASS,259 session-days; mean 76.6 bars/day; 2024-01-02 14:30:00+00:00 -> 2024-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2025.csv,C1_schema,PASS,19690 bars
+intraday\5min\NDX\NDX_5min_2025.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2025.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16616.3-26176.0
+intraday\5min\NDX\NDX_5min_2025.csv,C5_continuity,PASS,257 session-days; mean 76.6 bars/day; 2025-01-02 14:30:00+00:00 -> 2025-12-31 20:55:00+00:00
+intraday\5min\NDX\NDX_5min_2026.csv,C1_schema,PASS,12689 bars
+intraday\5min\NDX\NDX_5min_2026.csv,C2_unique,PASS,0
+intraday\5min\NDX\NDX_5min_2026.csv,C3_monotonic,PASS,
+intraday\5min\NDX\NDX_5min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 22847.1-30687.8
+intraday\5min\NDX\NDX_5min_2026.csv,C5_continuity,PASS,165 session-days; mean 76.9 bars/day; 2026-01-02 14:30:00+00:00 -> 2026-08-21 19:55:00+00:00
+intraday\5min\NKY\NKY_5min_2011.csv,C1_schema,PASS,153 bars
+intraday\5min\NKY\NKY_5min_2011.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2011.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8550.4-8768.2
+intraday\5min\NKY\NKY_5min_2011.csv,C5_continuity,PASS,3 session-days; mean 51.0 bars/day; 2011-09-20 00:00:00+00:00 -> 2011-09-22 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2012.csv,C1_schema,PASS,13407 bars
+intraday\5min\NKY\NKY_5min_2012.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2012.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 8251.1-10432.3
+intraday\5min\NKY\NKY_5min_2012.csv,C5_continuity,PASS,225 session-days; mean 59.6 bars/day; 2012-02-06 00:00:00+00:00 -> 2012-12-28 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2013.csv,C1_schema,PASS,13257 bars
+intraday\5min\NKY\NKY_5min_2013.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2013.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 10398.6-16303.0
+intraday\5min\NKY\NKY_5min_2013.csv,C5_continuity,PASS,227 session-days; mean 58.4 bars/day; 2013-01-04 00:00:00+00:00 -> 2013-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2014.csv,C1_schema,PASS,15354 bars
+intraday\5min\NKY\NKY_5min_2014.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2014.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 13873.0-18013.0
+intraday\5min\NKY\NKY_5min_2014.csv,C5_continuity,PASS,256 session-days; mean 60.0 bars/day; 2014-01-02 00:00:00+00:00 -> 2014-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2015.csv,C1_schema,PASS,4650 bars
+intraday\5min\NKY\NKY_5min_2015.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2015.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16600.0-20001.6
+intraday\5min\NKY\NKY_5min_2015.csv,C5_continuity,PASS,87 session-days; mean 53.4 bars/day; 2015-01-02 00:00:00+00:00 -> 2015-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2016.csv,C1_schema,PASS,12374 bars
+intraday\5min\NKY\NKY_5min_2016.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2016.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 14853.0-19584.5
+intraday\5min\NKY\NKY_5min_2016.csv,C5_continuity,PASS,258 session-days; mean 48.0 bars/day; 2016-01-04 01:00:00+00:00 -> 2016-12-30 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2017.csv,C1_schema,PASS,12036 bars
+intraday\5min\NKY\NKY_5min_2017.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2017.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18234.0-23363.5
+intraday\5min\NKY\NKY_5min_2017.csv,C5_continuity,PASS,257 session-days; mean 46.8 bars/day; 2017-01-03 01:00:00+00:00 -> 2017-12-29 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2018.csv,C1_schema,PASS,14528 bars
+intraday\5min\NKY\NKY_5min_2018.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2018.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 18975.0-24435.0
+intraday\5min\NKY\NKY_5min_2018.csv,C5_continuity,PASS,258 session-days; mean 56.3 bars/day; 2018-01-02 01:05:00+00:00 -> 2018-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2019.csv,C1_schema,PASS,15299 bars
+intraday\5min\NKY\NKY_5min_2019.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2019.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 19229.5-24075.0
+intraday\5min\NKY\NKY_5min_2019.csv,C5_continuity,PASS,258 session-days; mean 59.3 bars/day; 2019-01-02 00:00:00+00:00 -> 2019-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2020.csv,C1_schema,PASS,15504 bars
+intraday\5min\NKY\NKY_5min_2020.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2020.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2020.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 16354.5-27602.3
+intraday\5min\NKY\NKY_5min_2020.csv,C5_continuity,PASS,259 session-days; mean 59.9 bars/day; 2020-01-02 00:00:00+00:00 -> 2020-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2021.csv,C1_schema,PASS,15525 bars
+intraday\5min\NKY\NKY_5min_2021.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2021.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 26966.4-30777.5
+intraday\5min\NKY\NKY_5min_2021.csv,C5_continuity,PASS,259 session-days; mean 59.9 bars/day; 2021-01-04 00:00:00+00:00 -> 2021-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2022.csv,C1_schema,PASS,15423 bars
+intraday\5min\NKY\NKY_5min_2022.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2022.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 24703.3-29365.5
+intraday\5min\NKY\NKY_5min_2022.csv,C5_continuity,PASS,258 session-days; mean 59.8 bars/day; 2022-01-03 00:00:00+00:00 -> 2022-12-30 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2023.csv,C1_schema,PASS,15393 bars
+intraday\5min\NKY\NKY_5min_2023.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2023.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 25632.5-33856.4
+intraday\5min\NKY\NKY_5min_2023.csv,C5_continuity,PASS,257 session-days; mean 59.9 bars/day; 2023-01-03 00:00:00+00:00 -> 2023-12-29 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2024.csv,C1_schema,PASS,15465 bars
+intraday\5min\NKY\NKY_5min_2024.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2024.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 30617.3-42379.5
+intraday\5min\NKY\NKY_5min_2024.csv,C5_continuity,PASS,258 session-days; mean 59.9 bars/day; 2024-01-02 00:00:00+00:00 -> 2024-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2025.csv,C1_schema,PASS,15443 bars
+intraday\5min\NKY\NKY_5min_2025.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2025.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 30683.5-52619.5
+intraday\5min\NKY\NKY_5min_2025.csv,C5_continuity,PASS,258 session-days; mean 59.9 bars/day; 2025-01-02 00:00:00+00:00 -> 2025-12-31 05:55:00+00:00
+intraday\5min\NKY\NKY_5min_2026.csv,C1_schema,PASS,9895 bars
+intraday\5min\NKY\NKY_5min_2026.csv,C2_unique,PASS,0
+intraday\5min\NKY\NKY_5min_2026.csv,C3_monotonic,PASS,
+intraday\5min\NKY\NKY_5min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 50482.4-72777.4
+intraday\5min\NKY\NKY_5min_2026.csv,C5_continuity,PASS,165 session-days; mean 60.0 bars/day; 2026-01-02 00:00:00+00:00 -> 2026-08-21 05:55:00+00:00
+intraday\5min\SPX\SPX_5min_2011.csv,C1_schema,PASS,285 bars
+intraday\5min\SPX\SPX_5min_2011.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2011.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1118.0-1219.7
+intraday\5min\SPX\SPX_5min_2011.csv,C5_continuity,PASS,4 session-days; mean 71.2 bars/day; 2011-09-19 13:50:00+00:00 -> 2011-09-22 19:10:00+00:00
+intraday\5min\SPX\SPX_5min_2012.csv,C1_schema,PASS,17690 bars
+intraday\5min\SPX\SPX_5min_2012.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2012.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1267.4-1474.0
+intraday\5min\SPX\SPX_5min_2012.csv,C5_continuity,PASS,245 session-days; mean 72.2 bars/day; 2012-01-16 14:30:00+00:00 -> 2012-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2013.csv,C1_schema,PASS,17981 bars
+intraday\5min\SPX\SPX_5min_2013.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2013.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1449.8-1848.5
+intraday\5min\SPX\SPX_5min_2013.csv,C5_continuity,PASS,248 session-days; mean 72.5 bars/day; 2013-01-02 14:50:00+00:00 -> 2013-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2014.csv,C1_schema,PASS,19379 bars
+intraday\5min\SPX\SPX_5min_2014.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2014.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1738.1-2092.1
+intraday\5min\SPX\SPX_5min_2014.csv,C5_continuity,PASS,258 session-days; mean 75.1 bars/day; 2014-01-02 14:30:00+00:00 -> 2014-12-31 18:55:00+00:00
+intraday\5min\SPX\SPX_5min_2015.csv,C1_schema,PASS,19773 bars
+intraday\5min\SPX\SPX_5min_2015.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2015.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1864.0-2134.2
+intraday\5min\SPX\SPX_5min_2015.csv,C5_continuity,PASS,258 session-days; mean 76.6 bars/day; 2015-01-02 14:30:00+00:00 -> 2015-12-31 17:55:00+00:00
+intraday\5min\SPX\SPX_5min_2016.csv,C1_schema,PASS,19862 bars
+intraday\5min\SPX\SPX_5min_2016.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2016.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 1812.3-2277.4
+intraday\5min\SPX\SPX_5min_2016.csv,C5_continuity,PASS,258 session-days; mean 77.0 bars/day; 2016-01-04 14:30:00+00:00 -> 2016-12-30 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2017.csv,C1_schema,PASS,19706 bars
+intraday\5min\SPX\SPX_5min_2017.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2017.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2244.6-2694.6
+intraday\5min\SPX\SPX_5min_2017.csv,C5_continuity,PASS,257 session-days; mean 76.7 bars/day; 2017-01-03 14:30:00+00:00 -> 2017-12-29 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2018.csv,C1_schema,PASS,19725 bars
+intraday\5min\SPX\SPX_5min_2018.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2018.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2340.1-2939.5
+intraday\5min\SPX\SPX_5min_2018.csv,C5_continuity,PASS,257 session-days; mean 76.8 bars/day; 2018-01-02 14:30:00+00:00 -> 2018-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2019.csv,C1_schema,PASS,19807 bars
+intraday\5min\SPX\SPX_5min_2019.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2019.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 2447.8-3246.4
+intraday\5min\SPX\SPX_5min_2019.csv,C5_continuity,PASS,258 session-days; mean 76.8 bars/day; 2019-01-02 14:30:00+00:00 -> 2019-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2020.csv,C1_schema,PASS,19910 bars
+intraday\5min\SPX\SPX_5min_2020.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2020.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2020.csv,C4_ranges,WARN,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=1; px range 2191.2-3755.1
+intraday\5min\SPX\SPX_5min_2020.csv,C5_continuity,PASS,259 session-days; mean 76.9 bars/day; 2020-01-02 14:30:00+00:00 -> 2020-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2021.csv,C1_schema,PASS,19875 bars
+intraday\5min\SPX\SPX_5min_2021.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2021.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3665.2-4807.1
+intraday\5min\SPX\SPX_5min_2021.csv,C5_continuity,PASS,258 session-days; mean 77.0 bars/day; 2021-01-04 14:30:00+00:00 -> 2021-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2022.csv,C1_schema,PASS,19838 bars
+intraday\5min\SPX\SPX_5min_2022.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2022.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3498.3-4815.7
+intraday\5min\SPX\SPX_5min_2022.csv,C5_continuity,PASS,258 session-days; mean 76.9 bars/day; 2022-01-03 14:30:00+00:00 -> 2022-12-30 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2023.csv,C1_schema,PASS,19655 bars
+intraday\5min\SPX\SPX_5min_2023.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2023.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 3795.9-4792.9
+intraday\5min\SPX\SPX_5min_2023.csv,C5_continuity,PASS,256 session-days; mean 76.8 bars/day; 2023-01-03 14:30:00+00:00 -> 2023-12-29 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2024.csv,C1_schema,PASS,19842 bars
+intraday\5min\SPX\SPX_5min_2024.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2024.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4684.2-6099.3
+intraday\5min\SPX\SPX_5min_2024.csv,C5_continuity,PASS,259 session-days; mean 76.6 bars/day; 2024-01-02 14:30:00+00:00 -> 2024-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2025.csv,C1_schema,PASS,19690 bars
+intraday\5min\SPX\SPX_5min_2025.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2025.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4854.4-6943.6
+intraday\5min\SPX\SPX_5min_2025.csv,C5_continuity,PASS,257 session-days; mean 76.6 bars/day; 2025-01-02 14:30:00+00:00 -> 2025-12-31 20:55:00+00:00
+intraday\5min\SPX\SPX_5min_2026.csv,C1_schema,PASS,12687 bars
+intraday\5min\SPX\SPX_5min_2026.csv,C2_unique,PASS,0
+intraday\5min\SPX\SPX_5min_2026.csv,C3_monotonic,PASS,
+intraday\5min\SPX\SPX_5min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6317.2-7814.9
+intraday\5min\SPX\SPX_5min_2026.csv,C5_continuity,PASS,165 session-days; mean 76.9 bars/day; 2026-01-02 14:30:00+00:00 -> 2026-08-21 19:55:00+00:00
+intraday\5min\UKX\UKX_5min_2011.csv,C1_schema,PASS,479 bars
+intraday\5min\UKX\UKX_5min_2011.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2011.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2011.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4941.6-5374.7
+intraday\5min\UKX\UKX_5min_2011.csv,C5_continuity,PASS,5 session-days; mean 95.8 bars/day; 2011-09-19 07:00:00+00:00 -> 2011-09-23 13:00:00+00:00
+intraday\5min\UKX\UKX_5min_2012.csv,C1_schema,PASS,24056 bars
+intraday\5min\UKX\UKX_5min_2012.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2012.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2012.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5233.4-5994.9
+intraday\5min\UKX\UKX_5min_2012.csv,C5_continuity,PASS,239 session-days; mean 100.7 bars/day; 2012-01-19 16:10:00+00:00 -> 2012-12-31 12:50:00+00:00
+intraday\5min\UKX\UKX_5min_2013.csv,C1_schema,PASS,23728 bars
+intraday\5min\UKX\UKX_5min_2013.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2013.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2013.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5969.7-6818.0
+intraday\5min\UKX\UKX_5min_2013.csv,C5_continuity,PASS,247 session-days; mean 96.1 bars/day; 2013-01-02 08:00:00+00:00 -> 2013-12-31 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2014.csv,C1_schema,PASS,25683 bars
+intraday\5min\UKX\UKX_5min_2014.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2014.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2014.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6080.6-6899.8
+intraday\5min\UKX\UKX_5min_2014.csv,C5_continuity,PASS,255 session-days; mean 100.7 bars/day; 2014-01-02 08:00:00+00:00 -> 2014-12-31 12:00:00+00:00
+intraday\5min\UKX\UKX_5min_2015.csv,C1_schema,PASS,25972 bars
+intraday\5min\UKX\UKX_5min_2015.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2015.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2015.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5777.0-7120.9
+intraday\5min\UKX\UKX_5min_2015.csv,C5_continuity,PASS,256 session-days; mean 101.5 bars/day; 2015-01-02 08:00:00+00:00 -> 2015-12-31 12:00:00+00:00
+intraday\5min\UKX\UKX_5min_2016.csv,C1_schema,PASS,25951 bars
+intraday\5min\UKX\UKX_5min_2016.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2016.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2016.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 5501.0-7135.7
+intraday\5min\UKX\UKX_5min_2016.csv,C5_continuity,PASS,255 session-days; mean 101.8 bars/day; 2016-01-04 08:00:00+00:00 -> 2016-12-30 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2017.csv,C1_schema,PASS,25848 bars
+intraday\5min\UKX\UKX_5min_2017.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2017.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2017.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7095.8-7702.3
+intraday\5min\UKX\UKX_5min_2017.csv,C5_continuity,PASS,254 session-days; mean 101.8 bars/day; 2017-01-03 08:00:00+00:00 -> 2017-12-29 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2018.csv,C1_schema,PASS,25907 bars
+intraday\5min\UKX\UKX_5min_2018.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2018.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2018.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6538.3-7902.8
+intraday\5min\UKX\UKX_5min_2018.csv,C5_continuity,PASS,255 session-days; mean 101.6 bars/day; 2018-01-02 08:00:00+00:00 -> 2018-12-31 12:25:00+00:00
+intraday\5min\UKX\UKX_5min_2019.csv,C1_schema,PASS,26072 bars
+intraday\5min\UKX\UKX_5min_2019.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2019.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2019.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6600.8-7712.0
+intraday\5min\UKX\UKX_5min_2019.csv,C5_continuity,PASS,257 session-days; mean 101.4 bars/day; 2019-01-02 08:00:00+00:00 -> 2019-12-31 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2020.csv,C1_schema,PASS,26125 bars
+intraday\5min\UKX\UKX_5min_2020.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2020.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2020.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 4898.3-7688.9
+intraday\5min\UKX\UKX_5min_2020.csv,C5_continuity,PASS,257 session-days; mean 101.7 bars/day; 2020-01-02 08:00:00+00:00 -> 2020-12-31 12:45:00+00:00
+intraday\5min\UKX\UKX_5min_2021.csv,C1_schema,PASS,26006 bars
+intraday\5min\UKX\UKX_5min_2021.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2021.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2021.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6400.9-7456.6
+intraday\5min\UKX\UKX_5min_2021.csv,C5_continuity,PASS,255 session-days; mean 102.0 bars/day; 2021-01-04 08:00:00+00:00 -> 2021-12-31 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2022.csv,C1_schema,PASS,26213 bars
+intraday\5min\UKX\UKX_5min_2022.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2022.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2022.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 6721.3-7685.2
+intraday\5min\UKX\UKX_5min_2022.csv,C5_continuity,PASS,257 session-days; mean 102.0 bars/day; 2022-01-03 08:00:00+00:00 -> 2022-12-30 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2023.csv,C1_schema,PASS,25771 bars
+intraday\5min\UKX\UKX_5min_2023.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2023.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2023.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7207.1-8041.7
+intraday\5min\UKX\UKX_5min_2023.csv,C5_continuity,PASS,255 session-days; mean 101.1 bars/day; 2023-01-02 09:25:00+00:00 -> 2023-12-29 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2024.csv,C1_schema,PASS,26284 bars
+intraday\5min\UKX\UKX_5min_2024.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2024.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2024.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7404.8-8472.1
+intraday\5min\UKX\UKX_5min_2024.csv,C5_continuity,PASS,259 session-days; mean 101.5 bars/day; 2024-01-02 08:00:00+00:00 -> 2024-12-31 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2025.csv,C1_schema,PASS,26164 bars
+intraday\5min\UKX\UKX_5min_2025.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2025.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2025.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 7587.7-9957.9
+intraday\5min\UKX\UKX_5min_2025.csv,C5_continuity,PASS,257 session-days; mean 101.8 bars/day; 2025-01-03 08:00:00+00:00 -> 2025-12-31 16:25:00+00:00
+intraday\5min\UKX\UKX_5min_2026.csv,C1_schema,PASS,16817 bars
+intraday\5min\UKX\UKX_5min_2026.csv,C2_unique,PASS,0
+intraday\5min\UKX\UKX_5min_2026.csv,C3_monotonic,PASS,
+intraday\5min\UKX\UKX_5min_2026.csv,C4_ranges,PASS,nonpos=0; OHLC_violations=0; bars_with_|r|>10%=0; px range 9668.4-10986.1
+intraday\5min\UKX\UKX_5min_2026.csv,C5_continuity,PASS,165 session-days; mean 101.9 bars/day; 2026-01-02 08:00:00+00:00 -> 2026-08-21 15:25:00+00:00

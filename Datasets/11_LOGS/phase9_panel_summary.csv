@@ -1,0 +1,7 @@
+Code,Rows,Columns,First,Last,RV_Days,RV_First,RV_Coverage_Pct_Since_RV_Start,VolIdx,VolIdx_Fallback,File
+SPX,9227,36,1990-01-02,2026-08-21,3664,2011-09-19,97.63,VIX,,panel/SPX_panel_daily.csv
+NDX,9227,38,1990-01-02,2026-08-21,3649,2011-09-19,97.23,VXN,VIX,panel/NDX_panel_daily.csv
+UKX,9255,38,1990-01-02,2026-08-21,3677,2011-09-19,97.53,VXEFA,VIX,panel/UKX_panel_daily.csv
+DAX,9270,38,1990-01-02,2026-08-21,3267,2013-09-30,100.0,V1X,V2TX,panel/DAX_panel_daily.csv
+NKY,8990,38,1990-01-04,2026-08-21,3349,2011-09-20,91.78,NKVI,VXEFA,panel/NKY_panel_daily.csv
+HSI,9041,38,1990-01-02,2026-08-21,3564,2011-09-19,97.11,VXEEM,VIX,panel/HSI_panel_daily.csv

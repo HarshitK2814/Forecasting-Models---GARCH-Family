@@ -1,0 +1,42 @@
+Columns,Group,Units,Availability,Timing,Note
+Date,key,date,always,-,"exchange trading date, local"
+Symbol,key,code,always,-,index code
+"Open,High,Low,Close",price,index points,always,known at close t,exchange daily bar from Yahoo Finance
+Return,target,log return,always,known at close t,log(C_t/C_t-1). PRIMARY TARGET for GARCH-EVT and Quantile Regression
+"Return_Pct,Return_Sq,AbsReturn,NegReturn",target,various,always,known at close t,"transformations of Return; NegReturn = |min(r,0)| leverage term"
+RV,realized,daily variance,RV_Valid only,known at close t,"5-min realized variance, cash session only. PRIMARY realized measure"
+"RVol,LogRV,RVol_Ann_Pct",realized,sd / log / annualised %,RV_Valid only,known at close t,transformations of RV
+"RV_1min,RV_ss",realized,daily variance,RV_Valid only,known at close t,1-min RV and the 5-grid subsampled RV (Zhang-Mykland-Ait-Sahalia)
+"BPV,MedRV",realized,daily variance,RV_Valid only,known at close t,jump-robust integrated variance. MedRV is robust to consecutive jumps
+"Jump,ContVar,JumpShare",realized,daily variance / ratio,RV_Valid only,known at close t,"J = max(RV - MedRV, 0); ContVar = RV - J; JumpShare = J/RV"
+"RS_pos,RS_neg,SignedJump,RSV_Ratio",realized,daily variance / ratio,RV_Valid only,known at close t,realized semivariance. RS_pos + RS_neg = RV EXACTLY. RSV_Ratio = RS_neg/RV
+LogRS_neg,realized,log variance,RV_Valid only,known at close t,"DO NOT use together with LogRV - VIF ~95, they are the same variable plus a constant"
+"RQ,TQ,RV_RelSE",realized,quarticity / ratio,RV_Valid only,known at close t,realized quarticity for HAR-Q; RV_RelSE = sqrt(2*RQ/n)/RV is the relative measurement error
+"RSkew,RKurt",realized,dimensionless,RV_Valid only,known at close t,intraday realized skewness and kurtosis (Amaya et al. 2015)
+NoiseRatio_1v5,diagnostic,ratio,RV_Valid only,known at close t,"RV_1min / RV_5min; a microstructure-noise indicator, ~1.06-1.09 here"
+"RV_d,RV_w,RV_m",HAR,daily variance,RV_Valid only,known at close t,"HAR cascade: today, trailing 5-day mean, trailing 22-day mean, all INCLUDING t"
+"LogRV_d,LogRV_w,LogRV_m,RSneg_*,CV_*,J_*",HAR,various,RV_Valid only,known at close t,"same cascade on the log, semivariance, continuous and jump parts"
+"RV_Scaled,ScaleFactor_HL",realized,daily variance,RV_Valid only,IN-SAMPLE constant,"Hansen-Lunde scaling of session RV onto close-to-close variance. WARNING: the factor is estimated once over the whole of sample B, so it is in-sample information. Fine for the measurement equation and for description; for a strict recursive out-of-sample exercise re-estimate it on each rolling window."
+"VolIdx,VolIdx_Symbol,VolIdx_IsProxy",implied,annualised vol %,always,known at close t,regional implied volatility index actually used; IsProxy flags NKY->VXEFA
+"IV_DailyVar,LogIV",implied,daily variance,always,known at close t,(VolIdx/100)^2/252 - the vol index converted onto the RV scale
+VRP,implied,daily variance,RV_Valid only,known at close t,variance risk premium = IV_DailyVar - RV
+"ParkinsonVar,GarmanKlassVar,RangePct",range,daily variance / %,always,known at close t,"range estimators from the exchange daily bar. AVAILABLE ON EVERY DAY, including intraday-defect days - the natural fallback predictor"
+Overnight_LogRet,return,log return,RV_Valid only,known at OPEN of t,close(t-1) -> open(t). NOT a day-t close variable; the only column that is not close-dated
+CFD_SessionReturn,diagnostic,log return,RV_Valid only,known at close t,close-to-close return of the CFD used to build RV; for reconciliation against Return
+"US10Y_pct,US13W_pct,TermSpread_pct",05_RAW_MACRO,percent,always,known at close t,LEVELS ARE NON-STATIONARY (ADF p=0.87/0.33). Do not use as QR regressors - use the _diff forms
+"US10Y_diff,TermSpread_diff",05_RAW_MACRO,percentage points,always,known at close t,first differences; stationary at p<0.001. USE THESE in the quantile regression
+"DXY,WTI_usd,GOLD_usd,HYG_px,IEF_px",05_RAW_MACRO,level,always,known at close t,"levels, forward-filled up to 5 business days; use the _ret forms as regressors"
+"DXY_ret,WTI_ret,GOLD_ret,HYG_ret,IEF_ret",05_RAW_MACRO,log return,always,known at close t,log differences of the above
+CreditStress,05_RAW_MACRO,log return,always,known at close t,"-(HYG_ret - IEF_ret); rises with credit stress, same sign as a widening high-yield spread"
+MacroFilled_t,quality,boolean,always,-,TRUE where at least one macro level was forward-filled on this row
+SessionClass,quality,FULL/HALFDAY/DEFECT/MISSING,always,-,intraday session classification driving RV_Valid
+"RV_Coverage,HasOpen,MaxInteriorGap_blocks",quality,ratio / bool / blocks,where intraday exists,-,"inputs to the classification, kept for auditability"
+RV_Valid,quality,boolean,always,-,THE GATE for every realized measure. TRUE only for FULL sessions with RV>0
+"IsHalfDay,IsDefect",quality,boolean,always,-,half-days are real short sessions; defects are feed failures
+"InSample_A,InSample_B,InSample_C",sample,boolean,always,-,"sample windows; B is PRIMARY (all six indices, 2013-09-30 onward)"
+CommonDate_B,sample,boolean,always,-,"date present for all six indices in sample B, ignoring RV validity"
+"CrisisLabel,IsCrisis",regime,label / boolean,always,known at close t,"10 named crisis windows with fixed calendar dates, identical across all six indices so cross-index comparison is meaningful. See CRISIS_PERIODS.csv for the dates and the basis for each. Sample B contains 6 of the 10; it MISSES the GFC, dot-com, Asian crisis and Euro sovereign crisis"
+TrailVol63_Ann,regime,annualised %,always,known at close t,"trailing 63-day return volatility, annualised. Defined on every day including intraday-defect days, because it uses returns rather than RV"
+VolRegime,regime,Calm/Normal/Stressed/Crisis,always,EX-POST,"quartiles of TrailVol63_Ann using FULL-SAMPLE cut-points. In-sample information: correct for ex-post subsample REPORTING, NEVER as a predictor"
+VolRegime_ExAnte,regime,Calm/Normal/Stressed/Crisis,from ~750 obs,known at close t,same quartiles from EXPANDING-WINDOW quantiles using only data strictly before each date. No look-ahead - safe as a regressor or conditioning variable
+BalancedRV_B,sample,boolean,always,-,date where ALL SIX indices have a VALID realized measure. Use for POOLED cross-index statistics only; per-index work should use RV_Valid and keep its own days

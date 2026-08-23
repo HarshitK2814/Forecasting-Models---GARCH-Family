@@ -1,0 +1,7 @@
+code,ticker,name,country,currency,tz,rows,first,last,cols,status,attempts,file
+SPX,^GSPC,S&P 500,United States,USD,America/New_York,9227,1990-01-02,2026-08-21,Symbol;Open;High;Low;Close;Adj Close;Volume;LogReturn,OK,"[9227, 9227]",daily\SPX\SPX_daily_1990-01-02_2026-08-21.csv
+NDX,^NDX,Nasdaq 100,United States,USD,America/New_York,9227,1990-01-02,2026-08-21,Symbol;Open;High;Low;Close;Adj Close;Volume;LogReturn,OK,"[9227, 9227]",daily\NDX\NDX_daily_1990-01-02_2026-08-21.csv
+UKX,^FTSE,FTSE 100,United Kingdom,GBP,Europe/London,9255,1990-01-02,2026-08-21,Symbol;Open;High;Low;Close;Adj Close;Volume;LogReturn,OK,"[9255, 9255]",daily\UKX\UKX_daily_1990-01-02_2026-08-21.csv
+DAX,^GDAXI,DAX 40,Germany,EUR,Europe/Berlin,9270,1990-01-02,2026-08-21,Symbol;Open;High;Low;Close;Adj Close;Volume;LogReturn,OK,"[9270, 9270]",daily\DAX\DAX_daily_1990-01-02_2026-08-21.csv
+NKY,^N225,Nikkei 225,Japan,JPY,Asia/Tokyo,8990,1990-01-04,2026-08-21,Symbol;Open;High;Low;Close;Adj Close;Volume;LogReturn,OK,"[8990, 8990]",daily\NKY\NKY_daily_1990-01-04_2026-08-21.csv
+HSI,^HSI,Hang Seng,Hong Kong,HKD,Asia/Hong_Kong,9041,1990-01-02,2026-08-21,Symbol;Open;High;Low;Close;Adj Close;Volume;LogReturn,OK,"[9041, 9041]",daily\HSI\HSI_daily_1990-01-02_2026-08-21.csv

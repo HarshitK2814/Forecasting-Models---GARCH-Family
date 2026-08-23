@@ -1,0 +1,18 @@
+Model,Role,Fields,Note
+GARCH-EVT,target,Return,"log return, full history from 1990 - this model needs no intraday data"
+GARCH-EVT,estimation note,-,stage 1 AR(1)-GJR-GARCH on Return; stage 2 GPD on the standardised residuals
+GARCH-EVT,POT threshold,-,95th-97.5th percentile of the standardised residuals - the region where the stage-6 stability plot shows xi flat with 230-460 exceedances
+GARCH-EVT,sample,InSample_B for evaluation,estimate on all history; only the forecast window must match the other models
+Realized GARCH,target,Return,log return
+Realized GARCH,realized measure,RV,"5-min RV, gated on RV_Valid. RV_ss is the low-noise alternative"
+Realized GARCH,measurement eq.,ScaleFactor_HL,"RV covers the session only, so it is 1.71-3.04x below close-to-close variance depending on session length; the intercept must absorb this or RV_Scaled must be used"
+Realized GARCH,optional,"MedRV, ContVar, Jump, RS_neg",jump-robust and signed variants for the robustness table
+Realized GARCH,sample,RV_Valid & InSample_B,"NKY has no valid RV in 2016-17; that index is estimated on 2,265 days with a gap"
+Quantile Regression,target,Return(t+1),"next-day log return, tau = 0.01 and 0.05"
+Quantile Regression,core regressors,"LogRV, LogRV_w, LogRV_m, LogIV, VRP, NegReturn, RangePct",the orthogonal parameterisation - max VIF 8.1 versus 21.9 for the naive set
+Quantile Regression,asymmetry,"RSV_Ratio, JumpShare, RSkew","downside share, jump share and intraday skew; these replace LogRS_neg, which is collinear with LogRV by construction"
+Quantile Regression,05_RAW_MACRO,"TermSpread_diff, CreditStress, DXY_ret",differenced or already-stationary forms only
+Quantile Regression,fallback,"RangePct, ParkinsonVar, GarmanKlassVar","available on every day including intraday-defect days; RangePct alone reaches R2=0.42 for next-day log RV, close to the implied-vol index"
+Quantile Regression,excluded,"LogRS_neg, US10Y_pct, TermSpread_pct level",collinear (VIF 95) or non-stationary in levels
+All models,evaluation,RV or RV_Scaled as the volatility proxy,QLIKE and MSE against the realized measure; VaR backtests against Return
+All models,pooled tests,BalancedRV_B,Model Confidence Set across indices requires aligned loss series

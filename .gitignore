@@ -1,0 +1,55 @@
+# ---------------------------------------------------------------------------
+# Large, fully regenerable data. These live in the project Google Drive.
+# Excluded from git because they total ~2 GB and add nothing that cannot be
+# rebuilt from the scripts. See README "What is not in this repository".
+# ---------------------------------------------------------------------------
+
+# 810 MB, 23,945 .npy files. Rebuild: 10_SCRIPTS/03_download_intraday.py (resumable)
+Datasets/12_CACHE_REGENERATION/
+
+# 1.1 GB of per-year 1-min and 5-min bars.
+# Rebuild from the cache: 10_SCRIPTS/05_build_intraday_and_RV.py
+Datasets/03_RAW_INTRADAY/
+
+# 17 MB. The pre-cleaning join, kept locally for provenance only - nothing should
+# model on it. Rebuild: 10_SCRIPTS/10_build_master_panel.py
+Datasets/07_PANEL_INTERMEDIATE/
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# ---------------------------------------------------------------------------
+# Editors / OS
+# ---------------------------------------------------------------------------
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---------------------------------------------------------------------------
+# Office lock files - these appear whenever an .xlsx is open and must never be
+# committed alongside the workbook.
+# ---------------------------------------------------------------------------
+~$*
+*.tmp
+
+# ---------------------------------------------------------------------------
+# Scratch
+# ---------------------------------------------------------------------------
+/tmp/
+*.log

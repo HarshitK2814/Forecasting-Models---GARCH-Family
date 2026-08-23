@@ -1,0 +1,18 @@
+code,kind,tracks,desc,rows,first,last,has_ohlc,attempts_to_stable,source_url,file,status
+VIX,cboe,SPX,"CBOE Volatility Index (S&P 500, 30d IV)",9256,1990-01-02,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv,volatility\VIX\VIX_daily_1990-01-02_2026-08-21.csv,OK
+VXN,cboe,NDX,CBOE Nasdaq-100 Volatility Index,4263,2009-09-14,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VXN_History.csv,volatility\VXN\VXN_daily_2009-09-14_2026-08-21.csv,OK
+VXEFA,cboe,UKX/NKY,CBOE EFA ETF Vol Index - developed mkts ex-US proxy,4685,2008-01-02,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VXEFA_History.csv,volatility\VXEFA\VXEFA_daily_2008-01-02_2026-08-21.csv,OK
+VXEEM,cboe,HSI,CBOE Emerging Markets ETF Vol Index - HSI proxy,3878,2011-03-16,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VXEEM_History.csv,volatility\VXEEM\VXEEM_daily_2011-03-16_2026-08-21.csv,OK
+VVIX,cboe,global,VIX of VIX (vol-of-vol),5088,2006-03-06,2026-08-21,False,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VVIX_History.csv,volatility\VVIX\VVIX_daily_2006-03-06_2026-08-21.csv,OK
+SKEW,cboe,SPX,CBOE SKEW Index (tail risk),9211,1990-01-02,2026-08-21,False,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/SKEW_History.csv,volatility\SKEW\SKEW_daily_1990-01-02_2026-08-21.csv,OK
+VIX9D,cboe,SPX,9-day VIX (term structure short end),3931,2011-01-04,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX9D_History.csv,volatility\VIX9D\VIX9D_daily_2011-01-04_2026-08-21.csv,OK
+VIX3M,cboe,SPX,3-month VIX,4257,2009-09-18,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX3M_History.csv,volatility\VIX3M\VIX3M_daily_2009-09-18_2026-08-21.csv,OK
+VIX6M,cboe,SPX,6-month VIX,4689,2008-01-02,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX6M_History.csv,volatility\VIX6M\VIX6M_daily_2008-01-02_2026-08-21.csv,OK
+RVX,cboe,US small cap,Russell 2000 Volatility Index,4254,2009-09-16,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/RVX_History.csv,volatility\RVX\RVX_daily_2009-09-16_2026-08-21.csv,OK
+VXD,cboe,US,DJIA Volatility Index,4257,2009-09-18,2026-08-21,True,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/VXD_History.csv,volatility\VXD\VXD_daily_2009-09-18_2026-08-21.csv,OK
+OVX,cboe,oil,Crude Oil ETF Volatility Index,4255,2009-09-18,2026-08-21,False,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/OVX_History.csv,volatility\OVX\OVX_daily_2009-09-18_2026-08-21.csv,OK
+GVZ,cboe,gold,Gold ETF Volatility Index,4255,2009-09-18,2026-08-21,False,2,https://cdn.cboe.com/api/global/us_indices/daily_prices/GVZ_History.csv,volatility\GVZ\GVZ_daily_2009-09-18_2026-08-21.csv,OK
+V2TX,stoxx,EuroStoxx/UKX,VSTOXX - EURO STOXX 50 Volatility,7035,1999-01-04,2026-08-21,False,2,https://www.stoxx.com/document/Indices/Current/HistoricalData/h_v2tx.txt,volatility\V2TX\V2TX_daily_1999-01-04_2026-08-21.csv,OK
+V1X,stoxx,DAX,VDAX-NEW - DAX Volatility Index,5474,2005-02-01,2026-08-21,False,2,https://www.stoxx.com/document/Indices/Current/HistoricalData/h_v1x.txt,volatility\V1X\V1X_daily_2005-02-01_2026-08-21.csv,OK
+V6I1,stoxx,EuroStoxx,VSTOXX 1-month sub-index,6329,1999-01-04,2026-08-19,False,2,https://www.stoxx.com/document/Indices/Current/HistoricalData/h_v6i1.txt,volatility\V6I1\V6I1_daily_1999-01-04_2026-08-19.csv,OK
+NKVI,yahoo,NKY,Nikkei 225 Volatility Index,2088,2018-01-22,2026-08-21,True,2,yfinance ticker ^NKVI.OS,volatility\NKVI\NKVI_daily_2018-01-22_2026-08-21.csv,OK

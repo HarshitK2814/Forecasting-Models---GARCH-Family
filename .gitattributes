@@ -1,0 +1,14 @@
+# Normalise text line endings in the repository; check out native on each platform.
+* text=auto
+
+# Explicitly binary - never line-ending converted, never diffed as text.
+*.pdf   binary
+*.xlsx  binary
+*.png   binary
+*.npy   binary
+
+# Data and scripts are plain text with LF in the repository.
+*.csv   text eol=lf
+*.py    text eol=lf
+*.md    text eol=lf
+*.txt   text eol=lf

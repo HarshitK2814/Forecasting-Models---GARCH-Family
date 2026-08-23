@@ -1,0 +1,11 @@
+CrisisLabel,Start,End,Basis,Days_in_SampleB,In_SampleB
+Asian_Crisis_LTCM,1997-07-02,1998-12-31,Thai baht float 1997-07-02 through the Russia default and LTCM rescue,0,False
+DotCom_Bust,2000-03-10,2002-10-09,Nasdaq peak 2000-03-10 to the S&P 500 trough 2002-10-09,0,False
+GFC,2007-08-01,2009-06-30,BNP Paribas fund freeze Aug 2007 through the NBER recession trough Jun 2009,0,False
+Euro_Sovereign_Debt,2010-04-23,2012-07-26,Greek bailout request to Draghi's 'whatever it takes',0,False
+China_Deval_Oil,2015-08-11,2016-02-11,RMB devaluation 2015-08-11 to the Feb 2016 equity/credit trough,128,True
+Volmageddon,2018-02-02,2018-02-14,The VIX complex blow-up and XIV termination,9,True
+Q4_2018_Selloff,2018-10-01,2018-12-26,Q4 2018 drawdown to the Christmas Eve trough,60,True
+COVID_Crash,2020-02-20,2020-04-30,Global equity peak 2020-02-19 through the April stabilisation,50,True
+Rate_Shock_2022,2022-01-03,2022-10-12,2022 peak to the October CPI-shock trough; inflation and rate repricing,196,True
+Yen_Carry_Unwind,2024-08-01,2024-08-09,BoJ hike and the global carry-trade unwind; Nikkei -12.4% on 2024-08-05,7,True
