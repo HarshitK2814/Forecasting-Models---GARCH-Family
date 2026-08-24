@@ -1,0 +1,18 @@
+Column,Type,Required,Description
+Date,date,True,"Target date. The day being forecast. Sorted, unique."
+OriginDate,date,True,Last date in the information set. Must be < Date.
+Code,str,True,Index code: SPX NDX UKX DAX NKY HSI.
+Model,str,True,Model family: GARCH GJR EGARCH RealGARCH GARCH-EVT QR.
+Spec,str,True,"Variant label, e.g. 'GJR-skewt-expanding'. Free text, stable within a file."
+Horizon,int,True,Forecast horizon in trading days. 1 for the main results.
+SigmaHat,float,True,"Conditional SD of the close-to-close daily log return. Decimal, > 0."
+VarHat,float,True,SigmaHat ** 2. Redundant but carried so QLIKE needs no recompute.
+VaR_01,float,True,"1% quantile of the return distribution. Signed, negative."
+VaR_025,float,True,"2.5% quantile. Signed, negative."
+VaR_05,float,True,"5% quantile. Signed, negative."
+ES_01,float,False,"Expected shortfall at 1%. Signed, negative. NaN if the model does not produce it."
+ES_025,float,False,"Expected shortfall at 2.5%. Signed, negative. NaN allowed."
+Realized,float,True,"Actual Return on Date, copied from the analysis file. For B's convenience and as a join check."
+RVProxy,float,True,RV_Scaled on Date - realized variance on the close-to-close scale. NaN where RV_Valid is False.
+Valid,bool,True,True if this row is an evaluable forecast. B must filter on this.
+Reason,str,False,Why Valid is False. Empty string when Valid is True.

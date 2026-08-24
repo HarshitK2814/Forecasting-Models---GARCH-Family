@@ -205,9 +205,69 @@ Step 3 is resumable — cached days are skipped, so a repeat run only fetches wh
 
 ---
 
+# PART 3 — Modelling deliverables (session 2026-08-24)
+
+Full detail and results tables: `RESEARCHER_A_SCOPE.md`. Decisions Researcher B depends on:
+`RESEARCHER_A_DECISIONS.md`. All four of A's remaining plan modules complete this session.
+
+## Phase 19 — Baseline GARCH / GJR-GARCH / EGARCH ✅
+- [x] 19.1 Six specs per index (Normal/t/skew-t × symmetric/asymmetric), AR(1) mean.
+      AR(1) added after a constant-mean pass left HSI's residuals autocorrelated
+      (Ljung-Box p=5e-5) - matches `FEATURE_SETS.csv`'s stated "AR(1)-GJR-GARCH".
+- [x] 19.2 GJR-skewt selected as primary (matches the plan's GARCH-EVT stage-1 spec and the
+      EDA's asymmetry findings); EGARCH-skewt has marginally lower AIC everywhere but is
+      reported as a comparator, not substituted - swapping the plan's named model is B's call.
+- [x] 19.3 Wrote `06_REALIZED_MEASURES/<CODE>_std_resid.csv` - **the file GARCH-EVT stage 2
+      reads**. This was the critical-path deliverable for unblocking B.
+
+## Phase 20 — Realized GARCH ✅
+- [x] 20.1 Implemented directly (not in `arch`) per Hansen, Huang & Shek (2012) log-linear
+      spec, verified against the paper's own equations before coding.
+- [x] 20.2 Fitted on `RV_Scaled`, not raw session RV - avoids a by-index scale mismatch
+      (1.71x-3.04x) contaminating the leverage/persistence parameters.
+- [x] 20.3 NKY's 2016-17 gap (842 of 3,558 days, 24%) handled explicitly: `h_{t-1}` substitutes
+      for missing `x_{t-1}` in the RECURSION only; the likelihood never sees the imputed
+      value. Affected forecast rows carry `Reason="RV_imputed_in_recursion"`.
+- [x] 20.4 All six converged; phi in [0.90, 1.02] (theory-consistent), tau1 negative
+      everywhere (leverage, consistent with EDA's -0.12 to -0.20 finding).
+
+## Phase 21 — Rolling out-of-sample forecast engine ✅
+- [x] 21.1 Genuine walk-forward: expanding-window re-estimation every 21 trading days
+      (chosen over fixed rolling given GPH d=0.50-0.63 long memory), daily state update via
+      `arch`'s `.fix(params).forecast(horizon=1)` - real 1-step-ahead forecasts throughout,
+      not multi-step projections held over the refit gap.
+- [x] 21.2 Run for GJR-skewt across all six indices, full sample-B window: 3,150-3,267
+      forecasts per index, 150-156 refits each.
+- [x] 21.3 Realized GARCH NOT walk-forward re-estimated - custom optimiser cost (~85s/fit)
+      makes a monthly refit ~18 hours; documented as an overnight-batch candidate, not
+      silently presented as equivalent to the GARCH-family rolling output.
+
+## Phase 22 — Robustness checks ✅
+- [x] 22.1 Sub-sample stability: persistence drops post-COVID on every index (e.g. SPX
+      0.987->0.973, NKY 0.981->0.921); skew strengthens on five of six.
+- [x] 22.2 Innovation distribution: Normal->t decisive everywhere (dAIC 252-466); t->GJR-skewt
+      decisive on five indices, weak on HSI (dAIC 63) - HSI has the least Engle-Ng asymmetry.
+- [x] 22.3 Sampling-frequency sensitivity: Hansen-Lunde scale factor moves 3-6% at 10-min RV,
+      17-28% at 30-min - the 5-min choice is doing real work, not an arbitrary convention.
+- [x] 22.4 Refit-cadence sensitivity: 21-day vs 63-day correlation 0.99998 - confirms the
+      rolling engine's cadence is a compute-cost choice, not a result-changing one.
+
+## Phase 23 — Forecast-file contract and cross-index decisions ✅
+- [x] 23.1 `10_SCRIPTS/26_forecast_io.py` - schema enforced in code (`validate()`,
+      `read_forecasts()`, `write_forecasts()`, `eval_frame()`), not just documented. Both real
+      model outputs pass validation and a full QLIKE/breach-rate join test.
+- [x] 23.2 Synthetic placeholder forecast files built and superseded once real output existed.
+- [x] 23.3 Non-synchronous-session convention and the crisis-coverage statement written to
+      `RESEARCHER_A_DECISIONS.md`.
+
+---
+
 ## Open items for the modelling stage
-- [ ] NKY Realized GARCH must handle the 2016-17 gap: rolling windows use the last *available*
-      observations; no forecasts can be produced or evaluated inside it.
-- [ ] Decide and state the treatment of non-synchronous sessions before any pooled analysis.
-- [ ] Re-estimate the POT threshold on the actual GARCH residuals once stage 1 is fitted.
+- [x] ~~NKY Realized GARCH must handle the 2016-17 gap~~ - done, see Phase 20.3.
+- [x] ~~Decide and state the treatment of non-synchronous sessions~~ - done, see Phase 23.3.
+- [ ] Re-estimate the POT threshold on the actual GARCH residuals once stage 1 is fitted -
+      **stage 1 is now fitted** (`06_REALIZED_MEASURES/<CODE>_std_resid.csv`); this is B's
+      next step, not A's.
+- [ ] Realized GARCH walk-forward re-estimation at a coarser (quarterly/annual) cadence -
+      compute-cost permitting, an overnight batch job.
 - [ ] Optional: Dukascopy ASK side for mid-price RV; the 5 remaining FRED series.

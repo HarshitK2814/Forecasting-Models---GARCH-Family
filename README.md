@@ -3,8 +3,10 @@
 Volatility and tail-risk forecasting across six Tier-1 equity indices, comparing
 **GARCH-EVT**, **Realized GARCH** and **Quantile Regression**.
 
-This repository currently holds the **dataset and its documentation**. No model has been
-fitted yet.
+This repository holds the **dataset, its documentation, and Researcher A's modelling
+deliverables** — baseline GARCH/GJR/EGARCH, Realized GARCH, a rolling out-of-sample forecast
+engine, and robustness checks. GARCH-EVT and quantile regression are Researcher B's modules
+and are not yet fitted.
 
 | | |
 |---|---|
@@ -13,19 +15,26 @@ fitted yet.
 | **Intraday / realized** | 2011-09 onward (DAX from 2013-09) |
 | **Primary sample** | B — all six indices, 2013-09-30 → 2026-08-21, 2,685 common days |
 | **Dataset status** | Complete and validated — 1,195 + 158 checks, **0 failures** |
-| **Model status** | **None fitted.** See [Division of labour](#division-of-labour) |
+| **Model status** | Baseline GARCH/GJR/EGARCH ✅ · Realized GARCH ✅ · Rolling engine ✅ · Robustness checks ✅ · GARCH-EVT / Quantile Regression — **B's modules, not started.** See [Division of labour](#division-of-labour) |
 | **Data cost** | £0 — every source is free and keyless |
 
 ---
 
 ## Start here
 
-1. **`Datasets/00_DOCUMENTATION/Dataset_Guide.pdf`** — 14 pages. **§3 is 24 precautions.
+1. **`Datasets/00_DOCUMENTATION/RESEARCHER_A_DECISIONS.md`** — **read this first if you are
+   Researcher B.** The forecast-file contract, the non-synchronous-session convention, and
+   the crisis-coverage statement — the three things B's code must agree with before writing
+   any evaluation or GARCH-EVT code.
+2. **`Datasets/00_DOCUMENTATION/RESEARCHER_A_SCOPE.md`** — what A built on top of the
+   dataset (baseline GARCH/GJR/EGARCH, Realized GARCH, rolling engine, robustness checks)
+   and the results tables for each.
+3. **`Datasets/00_DOCUMENTATION/Dataset_Guide.pdf`** — 14 pages. **§3 is 24 precautions.
    Read it before writing any modelling code.**
-2. **`Datasets/00_DOCUMENTATION/Handoff_to_Researcher_B.pdf`** — what is done, what is not,
+4. **`Datasets/00_DOCUMENTATION/Handoff_to_Researcher_B.pdf`** — what is done, what is not,
    and where the delivered data departs from the project plan.
-3. **`Datasets/00_DOCUMENTATION/Figure_Guide.pdf`** — every diagnostic figure explained.
-4. **`Datasets/00_DOCUMENTATION/DATASET_MASTER_REPORT.xlsx`** — 26 sheets: data dictionary,
+5. **`Datasets/00_DOCUMENTATION/Figure_Guide.pdf`** — every diagnostic figure explained.
+6. **`Datasets/00_DOCUMENTATION/DATASET_MASTER_REPORT.xlsx`** — 26 sheets: data dictionary,
    precautions, every EDA table, full file inventory.
 
 ## Quick start
@@ -44,6 +53,18 @@ rv = a.loc[a['RV_Valid'] & a['InSample_B'], ['Date', 'RV', 'LogRV', 'RS_neg']]
 # YOU apply the forecasting lag. Nothing in the file is pre-lagged.
 X = a[['LogRV', 'LogRV_w', 'LogIV', 'NegReturn']].shift(1)
 y = a['Return']
+
+# GARCH-EVT stage 1 is already fitted — start stage 2 (GPD on the standardised residuals)
+# straight from this file. Do not refit stage 1 independently; use A's std_resid so both
+# researchers' stage-1 model is identical.
+std = pd.read_csv('Datasets/06_REALIZED_MEASURES/SPX_std_resid.csv', parse_dates=['Date'])
+
+# Baseline-GARCH and Realized-GARCH forecasts, contract-format, ready for evaluation:
+import sys; sys.path.insert(0, 'Datasets/10_SCRIPTS')
+import importlib
+fio = importlib.import_module('26_forecast_io')
+fc = fio.read_forecasts('Datasets/20_FORECASTS/GJR-skewt__SPX_forecasts.csv')
+ev = fio.eval_frame(fc)   # adds QLIKE, squared error, VaR breach indicators
 ```
 
 ## The four rules that matter
@@ -157,19 +178,25 @@ Per `Executive Summary.pdf`, the project splits between two researchers.
 |---|---|---|---|
 | Data acquisition & cleaning | A | 40 h | ✅ **Complete** |
 | Realized volatility construction | A | 16 h | ✅ **Complete** (exceeds scope) |
-| Baseline GARCH & GJR/EGARCH | **A** | 24 h | ⬜ Not started |
-| Realized GARCH | **A** | 24 h | ⬜ Not started |
-| Rolling out-of-sample engine | **A** | 24 h | ⬜ Not started |
-| Robustness checks | **A** | 16 h | ⬜ Not started |
-| GARCH-EVT | B | 24 h | ⬜ Ready to start |
-| Quantile regression | B | 16 h | ⬜ Ready to start |
-| Evaluation metrics | B | 24 h | ⬜ Ready to start |
-| Crisis / regime analysis | B | 16 h | ⬜ Ready to start — labels shipped |
-| Statistical tests (DM, MCS) | B | 12 h | ⬜ Ready to start |
+| Baseline GARCH & GJR/EGARCH | A | 24 h | ✅ **Complete** |
+| Realized GARCH | A | 24 h | ✅ **Complete** |
+| Rolling out-of-sample engine | A | 24 h | ✅ **Complete** (GARCH-family; Realized GARCH walk-forward is an open item — see below) |
+| Robustness checks | A | 16 h | ✅ **Complete** |
+| GARCH-EVT | **B** | 24 h | ⬜ Ready to start — stage 1 done, see `06_REALIZED_MEASURES/<CODE>_std_resid.csv` |
+| Quantile regression | **B** | 16 h | ⬜ Ready to start |
+| Evaluation metrics | **B** | 24 h | ⬜ Ready to start — forecast files ready, see `20_FORECASTS/` |
+| Crisis / regime analysis | **B** | 16 h | ⬜ Ready to start — labels shipped |
+| Statistical tests (DM, MCS) | **B** | 12 h | ⬜ Ready to start |
 
-**2 of 15 plan deliverables are complete.** Note that the plan assigns the baseline GARCH,
-Realized GARCH and rolling-engine modules to Researcher A, not B — 88 hours still
-outstanding on A's side. See §1 of the Handoff document.
+**6 of 15 plan deliverables are complete — all of Researcher A's.** 92 hours outstanding, all
+on Researcher B's side. See `Datasets/00_DOCUMENTATION/RESEARCHER_A_SCOPE.md` for what was
+built and `RESEARCHER_A_DECISIONS.md` for what B needs to read before starting.
+
+**One open item inside A's "complete" scope**: the rolling engine's walk-forward
+re-estimation was run for the GARCH-family models only. Realized GARCH's custom optimiser
+(~85s/fit) makes a monthly walk-forward refit ~18 hours of compute; its forecast file instead
+uses full-sample parameters with a daily-updated (look-ahead-free) state, and a coarser
+quarterly/annual walk-forward is left as an overnight-batch candidate.
 
 ---
 
@@ -205,9 +232,18 @@ python 10_SCRIPTS/21_build_eda_report.py
 python 10_SCRIPTS/22_validate_analysis.py     # 158 checks, must report 0 failures
 python 10_SCRIPTS/23_build_documentation.py
 python 10_SCRIPTS/25_build_figure_and_handoff_docs.py
+
+# modelling (Researcher A's deliverables) - needs: pip install arch statsmodels scipy
+# matplotlib tabulate (all pinned in requirements.txt)
+python 10_SCRIPTS/27_baseline_garch.py             # ~10s. Writes std_resid files B needs.
+python 10_SCRIPTS/28_realized_garch.py             # ~9 min (custom optimiser, 6 indices)
+python 10_SCRIPTS/29_rolling_forecast_engine.py    # ~3 min. Walk-forward GJR-skewt forecasts.
+python 10_SCRIPTS/30_robustness_checks.py          # ~1 min
+python 10_SCRIPTS/31_build_synthetic_forecasts.py  # instant; superseded once real files exist
 ```
 
 Steps 12 and 14 read the 24,000-file Dukascopy cache and take several minutes each.
+Step 28 is the only other slow step (a hand-written quasi-MLE optimiser, not `arch`).
 Everything else runs in seconds.
 
 ### Two operational traps that cost real time
