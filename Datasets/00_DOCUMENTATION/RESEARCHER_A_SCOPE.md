@@ -134,6 +134,22 @@ choice, not a result-changing one; 63-day would have been equally valid and ~40%
 
 ---
 
+## Figures — `10_SCRIPTS/32_modelling_figures.py`, output in `09_FIGURES/`
+
+Seven figures, each backing a specific number above rather than illustrating in the abstract:
+
+| File | What it shows |
+|---|---|
+| `11_VaR_breach.png` | Return vs 1% VaR, breaches marked, all six indices. Empirical breach rates land at 0.8–1.5% against a 1% nominal target. |
+| `12_forecast_vs_realized.png` | GJR-skewt and Realized GARCH sigma-hat vs sqrt(RV_Scaled), all six. The NKY panel visibly shows Realized GARCH flatlining through the 2016–17 gap while GJR-skewt (returns-only) keeps tracking — the same fact `17_nky_gap.png` makes with shading, seen from the other model's side. |
+| `13_residual_diagnostics.png` | QQ vs fitted skew-t + ACF(resid²) with Ljung-Box p-values, all six. Center fits well; a handful of tail points (SPX, DAX) sit visibly off the skew-t line — the visual case for EVT beyond skew-t alone. |
+| `14_subsample_stability.png` | Persistence and skew-t lambda, pre- vs post-COVID bars, all six — the picture behind check (a). |
+| `15_frequency_sensitivity.png` | Hansen-Lunde scale factor vs sampling interval, all six lines — the picture behind check (c). |
+| `16_refit_cadence_overlay.png` | SPX sigma-hat, 21-day vs 63-day refit, overlaid + difference panel — the picture behind check (d). |
+| `17_nky_gap.png` | NKY Realized GARCH conditional volatility with the imputed-recursion window shaded (842 days) — the picture behind Phase 20.3. |
+
+---
+
 ## Three decisions — see `RESEARCHER_A_DECISIONS.md` for the full statements
 
 5. **Non-synchronous sessions** — each index keeps its own local calendar; pooled/cross-index

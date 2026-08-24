@@ -240,6 +240,7 @@ python 10_SCRIPTS/28_realized_garch.py             # ~9 min (custom optimiser, 6
 python 10_SCRIPTS/29_rolling_forecast_engine.py    # ~3 min. Walk-forward GJR-skewt forecasts.
 python 10_SCRIPTS/30_robustness_checks.py          # ~1 min
 python 10_SCRIPTS/31_build_synthetic_forecasts.py  # instant; superseded once real files exist
+python 10_SCRIPTS/32_modelling_figures.py          # ~1 min. 7 figures backing the tables above
 ```
 
 Steps 12 and 14 read the 24,000-file Dukascopy cache and take several minutes each.
