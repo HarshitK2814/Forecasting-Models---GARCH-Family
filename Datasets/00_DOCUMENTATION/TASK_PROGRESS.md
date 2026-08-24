@@ -260,14 +260,45 @@ Full detail and results tables: `RESEARCHER_A_SCOPE.md`. Decisions Researcher B 
 - [x] 23.3 Non-synchronous-session convention and the crisis-coverage statement written to
       `RESEARCHER_A_DECISIONS.md`.
 
+## Phase 24 — Modelling figures ✅
+- [x] 24.1 Seven figures in `09_FIGURES/` (11-17), each backing a specific number from
+      Phases 19-23 rather than illustrating in the abstract. See `RESEARCHER_A_SCOPE.md`
+      "Figures" section for the full index.
+
+## Phase 25 — Window-length and horizon-extension robustness ✅ (closes an Exec-Summary gap)
+- [x] 25.1 `EXECUTIVE_SUMMARY_ADDENDUM.md` written - reconciles four places delivery differs
+      from the Executive Summary's own text (free data sources, 6 indices not 1-3, a fuller
+      Realized GARCH spec than the doc's simplified equation, and this phase closing the two
+      robustness items the doc names but the first robustness pass had not yet covered).
+- [x] 25.2 Window-length sensitivity (SPX, expanding vs fixed 2y vs fixed 5y): correlation with
+      expanding drops to ~0.954, mean abs rel diff ~10% - unlike refit-cadence, this **matters**.
+      2020 COVID window shows the mechanism: fixed 5y overshoots expanding by up to +2pp at the
+      peak, then both fixed windows undershoot for months after as COVID ages out of lookback.
+- [x] 25.3 Horizon extension (all six indices, 1-day vs 5-day cumulative GJR-skewt): mean
+      annualised vol agrees to within 0.1-0.7pp across horizons - stable long-run estimate.
+      Caveat documented: QLIKE_5d < QLIKE_1d on every index is a scale artifact of QLIKE on a
+      coarser target, not evidence of better 5-day forecasting - never compare the two directly.
+- [x] 25.4 `29_rolling_forecast_engine.py` extended with `window_size` and `horizon` params,
+      backward-compatible (verified: refactored expanding/horizon=1 output matches the
+      previously delivered production files to float-precision noise, 5e-12 max abs diff).
+- [x] 25.5 6 new contract-format forecast files: `20_FORECASTS/GJR-skewt-h5__<CODE>_forecasts.csv`.
+- [x] 25.6 2 new figures: `18_window_length_sensitivity.png`, `19_horizon_extension.png`.
+
+**All six of Researcher A's Exec-Summary lead rows are now complete with no open items inside
+them.** See `EXECUTIVE_SUMMARY_ADDENDUM.md` for the row-by-row reconciliation table.
+
 ---
 
 ## Open items for the modelling stage
 - [x] ~~NKY Realized GARCH must handle the 2016-17 gap~~ - done, see Phase 20.3.
 - [x] ~~Decide and state the treatment of non-synchronous sessions~~ - done, see Phase 23.3.
+- [x] ~~Window-length and horizon-extension robustness~~ - done, see Phase 25.
 - [ ] Re-estimate the POT threshold on the actual GARCH residuals once stage 1 is fitted -
       **stage 1 is now fitted** (`06_REALIZED_MEASURES/<CODE>_std_resid.csv`); this is B's
       next step, not A's.
 - [ ] Realized GARCH walk-forward re-estimation at a coarser (quarterly/annual) cadence -
       compute-cost permitting, an overnight batch job.
+- [ ] Docker/environment reproducibility audit and unit tests for model-fitting functions -
+      named in the Executive Summary's "Reproducibility & Environment" and shared A/B rows;
+      not yet started by either researcher.
 - [ ] Optional: Dukascopy ASK side for mid-price RV; the 5 remaining FRED series.

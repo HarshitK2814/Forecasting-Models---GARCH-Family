@@ -85,7 +85,26 @@ SPEC_DEFS = {
 RUN_SPECS = ["GJR-skewt"]   # widen here if compute budget allows; see docstring
 
 
-def run_index_spec(code, spec_name):
+def run_index_spec(code, spec_name, window_size=None, horizon=1):
+    """Walk-forward one (index, spec).
+
+    window_size: None (default) = EXPANDING window, the production choice (see docstring for
+        why: GPH d=0.50-0.63 long memory means a fixed window forgets what it still needs).
+        An integer = FIXED ROLLING window of that many trading days - the doc's Section 4.1
+        names "fixed window or expanding window" explicitly as the two options; this parameter
+        makes the alternative buildable and comparable rather than only asserted in prose.
+
+    horizon: 1 (default) = the production 1-step-ahead forecast used everywhere else in the
+        pipeline. An integer >1 produces a CUMULATIVE H-day forecast: SigmaHat becomes the
+        conditional SD of the H-day-ahead cumulative log return (sqrt of the sum of the H
+        one-step-ahead variances - the standard GARCH multi-step aggregation, since returns are
+        conditionally uncorrelated in this mean specification), and mu is the sum of the H
+        one-step-ahead conditional means. VaR/ES quantiles reuse the SAME fitted shape
+        parameters (nu, lambda) scaled by the H-day sigma - an approximation (the true H-day
+        return distribution is a convolution of H marginals with time-varying variance, not
+        itself exactly skew-t), stated explicitly rather than left implicit. This is the
+        doc's Section "Evaluation & Robustness" horizon-extension item.
+    """
     spec = SPEC_DEFS[spec_name]
     a = pd.read_csv(os.path.join(ANA, f'{code}_analysis.csv'), parse_dates=['Date'], low_memory=False)
     a = a.sort_values('Date').reset_index(drop=True)
@@ -94,7 +113,9 @@ def run_index_spec(code, spec_name):
 
     start_i = int(np.searchsorted(dates.values, np.datetime64(SAMPLE_B_START)))
     start_i = max(start_i, 250)   # never fit on fewer than ~1 year of data
-    if start_i >= len(dates) - 5:
+    if window_size is not None:
+        start_i = max(start_i, window_size)   # need a full window before the first fit
+    if start_i >= len(dates) - horizon:
         raise RuntimeError(f"{code}: not enough post-burn-in history for a rolling run")
 
     theta = None
@@ -103,9 +124,11 @@ def run_index_spec(code, spec_name):
     refit_log = []
     t0 = time.time()
 
-    for i in range(start_i, len(dates)):
+    for i in range(start_i, len(dates) - horizon + 1):
         need_refit = theta is None or (i - start_i) % REFIT_EVERY == 0
-        train = r.iloc[:i]   # everything strictly before date i -> OriginDate = dates[i-1]
+        # everything strictly before date i -> OriginDate = dates[i-1]. Fixed window: only the
+        # trailing `window_size` observations; expanding (window_size=None): everything to date.
+        train = r.iloc[max(0, i - window_size):i] if window_size is not None else r.iloc[:i]
         am = arch_model(train, mean="AR", lags=1, vol=spec["vol"],
                          p=spec["p"], o=spec["o"], q=spec["q"], dist=spec["dist"])
         if need_refit:
@@ -119,17 +142,18 @@ def run_index_spec(code, spec_name):
         else:
             fixed = am.fix(theta)
 
-        f = fixed.forecast(horizon=1, reindex=False)
-        var1 = float(f.variance.values[-1, 0])     # percent^2
-        mean1 = float(f.mean.values[-1, 0])        # percent
-        sigma = np.sqrt(var1) / 100.0              # decimal
-        mu = mean1 / 100.0
+        f = fixed.forecast(horizon=horizon, reindex=False)
+        var_h = float(f.variance.values[-1, :].sum())     # cumulative H-day variance, percent^2
+        mean_h = float(f.mean.values[-1, :].sum())         # cumulative H-day mean, percent
+        sigma = np.sqrt(var_h) / 100.0              # decimal
+        mu = mean_h / 100.0
 
         dp = [theta[n] for n in dist_names] if dist_names else []
         dist_obj = am.distribution
         taus = [t for _, t in LEVELS]
         q = dist_obj.ppf(taus, dp) if dp else dist_obj.ppf(taus, None)
-        row = dict(Date=dates[i], OriginDate=dates[i - 1], SigmaHat=sigma, VarHat=sigma ** 2)
+        target_date = dates[i + horizon - 1] if horizon > 1 else dates[i]
+        row = dict(Date=target_date, OriginDate=dates[i - 1], SigmaHat=sigma, VarHat=sigma ** 2)
         for (k, tau), qi in zip(LEVELS, q):
             row[f"VaR_{k}"] = mu + sigma * qi
         rows.append(row)
@@ -141,9 +165,26 @@ def run_index_spec(code, spec_name):
                             # 28_realized_garch.py's analytic Student-t ES is the reference
                             # implementation where ES is required.
     act = a.set_index('Date')
-    df["Realized"] = act.loc[df["Date"], "Return"].values
-    rv_valid = act.loc[df["Date"], "RV_Valid"].astype(bool).values
-    df["RVProxy"] = np.where(rv_valid, act.loc[df["Date"], "RV_Scaled"].values, np.nan)
+    if horizon == 1:
+        df["Realized"] = act.loc[df["Date"], "Return"].values
+        rv_valid = act.loc[df["Date"], "RV_Valid"].astype(bool).values
+        df["RVProxy"] = np.where(rv_valid, act.loc[df["Date"], "RV_Scaled"].values, np.nan)
+    else:
+        # H-day cumulative actual: log returns are additive, so Realized = sum of the daily
+        # log returns strictly after OriginDate through Date (inclusive). RVProxy likewise sums
+        # RV_Scaled over the same window, but only when every day in it has RV_Valid - a single
+        # defect day (e.g. NKY) invalidates the whole H-day realized-variance comparison, not
+        # just that one day, since the sum would otherwise silently understate it.
+        realized, rvproxy = [], []
+        for _, rr in df.iterrows():
+            window = act.loc[(act.index > rr["OriginDate"]) & (act.index <= rr["Date"])]
+            realized.append(float(window["Return"].sum()))
+            if window["RV_Valid"].astype(bool).all() and len(window) == horizon:
+                rvproxy.append(float(window["RV_Scaled"].sum()))
+            else:
+                rvproxy.append(np.nan)
+        df["Realized"] = realized
+        df["RVProxy"] = rvproxy
     df["Valid"] = True
     df["Reason"] = ""
     return df, pd.DataFrame(refit_log), elapsed

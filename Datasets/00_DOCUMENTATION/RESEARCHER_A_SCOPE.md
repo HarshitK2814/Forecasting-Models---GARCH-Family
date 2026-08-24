@@ -9,6 +9,12 @@ Read `RESEARCHER_A_DECISIONS.md` first — it is the shorter document and it is 
 unblocks Researcher B (schema, session convention, crisis-coverage statement). This document
 is the fuller record of what was built and why.
 
+`EXECUTIVE_SUMMARY_ADDENDUM.md` reconciles four places where delivery differs from the
+Executive Summary's own text (free data sources instead of paid, 6 indices instead of 1-3, a
+fuller Realized GARCH spec than the doc's own simplified equation, and the window-length /
+horizon-extension robustness items closed after the doc flagged them as outstanding) — read it
+before citing the Exec Summary's data-source or model-equation sections directly in the paper.
+
 ---
 
 ## 1. Baseline GARCH, GJR-GARCH, EGARCH — `10_SCRIPTS/27_baseline_garch.py`
@@ -109,9 +115,12 @@ overnight-batch candidate at a coarser (quarterly/annual) cadence.
 
 ---
 
-## 4. Robustness checks — `10_SCRIPTS/30_robustness_checks.py`
+## 4. Robustness checks — `10_SCRIPTS/30_robustness_checks.py`, `33_window_and_horizon_robustness.py`
 
-Full results and interpretation notes: `08_VALIDATION/ROBUSTNESS_SUMMARY.md`. Four checks:
+Full results and interpretation notes: `08_VALIDATION/ROBUSTNESS_SUMMARY.md`. Six checks — the
+first four cover sub-sample/distribution/frequency/cadence; the last two close the Executive
+Summary's window-length and horizon-extension items, which the first robustness pass had not
+yet addressed (see `EXECUTIVE_SUMMARY_ADDENDUM.md` §4 for the reconciliation):
 
 **(a) Sub-sample stability (pre/post-COVID, GJR-skewt).** Persistence *drops* post-COVID for
 every index (e.g. SPX 0.987→0.973, NKY 0.981→0.921, HSI 0.988→0.942) and the skew parameter
@@ -132,11 +141,25 @@ explained away.
 relative difference 0.14% — confirms REFIT_EVERY=21 in the rolling engine is a compute-cost
 choice, not a result-changing one; 63-day would have been equally valid and ~40% cheaper.
 
+**(e) Window-length sensitivity (SPX, expanding vs fixed 2-year vs fixed 5-year).** Unlike
+refit-cadence, this one **matters**: correlation with expanding drops to ~0.954, mean absolute
+relative difference ~10%. The 2020 COVID window shows why — fixed 5-year overshoots expanding
+by up to +2pp at the peak, then both fixed windows undershoot for months after as COVID ages
+out of their lookback. Corroborates the original expanding-window choice (motivated by the
+EDA's GPH d=0.50–0.63 long-memory finding) with evidence, not just the original argument.
+
+**(f) Horizon extension (all six indices, 1-day vs 5-day cumulative).** Mean annualised
+volatility agrees to within 0.1–0.7pp between 1-day and 5-day forecasts on every index — the
+long-run volatility estimate is stable across aggregation horizons. **Caveat, stated plainly
+because it is easy to misread**: QLIKE is lower at 5-day than 1-day on every index, but that
+is a scale artifact of QLIKE on a coarser target, not evidence of better 5-day forecasting —
+QLIKE_1d and QLIKE_5d must never be compared to each other, only within the same horizon.
+
 ---
 
-## Figures — `10_SCRIPTS/32_modelling_figures.py`, output in `09_FIGURES/`
+## Figures — `10_SCRIPTS/32_modelling_figures.py`, `33_window_and_horizon_robustness.py`, output in `09_FIGURES/`
 
-Seven figures, each backing a specific number above rather than illustrating in the abstract:
+Nine figures, each backing a specific number above rather than illustrating in the abstract:
 
 | File | What it shows |
 |---|---|
@@ -147,6 +170,8 @@ Seven figures, each backing a specific number above rather than illustrating in 
 | `15_frequency_sensitivity.png` | Hansen-Lunde scale factor vs sampling interval, all six lines — the picture behind check (c). |
 | `16_refit_cadence_overlay.png` | SPX sigma-hat, 21-day vs 63-day refit, overlaid + difference panel — the picture behind check (d). |
 | `17_nky_gap.png` | NKY Realized GARCH conditional volatility with the imputed-recursion window shaded (842 days) — the picture behind Phase 20.3. |
+| `18_window_length_sensitivity.png` | SPX sigma-hat, expanding vs fixed 2y vs fixed 5y, overlaid + difference panel — the picture behind check (e), with the 2020 divergence directly visible. |
+| `19_horizon_extension.png` | 1-day vs 5-day-ahead annualised volatility, all six indices — the picture behind check (f). |
 
 ---
 

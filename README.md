@@ -181,7 +181,7 @@ Per `Executive Summary.pdf`, the project splits between two researchers.
 | Baseline GARCH & GJR/EGARCH | A | 24 h | ✅ **Complete** |
 | Realized GARCH | A | 24 h | ✅ **Complete** |
 | Rolling out-of-sample engine | A | 24 h | ✅ **Complete** (GARCH-family; Realized GARCH walk-forward is an open item — see below) |
-| Robustness checks | A | 16 h | ✅ **Complete** |
+| Robustness checks | A | 16 h | ✅ **Complete** (6 checks — sub-sample, distribution, RV frequency, refit cadence, **window length, horizon extension**) |
 | GARCH-EVT | **B** | 24 h | ⬜ Ready to start — stage 1 done, see `06_REALIZED_MEASURES/<CODE>_std_resid.csv` |
 | Quantile regression | **B** | 16 h | ⬜ Ready to start |
 | Evaluation metrics | **B** | 24 h | ⬜ Ready to start — forecast files ready, see `20_FORECASTS/` |
@@ -190,7 +190,11 @@ Per `Executive Summary.pdf`, the project splits between two researchers.
 
 **6 of 15 plan deliverables are complete — all of Researcher A's.** 92 hours outstanding, all
 on Researcher B's side. See `Datasets/00_DOCUMENTATION/RESEARCHER_A_SCOPE.md` for what was
-built and `RESEARCHER_A_DECISIONS.md` for what B needs to read before starting.
+built, `RESEARCHER_A_DECISIONS.md` for what B needs to read before starting, and
+`EXECUTIVE_SUMMARY_ADDENDUM.md` for four places delivery differs from the Executive Summary's
+own text (free data sources instead of paid, 6 indices instead of 1-3, a fuller Realized GARCH
+spec than the doc's simplified equation, and the window-length/horizon-extension robustness
+items — named in the plan, closed in this session).
 
 **One open item inside A's "complete" scope**: the rolling engine's walk-forward
 re-estimation was run for the GARCH-family models only. Realized GARCH's custom optimiser
@@ -241,6 +245,8 @@ python 10_SCRIPTS/29_rolling_forecast_engine.py    # ~3 min. Walk-forward GJR-sk
 python 10_SCRIPTS/30_robustness_checks.py          # ~1 min
 python 10_SCRIPTS/31_build_synthetic_forecasts.py  # instant; superseded once real files exist
 python 10_SCRIPTS/32_modelling_figures.py          # ~1 min. 7 figures backing the tables above
+python 10_SCRIPTS/33_window_and_horizon_robustness.py  # ~5 min. Closes the Exec Summary's
+                                                        # window-length and horizon items
 ```
 
 Steps 12 and 14 read the 24,000-file Dukascopy cache and take several minutes each.
