@@ -43,6 +43,16 @@ named model is B's call, not an implicit one made by an AIC ranking. See
 CondVol, StdResid from the GJR-skewt fit. **This is the input to GARCH-EVT stage 2** (fit a
 GPD to `StdResid`). Nothing else in the repository is a substitute for this file.
 
+**Look-ahead caveat, flagged 2026-08-25 (code review of B's GARCH-EVT PR, not previously
+called out here).** CondVol/StdResid come from one full-sample fit, by design (see script
+docstring). The consequence: GARCH-EVT stage 2's expanding-window GPD tail parameters (xi,
+beta) — which set every GARCH-EVT VaR/ES — are fit at each OriginDate on residuals whose scale
+already reflects parameters estimated on the full sample, including future dates. This is a
+look-ahead channel into the tail shape, beyond the smaller Mu-reconstruction bias B already
+disclosed in PR #1. Not fixed in this session (would need an expanding-window refit of this
+stage-1 model, ~150+ refits × 6 indices) — treat GARCH-EVT's out-of-sample framing as weaker
+than genuine walk-forward on this point until it is.
+
 ---
 
 ## 2. Realized GARCH — `10_SCRIPTS/28_realized_garch.py`
