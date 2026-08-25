@@ -77,7 +77,7 @@ def basel_zone(n_breach, n_obs, alpha=ALPHA):
     below 95%, amber to 99.99%, red beyond. Stating it this way rather than
     hard-coding 4 and 9 keeps it valid at n = 3,243.
     """
-    p = stats.binom.cdf(n_breach - 1, n_obs, alpha)   # P(X < n_breach)
+    p = stats.binom.cdf(n_breach, n_obs, alpha)       # P(X <= n_breach)
     if p < 0.95:   return 'green'
     if p < 0.9999: return 'amber'
     return 'red'
