@@ -39,19 +39,24 @@ index** — reported as a comparator, not silently substituted, because swapping
 named model is B's call, not an implicit one made by an AIC ranking. See
 `08_VALIDATION/garch_baseline_params.csv` for every spec × index cell.
 
-**Output B needs directly**: `06_REALIZED_MEASURES/<CODE>_std_resid.csv` — Date, Return,
-CondVol, StdResid from the GJR-skewt fit. **This is the input to GARCH-EVT stage 2** (fit a
-GPD to `StdResid`). Nothing else in the repository is a substitute for this file.
+**Output**: `06_REALIZED_MEASURES/<CODE>_std_resid.csv` — Date, Return, CondVol, StdResid from
+the GJR-skewt full-sample fit. Used for parameter tables, diagnostics, the summary figure, and
+`41_evt_threshold.py`'s one-time global threshold calibration (a fixed hyperparameter chosen
+once from the whole history, not a per-forecast quantity).
 
-**Look-ahead caveat, flagged 2026-08-25 (code review of B's GARCH-EVT PR, not previously
-called out here).** CondVol/StdResid come from one full-sample fit, by design (see script
-docstring). The consequence: GARCH-EVT stage 2's expanding-window GPD tail parameters (xi,
-beta) — which set every GARCH-EVT VaR/ES — are fit at each OriginDate on residuals whose scale
-already reflects parameters estimated on the full sample, including future dates. This is a
-look-ahead channel into the tail shape, beyond the smaller Mu-reconstruction bias B already
-disclosed in PR #1. Not fixed in this session (would need an expanding-window refit of this
-stage-1 model, ~150+ refits × 6 indices) — treat GARCH-EVT's out-of-sample framing as weaker
-than genuine walk-forward on this point until it is.
+**No longer the input to GARCH-EVT stage 2.** Flagged 2026-08-25 (code review of B's GARCH-EVT
+PR): stage 2's expanding-window GPD tail parameters (xi, beta) — which set every GARCH-EVT
+VaR/ES — were fit at each OriginDate on this file's residuals, whose scale already reflected
+parameters estimated on the full sample, including future dates. A look-ahead channel into the
+tail shape, beyond the smaller Mu-reconstruction bias B originally disclosed in PR #1. **Fixed
+2026-08-26**: `42_garch_evt.py` now sources both StdResid and Mu from
+`34_causal_evt_residuals.py`, which reuses `29_rolling_forecast_engine.py`'s own walk-forward
+refits (already computed and on record in `rolling_engine_refit_log.csv` — no new GARCH
+optimisation) via `.fix(theta)` at the latest refit at or before each OriginDate, so nothing
+feeding the tail fit was ever estimated on data after it. Effect on GARCH-EVT's output: breach
+counts unchanged on five of six indices; NDX moved from 46 to 49 (see
+`results/tables/34_causal_verification.csv` and `34_causal_evt_residuals.py`'s docstring for
+why the effect is this small — recent history barely changes, only the distant past does).
 
 ---
 
@@ -122,6 +127,12 @@ explicitly in the script docstring as weaker than genuine walk-forward, and left
 overnight-batch candidate at a coarser (quarterly/annual) cadence.
 
 **Output**: `20_FORECASTS/GJR-skewt__<CODE>_forecasts.csv` — contract-validated.
+
+**Also feeds `10_SCRIPTS/34_causal_evt_residuals.py` (added 2026-08-26).** That module reuses
+`08_VALIDATION/rolling_engine_refit_log.csv` — every refit's parameters, already persisted here
+— to give GARCH-EVT stage 2 a look-ahead-free residual/Mu source (see section 1's caveat,
+above). No new refits: it re-attaches this engine's own already-fitted parameters via
+`.fix(theta)`.
 
 ---
 

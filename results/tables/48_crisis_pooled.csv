@@ -1,7 +1,7 @@
 model,regime,n,breaches,rate_pct,reportable
 GARCH-EVT,COVID_Crash,294,11,3.741,True
 GARCH-EVT,China_Deval_Oil,760,16,2.105,True
-GARCH-EVT,Normal,16657,169,1.015,True
+GARCH-EVT,Normal,16657,172,1.033,True
 GARCH-EVT,Q4_2018_Selloff,359,10,2.786,True
 GARCH-EVT,Rate_Shock_2022,1168,11,0.942,True
 GARCH-EVT,Volmageddon,53,7,13.208,True

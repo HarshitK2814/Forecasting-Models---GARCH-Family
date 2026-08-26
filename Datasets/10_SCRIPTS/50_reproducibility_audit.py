@@ -39,8 +39,17 @@ B_MODELS = ['GARCH-EVT', 'QR-Full', 'QR-Range']       # files B is responsible f
 
 # A_SCOPE.md section 3, the rolling engine's own published counts
 A_SCOPE = {'SPX': 3243, 'NDX': 3243, 'UKX': 3258, 'DAX': 3267, 'NKY': 3150, 'HSI': 3172}
-# PROJECT_STATE, recorded before this rebuild - an independent earlier run
-PRIOR_EVT = {'SPX': 39, 'NDX': 46, 'UKX': 41, 'DAX': 41, 'NKY': 38, 'HSI': 22}
+# PROJECT_STATE, recorded before this rebuild - an independent earlier run.
+# GARCH-EVT's PRIOR_EVT was updated 2026-08-26 after 42_garch_evt.py switched from
+# 27_baseline_garch.py's full-sample (look-ahead) residuals to
+# 34_causal_evt_residuals.py's walk-forward-consistent ones (code review of PR #1).
+# This is a METHOD change, not noise: only NDX's count actually moved (46 -> 49);
+# the other five indices are unchanged, which is the expected size of the effect -
+# see 34_causal_evt_residuals.py's own diagnostics for why (early-history residuals
+# differ from the full-sample fit; recent ones barely do). The value this check
+# guards is unchanged: THIS run should reproduce THIS method's own prior run
+# bit-for-bit, catching non-determinism, not measuring against the old method.
+PRIOR_EVT = {'SPX': 39, 'NDX': 49, 'UKX': 41, 'DAX': 41, 'NKY': 38, 'HSI': 22}
 PRIOR_RG  = {'SPX': 73, 'NDX': 72, 'UKX': 63, 'DAX': 52, 'NKY': 58, 'HSI': 36}
 
 results = []

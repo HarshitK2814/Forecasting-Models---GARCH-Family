@@ -41,21 +41,30 @@ OUTPUTS
   09_FIGURES/garch_baseline_summary.png         conditional volatility, all six indices
   11_LOGS/phase19_baseline_garch.log
 
-LOOK-AHEAD CAVEAT ON CondVol/StdResid (flagged 2026-08-25, code review of B's GARCH-EVT PR)
+LOOK-AHEAD ON CondVol/StdResid — FLAGGED 2026-08-25, FIXED 2026-08-26
   CondVol and StdResid above come from ONE full-sample fit (params estimated on the whole
   history, then applied to every date) — this is the documented design ("estimate on all
-  history" per FEATURE_SETS.csv), not an accident. The consequence, not previously called out
-  here: B's GARCH-EVT stage 2 (script 42) fits its expanding-window GPD tail model on
-  StdResid=this series at every OriginDate, so the tail-shape parameters (xi, beta) driving
-  every GARCH-EVT VaR/ES forecast are estimated on residuals whose scale (CondVol) already
-  reflects GARCH parameters fit using the full sample, including dates after that OriginDate.
-  This is a look-ahead channel into the tail shape itself, on top of the smaller, already-
-  disclosed bias in the reconstructed Mu (see B's PR #1 description, item under "Known
-  limitations"). Not fixed here — an expanding-window refit of this stage-1 model (like
-  29_rolling_forecast_engine.py already does for the walk-forward GJR-skewt forecasts) would
-  remove it, at a cost of ~150+ refits x 6 indices, not budgeted in this session. Treat
-  GARCH-EVT's "genuine out-of-sample" framing as weaker than genuine walk-forward on this
-  specific point until that refit is done.
+  history" per FEATURE_SETS.csv), not an accident, and this file's OWN purpose (parameter
+  tables, the summary figure) is unaffected by it: those describe the fitted model, not an
+  out-of-sample forecast.
+  The consequence WAS that B's GARCH-EVT stage 2 (script 42) fit its expanding-window GPD tail
+  model on this series at every OriginDate, so the tail-shape parameters (xi, beta) driving
+  every GARCH-EVT VaR/ES forecast were estimated on residuals whose scale (CondVol) already
+  reflected GARCH parameters fit using the full sample, including dates after that OriginDate —
+  a look-ahead channel into the tail shape itself, on top of the Mu-reconstruction bias
+  originally disclosed in B's PR #1. Script 42 no longer reads this file at all: it now sources
+  both StdResid and Mu from 34_causal_evt_residuals.py's CausalResidualSource, which reuses
+  29_rolling_forecast_engine.py's own walk-forward refits (already computed, no new GARCH
+  optimisation) so that nothing feeding the EVT tail fit was ever estimated on data after the
+  forecast's OriginDate. See that module's docstring for the mechanism and verification, and
+  42_garch_evt.py's own docstring for the effect on its output (GARCH-EVT breach counts:
+  unchanged on five of six indices, NDX moved from 46 to 49 - see
+  results/tables/34_causal_verification.csv for why the effect is this small).
+  This file (27_baseline_garch.py) itself is UNCHANGED — the full-sample fit it produces
+  remains correct and useful for what it is now used for (parameter tables, diagnostics, the
+  summary figure, and 41_evt_threshold.py's one-time global threshold calibration, which - like
+  spec selection above - is a fixed hyperparameter choice made once from the whole history, not
+  a per-forecast quantity, so it carries no look-ahead into any individual VaR/ES output).
 """
 import os
 import sys

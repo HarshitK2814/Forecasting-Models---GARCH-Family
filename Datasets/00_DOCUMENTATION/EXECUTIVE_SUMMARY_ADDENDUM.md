@@ -101,3 +101,15 @@ evaluation visualisations, which cannot exist before B's models do).
 
 *Owner: Researcher A. Written 2026-08-24, updated same day after closing the window-length and
 horizon-extension items.*
+
+---
+
+**2026-08-26 follow-up.** B's PR #1 (all remaining lead rows: GARCH-EVT, quantile regression,
+evaluation, crisis/regime, statistical comparison, reproducibility audit) merged the same day,
+closing every remaining coding deliverable in this table. Of the two shared rows still open
+above: unit tests are done (`tests/`, 39 pytest tests). A Dockerfile was built, reviewed, and
+then dropped — never build-verified in this environment and not worth maintaining unverified;
+environment reproducibility instead rests on `requirements.txt` / `requirements_B.txt`'s exact
+pins plus `50_reproducibility_audit.py`'s environment check. Also fixed the same day: a
+look-ahead channel in GARCH-EVT's tail-fit input (full-sample residuals, not walk-forward —
+see `RESEARCHER_A_SCOPE.md` §1 and `34_causal_evt_residuals.py`), found in code review of PR #1.

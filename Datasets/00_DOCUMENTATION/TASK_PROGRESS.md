@@ -298,7 +298,9 @@ them.** See `EXECUTIVE_SUMMARY_ADDENDUM.md` for the row-by-row reconciliation ta
       next step, not A's.
 - [ ] Realized GARCH walk-forward re-estimation at a coarser (quarterly/annual) cadence -
       compute-cost permitting, an overnight batch job.
-- [ ] Docker/environment reproducibility audit and unit tests for model-fitting functions -
-      named in the Executive Summary's "Reproducibility & Environment" and shared A/B rows;
-      not yet started by either researcher.
+- [x] ~~Unit tests for model-fitting functions~~ - done 2026-08-26, `tests/` (39 pytest tests:
+      the EVT/backtest/loss-function library, the forecast-file contract, the Basel zone fn).
+- [x] ~~Environment reproducibility~~ - `requirements.txt` / `requirements_B.txt` exact pins +
+      `50_reproducibility_audit.py`'s environment check. A Dockerfile was tried and dropped
+      2026-08-26 (never build-verified; not worth maintaining unverified).
 - [ ] Optional: Dukascopy ASK side for mid-price RV; the 5 remaining FRED series.

@@ -10,15 +10,25 @@ DESIGN
   Stage 2 fits a GPD to the left tail of those residuals.
 
   Consequence: GARCH-EVT and the skew-t baseline share the SAME conditional
-  variance (both use A's SigmaHat) and very nearly the same conditional mean.
-  Mu here is reconstructed from the residual file, which is A's FULL-SAMPLE fit,
-  whereas A's forecast file uses the expanding-window fit. Measured gap: zero
-  mean, sd 0.001-0.008 sigma, max 0.05 sigma, against a tail effect of
-  0.019-0.044 sigma. Unbiased and an order smaller, so the comparison still
-  isolates the tail specification, but it is not exact and is disclosed as such.
+  variance (both use A's SigmaHat) and the SAME conditional mean (Mu is now
+  recovered algebraically from A's own walk-forward forecast file - see
+  CAUSAL RESIDUALS below - so the two are exactly consistent, not merely close).
   The shared SigmaHat also means the two have IDENTICAL volatility forecasts, so
   QLIKE cannot separate them and a Diebold-Mariano test on volatility loss returns
   NaN. That is correct behaviour, not a bug.
+
+CAUSAL RESIDUALS (fixed 2026-08-26, code review of PR #1)
+  Both stages' inputs previously came from 27_baseline_garch.py's single
+  full-sample fit: CondVol/StdResid/Mu at every historical date reflected
+  parameters estimated on the WHOLE sample, including dates after any given
+  OriginDate - a look-ahead channel directly into the tail-shape parameters
+  (xi, beta) this script fits, on top of the Mu bias disclosed at the time.
+  Both are now sourced from 34_causal_evt_residuals.py's CausalResidualSource,
+  which reuses 29_rolling_forecast_engine.py's own walk-forward refits (already
+  computed, already on record in rolling_engine_refit_log.csv - no new GARCH
+  optimisation) via `.fix(theta)` at the LATEST refit at or before OriginDate,
+  so nothing used here was ever estimated on data after OriginDate. See that
+  module's docstring for the full mechanism and verification.
 
 WINDOW DECISION - expanding, and why it differs from stage 1
   A short rolling window leaves few exceedances at q=0.95. Script 41's sampling-SE
@@ -32,12 +42,16 @@ WINDOW DECISION - expanding, and why it differs from stage 1
   Tail estimation is data-hungry in a way variance estimation is not, so the two
   stages warrant different window schemes. Stage 1 keeps A's expanding-window,
   21-day-refit scheme; stage 2 uses an expanding window over all residual history
-  available at OriginDate. This asymmetry is deliberate and is disclosed.
+  available at OriginDate (now via the causal source above). This asymmetry is
+  deliberate and is disclosed.
 
 LOOK-AHEAD
-  The GPD for target date t is fitted only on residuals dated <= OriginDate.
-  The contract guarantees OriginDate < Date and validate() rejects violations,
-  so the inclusive slice is safe.
+  The GPD for target date t is fitted only on residuals dated <= OriginDate, and
+  every one of those residuals - including ones from decades earlier - is itself
+  computed from GARCH parameters estimated using only data through OriginDate
+  (CausalResidualSource, above). The contract guarantees OriginDate < Date and
+  validate() rejects violations, so the inclusive slice is safe, and it is now
+  also true that the slice's CONTENTS carry no information from after OriginDate.
 
 OUTPUT
   20_FORECASTS/GARCH-EVT__<CODE>_forecasts.csv   contract format, write_forecasts()
@@ -50,8 +64,9 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 def _load(name, path):
     s = importlib.util.spec_from_file_location(name, path)
     m = importlib.util.module_from_spec(s); s.loader.exec_module(m); return m
-bc  = _load('bc',  os.path.join(HERE, '40_b_common.py'))
-fio = _load('fio', os.path.join(HERE, '26_forecast_io.py'))
+bc     = _load('bc',     os.path.join(HERE, '40_b_common.py'))
+fio    = _load('fio',    os.path.join(HERE, '26_forecast_io.py'))
+causal = _load('causal', os.path.join(HERE, '34_causal_evt_residuals.py'))
 
 RESID    = 'Datasets/06_REALIZED_MEASURES'
 FORECAST = 'Datasets/20_FORECASTS'
@@ -64,17 +79,16 @@ LEVELS = [('01', 0.99), ('025', 0.975), ('05', 0.95)]
 
 
 def rolling_evt(code):
-    """One index. Returns (forecast frame in contract shape, diagnostics frame)."""
-    r = pd.read_csv(f'{RESID}/{code}_std_resid.csv', parse_dates=['Date']
-                    ).set_index('Date').sort_index()
-    # A fits AR(1)-GJR; recover that conditional mean from the identity
-    #   Return = Mu + StdResid * CondVol
-    r['Mu'] = r['Return'] - r['StdResid'] * r['CondVol']
+    """One index. Returns (forecast frame in contract shape, diagnostics frame).
+
+    Residual history and Mu both come from CausalResidualSource (see module
+    docstring and 34_causal_evt_residuals.py) - neither carries information from
+    after OriginDate."""
+    src = causal.CausalResidualSource(code)
 
     base = fio.read_forecasts(f'{FORECAST}/GJR-skewt__{code}_forecasts.csv')
     base = base.sort_values('Date').reset_index(drop=True)
 
-    z_all, mu_all = r['StdResid'].dropna(), r['Mu']
     fc_rows, diag_rows = [], []
 
     for _, row in base.iterrows():
@@ -95,9 +109,10 @@ def rolling_evt(code):
         if pd.isna(origin):
             rec['Reason'] = 'no_origin_date'; fc_rows.append(rec); continue
 
-        hist = z_all.loc[:origin]          # OriginDate < Date, enforced by the contract
-        if len(hist) < MIN_OBS:
-            rec['Reason'] = f'residual_history_{len(hist)}_below_{MIN_OBS}'
+        hist = src.residual_history_as_of(origin)   # OriginDate < Date, enforced by the contract
+        if hist is None or len(hist) < MIN_OBS:
+            n = 0 if hist is None else len(hist)
+            rec['Reason'] = f'residual_history_{n}_below_{MIN_OBS}'
             fc_rows.append(rec); continue
         try:
             g = bc.fit_gpd(-hist.values, THRESH_Q)     # loss scale: L = -z
@@ -105,7 +120,7 @@ def rolling_evt(code):
             rec['Reason'] = f'gpd_fit_failed:{e}'; fc_rows.append(rec); continue
 
         sigma = float(row['SigmaHat'])
-        mu = mu_all.get(date, np.nan)
+        mu = src.mu_forecast(origin, sigma, float(row['VaR_01']))
         if not np.isfinite(mu):
             rec['Reason'] = 'mu_unavailable_on_target_date'
             fc_rows.append(rec); continue

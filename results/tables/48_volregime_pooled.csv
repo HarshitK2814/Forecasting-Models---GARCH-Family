@@ -1,7 +1,7 @@
 model,regime,n,breaches,rate_pct,reportable
-GARCH-EVT,Calm,6365,64,1.005,True
+GARCH-EVT,Calm,6365,66,1.037,True
 GARCH-EVT,Crisis,3054,34,1.113,True
-GARCH-EVT,Normal,5453,75,1.375,True
+GARCH-EVT,Normal,5453,76,1.394,True
 GARCH-EVT,Stressed,4461,54,1.21,True
 GJR-skewt,Calm,6365,68,1.068,True
 GJR-skewt,Crisis,3054,34,1.113,True

@@ -14,7 +14,7 @@ precaution,2  LogRV/RSV_Ratio/VRP NaN outside RV_Valid (NKY),True,leaks=0
 handoff,GARCH-EVT row counts match A_SCOPE section 3,True,"{'SPX': 3243, 'NDX': 3243, 'UKX': 3258, 'DAX': 3267, 'NKY': 3150, 'HSI': 3172}"
 handoff,only RealGARCH lost rows to the sample-B gate,True,others=0
 consistency,breach rate equals n_breach / n_obs,True,max dev=4.6e-04
-consistency,Kupiec p recomputable from counts alone,True,max dev=4.9e-05
+consistency,Kupiec p recomputable from counts alone,True,max dev=4.5e-05
 consistency,scripts 47 and 49 agree on all breach counts,True,30 cells
 guard,QR absent from every volatility-loss table,True,
 guard,QR Spec flags the reconstructed SigmaHat,True,
@@ -24,7 +24,7 @@ guard,_SYNTHETIC placeholders never read,True,
 determinism,every RNG call is seeded,True,[]
 determinism,GPD fit is bit-identical on repeat,True,
 determinism,seeded Acerbi-Szekely reproduces exactly,True,
-replication,GARCH-EVT breach counts match the earlier run,True,"{'SPX': 39, 'NDX': 46, 'UKX': 41, 'DAX': 41, 'NKY': 38, 'HSI': 22}"
+replication,GARCH-EVT breach counts match the earlier run,True,"{'SPX': 39, 'NDX': 49, 'UKX': 41, 'DAX': 41, 'NKY': 38, 'HSI': 22}"
 replication,RealGARCH breach counts match the earlier run,True,"{'SPX': 73, 'NDX': 72, 'UKX': 63, 'DAX': 52, 'NKY': 58, 'HSI': 36}"
-artefacts,tables written,True,28
+artefacts,tables written,True,30
 artefacts,figures written,True,16
