@@ -1,0 +1,7 @@
+index,n,n_retained,retained,eliminated
+SPX,2481,5,GARCH-EVT|GJR-skewt|RealGARCH|QR-Full|QR-Range,none
+NDX,2695,5,GARCH-EVT|GJR-skewt|RealGARCH|QR-Full|QR-Range,none
+UKX,2718,5,GARCH-EVT|GJR-skewt|RealGARCH|QR-Full|QR-Range,none
+DAX,2474,5,GARCH-EVT|GJR-skewt|RealGARCH|QR-Full|QR-Range,none
+NKY,1814,5,GARCH-EVT|GJR-skewt|RealGARCH|QR-Full|QR-Range,none
+HSI,2614,4,GJR-skewt|RealGARCH|QR-Full|QR-Range,GARCH-EVT
