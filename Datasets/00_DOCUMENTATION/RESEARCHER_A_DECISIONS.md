@@ -14,7 +14,10 @@ code against it is expensive.
 (14:30 UTC). A US shock on trading day *t* cannot reach the Asian close until day *t+1*. The
 EDA measured same-calendar-date return correlation between Asia and the US at **~0.18** — a
 timing artefact of the closing-time mismatch, not weak economic linkage. (Contrast: SPX–NDX
-same-day correlation is 0.96, because both close at the same instant.)
+same-day **return** correlation is 0.93, because both close at the same instant — corrected
+2026-08-26, code review: the figure previously stated here, 0.96, was the log-realized-variance
+correlation between SPX and NDX, a different EDA table, not the return correlation. See
+EDA_REPORT.md's return-correlation and log-RV-correlation matrices respectively.)
 
 **Decision.** All six indices in the analysis files use their **own local exchange calendar**
 — `Date` is the local trading day, `Close` the local close. No shift is applied inside

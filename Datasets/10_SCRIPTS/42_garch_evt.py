@@ -21,11 +21,14 @@ DESIGN
   NaN. That is correct behaviour, not a bug.
 
 WINDOW DECISION - expanding, and why it differs from stage 1
-  A 1,000-day rolling window leaves roughly 50 exceedances at q=0.95. Script 41
-  measured the sampling SD of xi at that count: 0.135, with 18% of fits returning
-  a NEGATIVE xi even when the true xi is +0.15. A negative xi implies a bounded
-  tail, which is not credible for equity returns. At 300-460 exceedances the SD
-  falls to about 0.056 and negative fits essentially vanish.
+  A short rolling window leaves few exceedances at q=0.95. Script 41's sampling-SE
+  sweep (results/tables/41_xi_sampling_se.csv) measured this concretely: at its
+  smallest tested count, n_exceed=90, sd(xi)=0.135 with 18% of fits returning a
+  NEGATIVE xi even when the true xi is +0.15 (corrected 2026-08-26, code review:
+  this was previously mis-cited as "~50 exceedances" - 90 is the smallest n_exceed
+  script 41 actually tested, not 50). A negative xi implies a bounded tail, which
+  is not credible for equity returns. At 360-460 exceedances the SD falls to about
+  0.056-0.063 and negative fits essentially vanish.
   Tail estimation is data-hungry in a way variance estimation is not, so the two
   stages warrant different window schemes. Stage 1 keeps A's expanding-window,
   21-day-refit scheme; stage 2 uses an expanding window over all residual history
