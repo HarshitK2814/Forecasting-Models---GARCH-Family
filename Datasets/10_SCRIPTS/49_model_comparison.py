@@ -47,6 +47,9 @@ FORECAST = 'Datasets/20_FORECASTS'
 INDICES  = ['SPX', 'NDX', 'UKX', 'DAX', 'NKY', 'HSI']
 MODELS   = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH', 'QR-Full', 'QR-Range']
 VOL_MODELS = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH']
+# 2026-08-29: the three variance-forecasting models, intersected per index to give the
+# strict common window. Matches STRICT_MODELS in 47_evaluation.py and 48_crisis_regime.py.
+STRICT_MODELS = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH']
 ALPHA = 0.01
 PAL = ["#378ADD", "#D85A30", "#1D9E75", "#BA7517", "#7F77DD"]
 
@@ -69,6 +72,42 @@ def load_all():
     return d
 
 
+def strict_window(data):
+    """Per-index intersection of the three variance models' valid dates. 2026-08-29.
+
+    WHY BASEL NEEDS THIS
+      basel_zone() classifies on n_breach GIVEN n_obs. After the walk-forward Realized
+      GARCH rebuild, n_obs differs by model within an index - DAX 2,765 for RealGARCH
+      against 3,267 for GJR-skewt - because the refit needs a burn-in. Comparing zones
+      across a row then compares models on different sample sizes, and the zone table
+      is the headline cross-model claim in this project. The same applies to the pooled
+      mean pinball ranking, where each model would otherwise be averaged over its own
+      set of days.
+
+      DM and the MCS are already immune: DM intersects each pair itself, and the MCS
+      needs one gap-free matrix so it already intersects all five.
+
+      QR is excluded from the intersection for the reason 47 gives - QR-Full's 13
+      predictors fail on 23-42% of days - but is carried through, cut to the strict
+      index, and still reported with its own n.
+
+    NON-DESTRUCTIVE: returns a new dict.
+    """
+    out, rep = {}, []
+    for c in INDICES:
+        idx = None
+        for m in STRICT_MODELS:
+            i = data[(m, c)].index
+            idx = i if idx is None else idx.intersection(i)
+        for m in MODELS:
+            before = len(data[(m, c)])
+            out[(m, c)] = data[(m, c)].loc[data[(m, c)].index.intersection(idx)]
+            rep.append({'index': c, 'model': m, 'rows_unrestricted': before,
+                        'rows_strict': len(out[(m, c)]),
+                        'dropped_for_common_window': before - len(out[(m, c)])})
+    return out, pd.DataFrame(rep)
+
+
 def basel_zone(n_breach, n_obs, alpha=ALPHA):
     """Basel traffic light, generalised from the 250-day table to any n.
 
@@ -86,13 +125,19 @@ def basel_zone(n_breach, n_obs, alpha=ALPHA):
 def main():
     os.makedirs('results/tables', exist_ok=True); os.makedirs('results/figures', exist_ok=True)
     data = load_all()
+    sdata, swin = strict_window(data)
+    swin.to_csv('results/tables/49_strict_window.csv', index=False)
 
     loss = {}
+    sloss = {}
     for c in INDICES:
         for m in MODELS:
             d = data[(m, c)]
             loss[(m, c)] = pd.Series(
                 bc.pinball_loss(d['Realized'], d['VaR_01'], ALPHA), index=d.index)
+            sd = sdata[(m, c)]
+            sloss[(m, c)] = pd.Series(
+                bc.pinball_loss(sd['Realized'], sd['VaR_01'], ALPHA), index=sd.index)
 
     dm_rows = []
     for c in INDICES:
@@ -116,18 +161,30 @@ def main():
                          'eliminated': '|'.join(r['eliminated']) or 'none'})
     mcs = pd.DataFrame(mcs_rows); mcs.to_csv('results/tables/49_mcs.csv', index=False)
 
-    b_rows = []
-    for c in INDICES:
-        for m in MODELS:
-            d = data[(m, c)]
-            nb = int((d['Realized'] < d['VaR_01']).sum())
-            b_rows.append({'index': c, 'model': m, 'n_obs': len(d), 'n_breach': nb,
-                           'expected': round(ALPHA*len(d), 1),
-                           'rate_pct': round(100*nb/len(d), 3),
-                           'zone': basel_zone(nb, len(d))})
-    basel = pd.DataFrame(b_rows); basel.to_csv('results/tables/49_basel.csv', index=False)
+    def basel_table(src):
+        rows = []
+        for c in INDICES:
+            for m in MODELS:
+                d = src[(m, c)]
+                nb = int((d['Realized'] < d['VaR_01']).sum())
+                rows.append({'index': c, 'model': m, 'n_obs': len(d), 'n_breach': nb,
+                             'expected': round(ALPHA*len(d), 1),
+                             'rate_pct': round(100*nb/len(d), 3),
+                             'zone': basel_zone(nb, len(d))})
+        return pd.DataFrame(rows)
 
-    bt = pd.read_csv('results/tables/47b_var_backtests.csv')
+    basel_unres = basel_table(data)
+    basel_unres.to_csv('results/tables/49_basel_unrestricted.csv', index=False)
+    # The strict table is the headline: zones are only comparable across a row when
+    # every model was classified on the same n_obs.
+    basel = basel_table(sdata)
+    basel.to_csv('results/tables/49_basel.csv', index=False)
+
+    # 47b_var_backtests_strict.csv is written by 47_evaluation.py on the same
+    # strict window used here; fall back if 47 has not been re-run yet.
+    _bt_strict = 'results/tables/47b_var_backtests_strict.csv'
+    bt = pd.read_csv(_bt_strict if os.path.exists(_bt_strict)
+                     else 'results/tables/47b_var_backtests.csv')
     bt = bt[bt['confidence'] == 0.99]
     TESTS = [('pass_kupiec', 'Kupiec'), ('pass_indep', 'Indep'),
              ('pass_cc', 'Joint CC'), ('pass_dq', 'DQ')]
@@ -213,20 +270,39 @@ def main():
     print(f'expected by chance alone at 5%: {0.05*len(dm):.1f}')
     if len(sig):
         print(sig[['index', 'model_1', 'model_2', 'dm_stat', 'p']].round(4).to_string(index=False))
-    print('\nmean pinball loss by model (pooled over indices):')
-    mp = {m: np.mean(np.concatenate([loss[(m, c)].values for c in INDICES])) for m in MODELS}
+    print('\nmean pinball loss by model (pooled over indices, STRICT common window):')
+    mp = {m: np.mean(np.concatenate([sloss[(m, c)].values for c in INDICES])) for m in MODELS}
     for m, v in sorted(mp.items(), key=lambda kv: kv[1]):
         print(f'  {m:10} {v:.6e}')
     print(f'  spread best to worst: {100*(max(mp.values())/min(mp.values())-1):.1f}%')
+    mpu = {m: np.mean(np.concatenate([loss[(m, c)].values for c in INDICES])) for m in MODELS}
+    print('  (unrestricted, each model on its own days: '
+          + ', '.join(f'{m} {mpu[m]:.4e}' for m in sorted(mpu, key=mpu.get)) + ')')
 
-    print('\n=== Basel traffic light, 99% VaR ===')
+    print('\n=== Basel traffic light, 99% VaR, STRICT common window ===')
     print(basel.pivot(index='index', columns='model', values='zone')[MODELS]
           .loc[INDICES].to_string())
-    print('\nzone counts:')
+    print('n_obs behind each zone:')
+    print(basel.pivot(index='index', columns='model', values='n_obs')[MODELS]
+          .loc[INDICES].to_string())
+    print('\nzone counts (STRICT):')
     for m in MODELS:
         z = basel[basel['model'] == m]['zone'].value_counts()
         print(f"  {m:10} green {z.get('green',0)}  amber {z.get('amber',0)}  red {z.get('red',0)}")
-    print('\nwrote 3 tables and 4 figures')
+
+    print('\nzone counts (unrestricted, for comparison only):')
+    for m in MODELS:
+        z = basel_unres[basel_unres['model'] == m]['zone'].value_counts()
+        print(f"  {m:10} green {z.get('green',0)}  amber {z.get('amber',0)}  red {z.get('red',0)}")
+    chg = basel.merge(basel_unres, on=['index', 'model'], suffixes=('_strict', '_unres'))
+    chg = chg[chg['zone_strict'] != chg['zone_unres']]
+    if len(chg):
+        print('\ncells whose ZONE changed under the common window:')
+        print(chg[['index', 'model', 'n_obs_unres', 'zone_unres',
+                   'n_obs_strict', 'zone_strict']].to_string(index=False))
+    else:
+        print('\nno zone changed under the common window')
+    print('\nwrote 6 tables and 4 figures')
 
 if __name__ == '__main__':
     main()

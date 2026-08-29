@@ -1,0 +1,6 @@
+model,normal_rate_pct,crisis_rate_pct,ratio,crisis_days
+GARCH-EVT,1.049,2.196,2.094,2641
+GJR-skewt,1.08,2.234,2.068,2641
+RealGARCH,1.504,3.787,2.518,2641
+QR-Full,1.125,3.224,2.866,2171
+QR-Range,1.157,2.538,2.194,2600
