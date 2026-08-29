@@ -143,7 +143,7 @@ validation tables. They are not open questions.
 |---|---|
 | Plain GARCH(1,1) is misspecified — use **GJR or EGARCH** | Engle–Ng sign-bias rejects on all six indices (worst p = 7e-5) |
 | A Gaussian innovation is insufficient | Hill tail index 2.6–3.9; every estimate below 4, so the fourth moment does not exist |
-| The EVT stage is justified | GPD shape ξ stays positive (0.15–0.25) **after** volatility standardisation |
+| The EVT stage is justified | GPD shape ξ is positive on all six indices. Measured on genuine GARCH residuals at q=0.95 the range is **0.050–0.159** (SPX 0.155, NDX 0.057, UKX 0.061, DAX 0.154, NKY 0.050, HSI 0.159), not the 0.15–0.25 previously quoted here — that band came from rolling-standardised returns, before any GARCH model existed. The conclusion is unchanged; the magnitude is smaller. |
 | Long memory is present — use the HAR cascade | GPH *d* on log RV is 0.50–0.63; ADF and KPSS both reject |
 | An AR(1) mean term is warranted | Ljung–Box on returns rejects for 5 of 6 indices |
 | Use the level-plus-share realized block | `LogRV` + `LogRS_neg` gives VIF ≈ 95; `LogRV` + `RSV_Ratio` + `JumpShare` + `RSkew` gives max VIF 8.1 |

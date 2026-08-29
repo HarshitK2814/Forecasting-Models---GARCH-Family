@@ -87,7 +87,14 @@ MODELS   = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH', 'QR-Full', 'QR-Range']
 # strict common window. Matches STRICT_MODELS in 47_evaluation.py - keep them in step.
 STRICT_MODELS = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH']
 ALPHA    = 0.01
-MIN_DAYS = 40          # below this a "rate" rests on 0-3 breaches and is not a rate
+MIN_DAYS = 100         # 2026-08-29: was 40. This is a POOLED threshold, so at 40 the
+                       # short windows still slipped through: Volmageddon pools to 53
+                       # days (7 breaches) and Yen_Carry_Unwind to 42 (3 breaches),
+                       # both marked reportable and written to the CSVs even though
+                       # per index they are the 7-9 day windows that must never be
+                       # quoted as rates. 100 pooled days is ~17 per index across six,
+                       # which still only supports a rate loosely - the per-index table
+                       # and the printed breach counts remain the primary record.
 PAL      = ["#378ADD", "#D85A30", "#1D9E75", "#BA7517", "#7F77DD"]
 
 mpl.rcParams.update({"figure.dpi": 110, "savefig.dpi": 300, "font.size": 9,
@@ -168,17 +175,34 @@ def by_regime(data, col):
 
 
 def degradation(pool_c):
-    """Normal vs weighted crisis rate per model. LEVELS are primary, ratio secondary."""
+    """Normal vs weighted crisis rate per model. LEVELS are primary, ratio secondary.
+
+    THE AGGREGATE USES EVERY CRISIS DAY, INCLUDING UNREPORTABLE WINDOWS
+      `reportable` gates whether an individual regime's rate may be PRINTED - a rate on
+      a 7-9 day per-index window is not a rate. It must not also gate this aggregate.
+      The two are different questions: the aggregate pools ~2,500 crisis days across
+      regimes, where the small-sample objection does not apply, and dropping the short
+      windows would remove the two most violent episodes in the sample (Volmageddon at
+      13.2% and Yen_Carry_Unwind at 7.1% on the strict window) and so understate crisis
+      degradation. Filtering on `reportable` here moved GARCH-EVT's crisis rate from
+      2.196 to 1.885 for no defensible reason.
+
+      n_unreportable_days records how much of the aggregate comes from windows too short
+      to quote individually, so a reader can see the exposure.
+    """
     deg = []
     for m in MODELS:
         s = pool_c[pool_c['model'] == m].set_index('regime')
         if 'Normal' not in s.index:
             continue
         norm = s.loc['Normal', 'rate_pct']
-        cr = s[(s.index != 'Normal') & s['reportable']]
+        cr = s[s.index != 'Normal']
         w = (cr['rate_pct'] * cr['n']).sum() / cr['n'].sum()
+        short = cr[~cr['reportable']]
         deg.append({'model': m, 'normal_rate_pct': norm, 'crisis_rate_pct': round(w, 3),
-                    'ratio': round(w / norm, 3), 'crisis_days': int(cr['n'].sum())})
+                    'ratio': round(w / norm, 3), 'crisis_days': int(cr['n'].sum()),
+                    'n_unreportable_days': int(short['n'].sum()),
+                    'unreportable_windows': '|'.join(sorted(short.index)) or 'none'})
     return pd.DataFrame(deg)
 
 
