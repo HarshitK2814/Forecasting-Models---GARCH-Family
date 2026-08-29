@@ -46,6 +46,9 @@ OUTPUT
   results/tables/47a_volatility_losses.csv   47a_dm_volatility.csv
   results/tables/47b_var_backtests.csv
   results/tables/47c_es_backtests.csv
+  results/tables/47_strict_window.csv                 2026-08-29, see strict_window()
+  results/tables/47a_volatility_losses_strict.csv     headline QLIKE, one common window
+  results/tables/47b_var_backtests_strict.csv         headline VaR, one common window
 """
 import os, importlib.util, itertools, numpy as np, pandas as pd
 
@@ -61,6 +64,9 @@ INDICES  = ['SPX', 'NDX', 'UKX', 'DAX', 'NKY', 'HSI']
 MODELS   = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH', 'QR-Full', 'QR-Range']
 VOL_MODELS = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH']       # QR excluded by design
 ES_MODELS  = ['GARCH-EVT', 'RealGARCH']
+# 2026-08-29: the three variance-forecasting models, used for the STRICT common-window
+# tables below. QR is deliberately excluded from this intersection - see strict_window().
+STRICT_MODELS = ['GARCH-EVT', 'GJR-skewt', 'RealGARCH']
 LEVELS   = [('01', 0.01), ('025', 0.025), ('05', 0.05)]
 
 
@@ -94,6 +100,51 @@ def common_window(data):
                         'rows_after': len(data[(m, c)]),
                         'dropped_outside_sampleB': before - len(data[(m, c)])})
     return data, pd.DataFrame(rep)
+
+
+def strict_window(data, models=None):
+    """Per-index intersection of the given models' valid dates. 2026-08-29 addition.
+
+    WHY THIS IS NEEDED IN ADDITION TO common_window()
+      common_window() removes rows that fall outside sample B, which is the contract
+      violation it was written for. It does NOT equalise coverage: a model that simply
+      cannot forecast on some in-window days still ends up with fewer rows than the
+      others. After the walk-forward Realized GARCH rebuild that gap became material,
+      because the refit needs a burn-in and RealGARCH's first forecast is therefore
+      later than GJR-skewt's by a different amount on every index (DAX 2015-09-29 vs
+      2013-09-30, i.e. 2765 rows against 3267).
+
+      Breach RATES and QLIKE means computed on different denominators are not directly
+      comparable, so a headline table built that way mixes a model effect with a window
+      effect. Diebold-Mariano was already immune (it intersects each pair itself); the
+      raw 47a/47b tables and everything downstream of them - Basel zones included - were
+      not.
+
+    WHY QR IS EXCLUDED FROM THIS INTERSECTION
+      Same reason common_window() gives for not intersecting everything: QR-Full's 13
+      predictors fail on 23-42% of days, so including it would hand the window to QR and
+      discard thousands of good observations from the other four. This intersection is
+      for the variance/tail comparison the paper leads with. QR is still reported on its
+      own coverage in the unrestricted tables, with n stated.
+
+    NON-DESTRUCTIVE: returns a NEW dict; the caller keeps the unrestricted `data` so
+    both sets of tables can be written and the difference between them inspected.
+    """
+    models = models or STRICT_MODELS
+    out, rep = {}, []
+    for c in INDICES:
+        idx = None
+        for m in models:
+            i = data[(m, c)].index
+            idx = i if idx is None else idx.intersection(i)
+        for m in MODELS:                      # carry every model, cut to the strict index
+            before = len(data[(m, c)])
+            out[(m, c)] = data[(m, c)].loc[data[(m, c)].index.intersection(idx)]
+            rep.append({'index': c, 'model': m, 'rows_unrestricted': before,
+                        'rows_strict': len(out[(m, c)]),
+                        'dropped_for_common_window': before - len(out[(m, c)])})
+        out[('_window', c)] = idx
+    return out, pd.DataFrame(rep)
 
 
 def main():
@@ -183,6 +234,35 @@ def main():
     es = pd.DataFrame(es_rows)
     es.to_csv('results/tables/47c_es_backtests.csv', index=False)
 
+    # ------------------------------------- STRICT COMMON WINDOW (2026-08-29)
+    # Same metrics, recomputed on the per-index intersection of the three variance
+    # models' valid dates, so breach rates and QLIKE means share one denominator.
+    # These are the tables the paper's headline VaR/volatility comparison should use;
+    # the unrestricted tables above remain as the each-model-on-its-own-coverage view.
+    sdata, swin = strict_window(data)
+    swin.to_csv('results/tables/47_strict_window.csv', index=False)
+
+    svol_rows = []
+    for c in INDICES:
+        for m in VOL_MODELS:
+            d = sdata[(m, c)]
+            ok = d['RVProxy'].notna()
+            L = bc.vol_losses(d.loc[ok, 'RVProxy'], d.loc[ok, 'VarHat'])
+            svol_rows.append({'index': c, 'model': m, **L})
+    svol = pd.DataFrame(svol_rows)
+    svol.to_csv('results/tables/47a_volatility_losses_strict.csv', index=False)
+
+    sbt_rows = []
+    for c in INDICES:
+        for m in MODELS:
+            d = sdata[(m, c)]
+            if len(d) == 0:
+                continue
+            for tag, alpha in LEVELS:
+                sbt_rows.append(bc.backtest(d['Realized'], d[f'VaR_{tag}'], alpha, m, c))
+    sbt = pd.DataFrame(sbt_rows)
+    sbt.to_csv('results/tables/47b_var_backtests_strict.csv', index=False)
+
     # ---------------------------------------------------- console
     print('\n=== 47a  QLIKE, lower is better (QR excluded: no volatility forecast) ===')
     print(vol.pivot(index='index', columns='model', values='QLIKE')[VOL_MODELS]
@@ -205,6 +285,21 @@ def main():
               f"joint CC {int(s['pass_cc'].sum())}/6   "
               f"DQ {int(s['pass_dq'].sum())}/6")
 
+    print('\n=== STRICT COMMON WINDOW (intersection of GJR / EVT / RealGARCH) ===')
+    print('evaluation days per index, unrestricted -> strict:')
+    piv = swin[swin['model'] == 'RealGARCH'].set_index('index')
+    for c in INDICES:
+        n_un = int(win[(win['model'] == 'GJR-skewt') & (win['index'] == c)]['rows_after'].iloc[0])
+        n_st = int(piv.loc[c, 'rows_strict'])
+        print(f'  {c}: GJR {n_un} / RealGARCH {int(piv.loc[c, "rows_unrestricted"])} -> common {n_st}')
+    print('\n99% VaR breach counts on the STRICT window:')
+    s1 = sbt[sbt['confidence'] == 0.99]
+    print(s1.pivot(index='index', columns='model', values='n_breach')[MODELS]
+          .loc[INDICES].to_string())
+    print('\nQLIKE on the STRICT window:')
+    print(svol.pivot(index='index', columns='model', values='QLIKE')[VOL_MODELS]
+          .loc[INDICES].round(4).to_string())
+
     print('\n=== 47c  Expected shortfall, realised / predicted on breach days ===')
     e1 = es[es['level'] == '01']
     print(e1.pivot(index='index', columns='model', values='ratio')[ES_MODELS]
@@ -217,7 +312,7 @@ def main():
     print('breaches behind each ratio:')
     print(e1.pivot(index='index', columns='model', values='n_breach')[ES_MODELS]
           .loc[INDICES].to_string())
-    print('\nwrote 5 tables')
+    print('\nwrote 8 tables')
 
 if __name__ == '__main__':
     main()

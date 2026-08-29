@@ -133,6 +133,32 @@ for c in CODES:
     chk(a['ScaleFactor_HL'].nunique(dropna=True) == 1, c,
         'ScaleFactor_HL is a single full-sample constant (documented in-sample quantity)')
 
+    # 2026-08-29 addition: ScaleFactor_HL_Causal must be the OPPOSITE of the above - genuinely
+    # expanding, not a disguised constant - and, like every other derived column, prefix-stable
+    # (a value computed through row T must not change when later rows are added).
+    hlc = a['ScaleFactor_HL_Causal'].dropna()
+    chk(hlc.nunique() > 1, c,
+        'ScaleFactor_HL_Causal actually varies over time (is genuinely expanding, not constant)',
+        f"nunique={hlc.nunique()}")
+    unstable_hlc = []
+    for T in cuts:
+        pre = a.iloc[:T + 1].copy()
+        mv = pre['RV_Valid'].astype(bool) & pre['Return'].notna()
+        cum_retsq = pre['Return_Sq'].where(mv).cumsum()
+        cum_rv = pre['RV'].where(mv).cumsum()
+        prior_n = mv.cumsum().shift(1).fillna(0)
+        c_causal = np.where((prior_n >= 60) & (cum_rv.shift(1) > 0),
+                             cum_retsq.shift(1) / cum_rv.shift(1), np.nan)
+        v_full, v_pre = a['ScaleFactor_HL_Causal'].iloc[T], c_causal[T] if T < len(c_causal) else np.nan
+        if pd.isna(v_full) and pd.isna(v_pre):
+            continue
+        if pd.isna(v_full) != pd.isna(v_pre):
+            unstable_hlc.append(f"ScaleFactor_HL_Causal@{T}(nan mismatch)")
+        elif abs(v_full - v_pre) > 1e-9 * max(1.0, abs(v_full)):
+            unstable_hlc.append(f"ScaleFactor_HL_Causal@{T}(d={abs(v_full - v_pre):.2e})")
+    chk(len(unstable_hlc) == 0, c, 'ScaleFactor_HL_Causal is prefix-stable (no look-ahead)',
+        "; ".join(unstable_hlc[:6]))
+
     # contemporaneous return must NOT be inferable from the predictor set alone in a way
     # that beats its own lag - a direct check that Return is not accidentally shifted
     cc = a[['Return']].copy()

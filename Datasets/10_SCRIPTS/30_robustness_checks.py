@@ -2,7 +2,7 @@
 """
 ROBUSTNESS CHECKS — Researcher A, plan item "Robustness checks", 16h.
 
-Four checks, each answering a specific question a reviewer will ask:
+Five checks, each answering a specific question a reviewer will ask:
 
   1. SUB-SAMPLE STABILITY. Are the GJR-skewt parameters stable pre- vs post-COVID, or did the
      2020 shock permanently reweight the persistence/leverage estimates? Split at 2020-02-20
@@ -27,11 +27,18 @@ Four checks, each answering a specific question a reviewer will ask:
      if 21-day and 63-day cadences give materially different SigmaHat, the cadence choice is
      not a free implementation detail and must be reported as such.
 
+  5. NKY MISSING-RV ROBUSTNESS. Does the realized-information volatility result depend on
+     including NKY, or specifically on the days its realized measure was recursion-imputed
+     (the 2016-17 feed outage, and the causal Hansen-Lunde scale factor's own warm-up window)?
+     Splits RealGARCH QLIKE three ways: all six markets, five markets excluding NKY, and
+     within NKY, observed-RV days vs recursion-imputed days.
+
 OUTPUTS
   08_VALIDATION/robustness_subsample_stability.csv
   08_VALIDATION/robustness_distribution_comparison.csv
   08_VALIDATION/robustness_frequency_sensitivity.csv
   08_VALIDATION/robustness_refit_cadence_sensitivity.csv
+  08_VALIDATION/robustness_nky_missing_rv.csv
   08_VALIDATION/ROBUSTNESS_SUMMARY.md
   11_LOGS/phase22_robustness.log
 """
@@ -171,6 +178,53 @@ def check_refit_cadence(code="SPX"):
     return summary
 
 
+# ---------------------------------------------------------------------------
+# 5. NKY missing-RV robustness (execution-plan item 10, 2026-08-29 addition).
+#    "All six markets" vs "five markets excl. NKY" vs, within NKY itself,
+#    observed-RV days vs recursion-imputed days (the 2016-17 feed outage, plus the causal
+#    Hansen-Lunde warm-up window). Turns a footnote into a table with QLIKE numbers attached.
+# ---------------------------------------------------------------------------
+def check_nky_missing_rv(model="RealGARCH"):
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    bc = importlib.import_module('40_b_common')
+    per_index = {}
+    for code in CODES:
+        path = os.path.join(fio.FCDIR, f'{model}__{code}_forecasts.csv')
+        if not os.path.exists(path):
+            continue
+        d = pd.read_csv(path, parse_dates=['Date'])
+        d = d[d['Valid'] == True]
+        per_index[code] = d
+
+    rows = []
+    six = pd.concat(per_index.values(), ignore_index=True) if per_index else pd.DataFrame()
+    if len(six):
+        L = bc.vol_losses(six['RVProxy'], six['VarHat'])
+        rows.append(dict(Comparison="all_six_markets", N_obs=L['n'], QLIKE=L['QLIKE'], RMSE=L['RMSE']))
+    five = pd.concat([v for k, v in per_index.items() if k != "NKY"], ignore_index=True) if len(per_index) > 1 else pd.DataFrame()
+    if len(five):
+        L = bc.vol_losses(five['RVProxy'], five['VarHat'])
+        rows.append(dict(Comparison="five_markets_excl_NKY", N_obs=L['n'], QLIKE=L['QLIKE'], RMSE=L['RMSE']))
+
+    if "NKY" in per_index:
+        n = per_index["NKY"]
+        imputed = n['Reason'].astype(str).eq('RV_imputed_in_recursion')
+        for label, mask in [("NKY_observed_RV_days", ~imputed), ("NKY_imputed_recursion_days", imputed)]:
+            sub = n[mask]
+            if len(sub) < 20:
+                rows.append(dict(Comparison=label, N_obs=len(sub), QLIKE=np.nan, RMSE=np.nan))
+                continue
+            L = bc.vol_losses(sub['RVProxy'], sub['VarHat'])
+            rows.append(dict(Comparison=label, N_obs=L['n'], QLIKE=L['QLIKE'], RMSE=L['RMSE']))
+        rows.append(dict(Comparison="NKY_pct_days_imputed",
+                          N_obs=len(n), QLIKE=np.nan, RMSE=np.nan,
+                          Note=f"{100*imputed.mean():.1f}%"))
+
+    df = pd.DataFrame(rows)
+    df.to_csv(os.path.join(VAL, 'robustness_nky_missing_rv.csv'), index=False)
+    return df
+
+
 def main():
     os.makedirs(VAL, exist_ok=True)
     os.makedirs(LOG, exist_ok=True)
@@ -192,10 +246,15 @@ def main():
     print(r3.to_string(index=False))
     log_lines.append("\nfrequency sensitivity:\n" + r3.to_string(index=False))
 
-    print("\n4/4 refit-cadence sensitivity (SPX, 21d vs 63d) ...")
+    print("\n4/5 refit-cadence sensitivity (SPX, 21d vs 63d) ...")
     r4 = check_refit_cadence()
     print(r4.to_string(index=False))
     log_lines.append("\nrefit cadence sensitivity:\n" + r4.to_string(index=False))
+
+    print("\n5/5 NKY missing-RV robustness (RealGARCH QLIKE: 6mkts / 5mkts-excl-NKY / NKY split) ...")
+    r5 = check_nky_missing_rv()
+    print(r5.to_string(index=False) if len(r5) else "  (skipped - run 28_realized_garch.py first)")
+    log_lines.append("\nNKY missing-RV robustness:\n" + (r5.to_string(index=False) if len(r5) else "skipped"))
 
     md = ["# Robustness checks — summary", "",
           f"Run {pd.Timestamp.now():%Y-%m-%d %H:%M}. Researcher A, plan item \"Robustness checks\".", "",
@@ -217,7 +276,12 @@ def main():
           "`Corr_63v21` close to 1 and a small `MeanAbsRelDiff_63v21` mean the rolling engine's "
           "REFIT_EVERY=21 choice is not materially different from a coarser, cheaper cadence - "
           "i.e. the 21-day default is a compute-cost choice, not a result-changing one.", "",
-          r4.to_markdown(index=False) if len(r4) else "(no data)", ""]
+          r4.to_markdown(index=False) if len(r4) else "(no data)", "",
+          "## 5. NKY missing-RV robustness (RealGARCH, QLIKE against RVProxy)",
+          "Does the realized-information result depend on including NKY, or on the days its "
+          "realized measure was recursion-imputed (2016-17 feed outage; causal Hansen-Lunde "
+          "warm-up window)? `NKY_pct_days_imputed` is informational (Note column), not a loss.", "",
+          r5.to_markdown(index=False) if len(r5) else "(run 28_realized_garch.py first)", ""]
     with open(os.path.join(VAL, 'ROBUSTNESS_SUMMARY.md'), 'w', encoding='utf-8') as f:
         f.write("\n".join(md))
 

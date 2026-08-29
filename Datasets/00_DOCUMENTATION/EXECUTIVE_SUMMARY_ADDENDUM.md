@@ -113,3 +113,66 @@ environment reproducibility instead rests on `requirements.txt` / `requirements_
 pins plus `50_reproducibility_audit.py`'s environment check. Also fixed the same day: a
 look-ahead channel in GARCH-EVT's tail-fit input (full-sample residuals, not walk-forward —
 see `RESEARCHER_A_SCOPE.md` §1 and `34_causal_evt_residuals.py`), found in code review of PR #1.
+
+---
+
+**2026-08-29 follow-up — the execution-plan review and its fixes.** A separate AI-assisted
+review of the execution plan (`Forecasting_Volatility_Research_Paper_Execution_Plan.pdf`)
+identified two P0 look-ahead issues still open after the 08-26 EVT fix, plus several P1/P2
+items. All are now closed:
+
+**P0 — the two that could move the paper's central conclusion:**
+1. **Causal Hansen-Lunde scaling.** `RV_Scaled` (the realized-measure scale factor used
+   throughout) was a single constant estimated over the *entire* evaluation window - an
+   observation dated 2014 was scaled using information partly from 2026. Replaced with
+   `RV_Scaled_Causal`, an expanding factor using only observations strictly before the target
+   date (`15_build_analysis_dataset.py` DECISION 5). Every model's QLIKE now scores against
+   this causal series (`26_forecast_io.py load_actuals`), not just Realized GARCH's own.
+2. **Walk-forward Realized GARCH.** Previously fit ONCE on the full sample (a genuine
+   look-ahead in the parameter values, though the recursion itself was causal). Now
+   re-estimated annually on an expanding window (`28_realized_garch.py`, ~13 refits/index,
+   `08_VALIDATION/realized_garch_refit_log.csv`), mirroring the GJR engine's design. **This
+   materially changed the headline result**: under the fair walk-forward refit, Realized
+   GARCH's 99% VaR breach rate got dramatically worse (now RED on the Basel traffic light for
+   4 of 6 markets, vs GARCH-EVT green on 5/6), while its QLIKE (volatility-accuracy) advantage
+   over GJR-skewt survived intact and remains statistically significant on 5/6 indices under
+   proper HAC inference. The "variance accuracy ≠ tail calibration" story is now demonstrated
+   honestly rather than resting on an in-sample parameter advantage - see
+   `results/tables/47a_volatility_losses.csv`, `47b_var_backtests.csv`, `49_basel.csv`.
+
+**P1:**
+- Skew-t Realized GARCH robustness variant added (`RealGARCH_ST` in every forecast/results
+  table), per Watanabe (2012)'s finding that a symmetric-t innovation can confound realized-
+  information quality with tail-density misspecification.
+- NKY session-close fix: the Tokyo Stock Exchange extended its cash-session close from 15:00
+  to 15:30 JST effective 2024-11-05; the session-window constant used to build every NKY
+  realized measure was date-independent and missed the extra half hour on ~450 trading days.
+  Fixed across `05_build_intraday_and_RV.py`, `12_extended_realized_measures.py`,
+  `14_session_classification.py`; full data pipeline rebuilt for NKY.
+- HAC/Newey-West Diebold-Mariano fix: the serial-correlation correction in `40_b_common.py`
+  was a no-op whenever h=1 (i.e. every DM call actually made in this project), silently using
+  the plain single-period variance. Now applies a proper Bartlett-kernel long-run variance with
+  the Newey-West (1994) plug-in bandwidth regardless of horizon.
+- EVT exceedance-dependence diagnostic added (Ljung-Box, Wald-Wolfowitz runs test,
+  Ferro-Segers extremal index) - `results/tables/41_exceedance_dependence.csv`. Found genuine
+  tail clustering in SPX and HSI (p<0.05), a citable limitation for the discussion section.
+- NKY missing-RV robustness table added (`robustness_nky_missing_rv.csv`) - confirms NKY does
+  not materially drive the six-market headline QLIKE result.
+- 5-day horizon metadata bug fixed: the `Horizon` contract field was silently defaulting to 1
+  on every `GJR-skewt-h5` file too.
+
+**Two bugs found only during this rebuild, unrelated to the causal-scaling work:**
+- `44_qr.py` (quantile regression) was silently broken - a required predictor column
+  (`TermSpread_diff`) was never created by the canonical data builder. Fixed in
+  `15_build_analysis_dataset.py`; QR now runs and its forecast files are current.
+- Pipeline sequencing gap: `20_finalise_and_document.py` (adds `CommonDate_B`/`BalancedRV_B`)
+  must run after `15_build_analysis_dataset.py` and before any evaluation script - was missed
+  once during this rebuild, causing a transient KeyError, now corrected in the run order.
+
+Full regeneration verified: 28/29 reproducibility-audit checks pass (`results/tables/50_audit.csv`;
+the one failure is expected local Python-version drift, not a real issue), all 45 unit tests
+pass. Drive was swept folder-by-folder on 2026-08-29 and every file found to contain now-wrong
+numbers (stale RealGARCH/GJR forecast files, stale NKY analysis/session-class files, stale
+`06_MODEL_FITS`, stale robustness tables) was removed; large binary/CSV files could not be
+re-uploaded through this tooling and need manual replacement from the local
+`Datasets/20_FORECASTS/`, `09_FIGURES/`, `06_MODEL_FITS/`, and `01_ANALYSIS_READY/` folders.

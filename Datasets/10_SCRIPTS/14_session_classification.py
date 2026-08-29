@@ -68,9 +68,19 @@ SESS = {
     "NDX": ("America/New_York", [("09:30", "16:00")]),
     "UKX": ("Europe/London",    [("08:00", "16:30")]),
     "DAX": ("Europe/Berlin",    [("09:00", "17:30")]),
-    "NKY": ("Asia/Tokyo",       [("09:00", "11:30"), ("12:30", "15:00")]),
+    "NKY": ("Asia/Tokyo",       [("09:00", "11:30"), ("12:30", "15:00")]),  # pre-2024-11-05 close; see windows_for()
     "HSI": ("Asia/Hong_Kong",   [("09:30", "12:00"), ("13:00", "16:00")]),
 }
+NKY_SESSION_CHANGE = "2024-11-05"  # TSE extended cash-session close from 15:00 to 15:30 JST
+
+
+def windows_for(code, date_str):
+    """Per-day session windows - only NKY is date-dependent. Identical logic to
+    05_build_intraday_and_RV.py / 12_extended_realized_measures.py's windows_for()."""
+    tz, windows = SESS[code]
+    if code == "NKY" and date_str >= NKY_SESSION_CHANGE:
+        return tz, [("09:00", "11:30"), ("12:30", "15:30")]
+    return tz, windows
 
 GRID = 5           # minutes; the sampling grid RV is computed on
 OPEN_TOL = 1       # 5-min blocks; the open counts as present within this many blocks
@@ -90,15 +100,15 @@ def expected_blocks(windows):
 
 
 def classify(code):
-    tz, windows = SESS[code]
-    exp = expected_blocks(windows)
-    nexp = len(exp)
     rows = []
     for fp in sorted(glob.glob(os.path.join(CACHE, code, 'BID_*.npy'))):
         rec = np.load(fp, allow_pickle=False)
         if rec.size == 0:
             continue
         day = os.path.basename(fp).split('_')[1].replace('.npy', '')
+        tz, windows = windows_for(code, day)
+        exp = expected_blocks(windows)
+        nexp = len(exp)
         base = pd.Timestamp(day, tz='UTC')
         d = pd.DataFrame({
             'ts': base + pd.to_timedelta(rec['t'].astype('int64'), unit='s'),

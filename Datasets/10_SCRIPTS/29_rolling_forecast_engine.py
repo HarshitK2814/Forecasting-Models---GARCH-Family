@@ -37,17 +37,15 @@ SPECS RUN
   bounded within one script invocation. Add strings to RUN_SPECS to widen the comparison -
   everything from the fit and quantile-extraction machinery is spec-agnostic.
 
-REALIZED GARCH IS NOT WALK-FORWARD RE-ESTIMATED HERE
-  The Realized GARCH optimiser in 28_realized_garch.py takes ~85s per full-sample fit (custom
-  quasi-MLE, no closed-form gradient, Nelder-Mead). A walk-forward re-estimation at the same
-  monthly cadence used here would be ~130 refits x 6 indices x 85s =~ 18 hours - not run as
-  part of this delivery. 28_realized_garch.py instead reports the full-sample-parameter,
-  daily-recursive 1-step-ahead series, which is look-ahead-free in the conditional-variance
-  STATE (h_t only uses x_{t-1}, h_{t-1}) but uses PARAMETERS estimated on the whole sample -
-  the standard "in-sample GARCH" convention, identical to how 27_baseline_garch.py's output is
-  produced, and clearly weaker than genuine walk-forward re-estimation. This gap is recorded
-  as an open item for the robustness-check budget (or an overnight batch job with a coarser,
-  e.g. quarterly or annual, refit cadence) rather than silently presented as equivalent.
+REALIZED GARCH IS NOT WALK-FORWARD RE-ESTIMATED HERE - HISTORICAL NOTE, NOW FIXED ELSEWHERE
+  This section originally explained why Realized GARCH used a single full-sample parameter fit
+  (custom quasi-MLE, ~85s/fit, monthly refits at this engine's cadence would have been ~18
+  hours). As of 2026-08-29, 28_realized_garch.py runs its OWN walk-forward loop - annual
+  expanding-window refits, ~13 refits x 6 indices, a coarser cadence chosen specifically to
+  make that runtime tractable (see that file's docstring "WALK-FORWARD PARAMETER ESTIMATION").
+  Realized GARCH is therefore no longer weaker than this engine's GJR output on that dimension;
+  it simply refits less often (annual vs this engine's 21-trading-day REFIT_EVERY) because its
+  per-refit optimisation cost is far higher.
 
 OUTPUT
   20_FORECASTS/<SPEC>__<CODE>_forecasts.csv     contract-format (26_forecast_io.py)
@@ -165,28 +163,39 @@ def run_index_spec(code, spec_name, window_size=None, horizon=1):
                             # 28_realized_garch.py's analytic Student-t ES is the reference
                             # implementation where ES is required.
     act = a.set_index('Date')
+    # RV_Scaled_Causal (expanding, look-ahead-free Hansen-Lunde factor - see
+    # 15_build_analysis_dataset.py DECISION 5) rather than RV_Scaled (full-sample constant):
+    # this RVProxy is what every model's QLIKE gets compared against in 47_evaluation.py, so
+    # a look-ahead scale factor here would bias every QLIKE number computed from this file,
+    # not just this model's own.
+    rv_valid_causal = act['RV_Valid'].astype(bool) & act['ScaleFactor_HL_Causal'].notna()
     if horizon == 1:
         df["Realized"] = act.loc[df["Date"], "Return"].values
-        rv_valid = act.loc[df["Date"], "RV_Valid"].astype(bool).values
-        df["RVProxy"] = np.where(rv_valid, act.loc[df["Date"], "RV_Scaled"].values, np.nan)
+        rv_valid = rv_valid_causal.loc[df["Date"]].values
+        df["RVProxy"] = np.where(rv_valid, act.loc[df["Date"], "RV_Scaled_Causal"].values, np.nan)
     else:
         # H-day cumulative actual: log returns are additive, so Realized = sum of the daily
         # log returns strictly after OriginDate through Date (inclusive). RVProxy likewise sums
-        # RV_Scaled over the same window, but only when every day in it has RV_Valid - a single
-        # defect day (e.g. NKY) invalidates the whole H-day realized-variance comparison, not
-        # just that one day, since the sum would otherwise silently understate it.
+        # RV_Scaled_Causal over the same window, but only when every day in it has a valid
+        # causal-scaled RV - a single defect day (e.g. NKY) invalidates the whole H-day
+        # realized-variance comparison, not just that one day, since the sum would otherwise
+        # silently understate it.
         realized, rvproxy = [], []
         for _, rr in df.iterrows():
             window = act.loc[(act.index > rr["OriginDate"]) & (act.index <= rr["Date"])]
+            window_valid = rv_valid_causal.loc[window.index]
             realized.append(float(window["Return"].sum()))
-            if window["RV_Valid"].astype(bool).all() and len(window) == horizon:
-                rvproxy.append(float(window["RV_Scaled"].sum()))
+            if window_valid.all() and len(window) == horizon:
+                rvproxy.append(float(window["RV_Scaled_Causal"].sum()))
             else:
                 rvproxy.append(np.nan)
         df["Realized"] = realized
         df["RVProxy"] = rvproxy
     df["Valid"] = True
     df["Reason"] = ""
+    df["Horizon"] = horizon   # 2026-08-29 fix: was silently defaulting to 1 via 26_forecast_io.py
+                               # for every h=5 file too (execution-plan item "verify 5-day horizon
+                               # metadata"); now the contract field actually matches the forecast.
     return df, pd.DataFrame(refit_log), elapsed
 
 

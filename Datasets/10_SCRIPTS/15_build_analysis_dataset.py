@@ -179,6 +179,12 @@ def build(code):
     a['MacroFilled_t'] = (before & ~after).any(axis=1)
     n_filled = int(a['MacroFilled_t'].sum())
     a['TermSpread_pct'] = a['US10Y_pct'] - a['US13W_pct']
+    # 2026-08-29 fix: 44_qr.py's QR_MACRO predictor block names 'TermSpread_diff' (the
+    # day-over-day change - stationary, unlike the level TermSpread_pct) but this canonical
+    # builder never created that column, so 44_qr.py has been reading a KeyError, not a value,
+    # every time it was run against a freshly-rebuilt analysis file. Discovered when rerunning
+    # QR after this session's other fixes; not related to the causal-scaling / NKY-session work.
+    a['TermSpread_diff'] = a['TermSpread_pct'].diff()
     for c, tag in (('DXY', 'DXY'), ('WTI_usd', 'WTI'), ('GOLD_usd', 'GOLD'),
                    ('HYG_px', 'HYG'), ('IEF_px', 'IEF')):
         a[f'{tag}_ret'] = np.log(a[c]).diff()
@@ -191,10 +197,33 @@ def build(code):
     a['Return_Pct'] = 100 * a['Return']
 
     # ---- DECISION 5: Hansen-Lunde scaling ----------------------------------
+    # RV_Scaled / ScaleFactor_HL below are the ORIGINAL full-sample-constant version, kept for
+    # descriptive EDA use only (EDA_REPORT.md, frequency_sensitivity.png) - NEVER feed these
+    # into a walk-forward forecast, because c_hl is estimated using the entire evaluation
+    # window (including its own future), which is look-ahead in the realized-measure scale.
     m = a['RV_Valid'] & a['Return'].notna() & a['InSample_B']
     c_hl = float(a.loc[m, 'Return_Sq'].sum() / a.loc[m, 'RV'].sum()) if m.sum() > 100 else np.nan
     a['RV_Scaled'] = c_hl * a['RV']
     a['ScaleFactor_HL'] = c_hl
+
+    # ---- CAUSAL Hansen-Lunde scaling (expanding, strictly pre-date) --------
+    # c_t = sum(r^2)/sum(RV) using every valid prior observation up to and including t-1 -
+    # not restricted to InSample_B, so an index with pre-2013 RV history (NDX/UKX/HSI/NKY/SPX)
+    # gets a genuine pre-OOS warm-up instead of leaning on its own evaluation window. Requires
+    # MIN_PRIOR valid observations before trusting the ratio; before that, ScaleFactor_HL_Causal
+    # (and hence RV_Scaled_Causal) is NaN, which 28_realized_garch.py's existing missing-x_t
+    # handling (substitute h_{t-1} in the recursion, skip the likelihood term) already absorbs
+    # correctly - no new imputation logic needed for the bootstrap window.
+    MIN_PRIOR = 60
+    mv = (a['RV_Valid'] & a['Return'].notna())
+    cum_retsq = a['Return_Sq'].where(mv).cumsum()
+    cum_rv = a['RV'].where(mv).cumsum()
+    prior_retsq = cum_retsq.shift(1)
+    prior_rv = cum_rv.shift(1)
+    prior_n = mv.cumsum().shift(1).fillna(0)
+    c_causal = np.where((prior_n >= MIN_PRIOR) & (prior_rv > 0), prior_retsq / prior_rv, np.nan)
+    a['ScaleFactor_HL_Causal'] = c_causal
+    a['RV_Scaled_Causal'] = a['ScaleFactor_HL_Causal'] * a['RV']
 
     a = a.sort_values('Date').reset_index(drop=True)
     path = os.path.join(OUT, f'{code}_analysis.csv')

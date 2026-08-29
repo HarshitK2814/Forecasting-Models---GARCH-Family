@@ -1,6 +1,6 @@
 # Robustness checks — summary
 
-Run 2026-08-24 18:28. Researcher A, plan item "Robustness checks".
+Run 2026-08-29 09:51. Researcher A, plan item "Robustness checks".
 
 ## 1. Sub-sample stability (pre/post COVID-19, GJR-skewt)
 COVID split at 2020-02-20 (crisis-window start). Compare `Persistence` (alpha + 0.5*gamma + beta) and the skew parameter `lam_skew` across the two halves.
@@ -35,16 +35,6 @@ AIC differences of 2+ units are conventionally decisive. `DeltaAIC_t_vs_Normal` 
 ## 3. Sampling-frequency sensitivity (Hansen-Lunde scale factor, 5/10/15/30-min RV)
 If `PctDiff_*_vs_5min` is small (a few percent), the choice of 5-min sampling for the primary realized-measure series is not doing unacknowledged work relative to coarser, even-lower-noise alternatives.
 
-**Note on the numbers below vs `SCALE_FACTORS.csv`.** This table is computed on *every* raw
-session-day in `06_REALIZED_MEASURES/<CODE>_RV_daily.csv`, before the session-quality gate
-(`SessionClass`/`RV_Valid`) is applied - it is a robustness check on the sampling frequency,
-run on the broadest available sample. `SCALE_FACTORS.csv` (used inside `01_ANALYSIS_READY`)
-is computed only on FULL sessions. The two therefore differ by a few percent (e.g. SPX 1.911
-here vs 1.809 there) - this is the DEFECT/HALFDAY sessions' effect on the ratio, not a
-computation error, and is itself informative: it is roughly consistent with the direction of
-the NKY under-measurement bias documented in the EDA (defect sessions understate RV, which
-inflates the implied scale factor when they are included).
-
 | Code   |   ScaleFactor_5min |   N_5min |   ScaleFactor_10min |   N_10min |   ScaleFactor_15min |   N_15min |   ScaleFactor_30min |   N_30min |   PctDiff_10min_vs_5min |   PctDiff_15min_vs_5min |   PctDiff_30min_vs_5min |
 |:-------|-------------------:|---------:|--------------------:|----------:|--------------------:|----------:|--------------------:|----------:|------------------------:|------------------------:|------------------------:|
 | SPX    |            1.91102 |     3754 |             2.00911 |      3754 |             2.08741 |      3754 |             2.2481  |      3754 |                 5.13297 |               9.23029   |                17.6389  |
@@ -59,57 +49,16 @@ inflates the implied scale factor when they are included).
 
 | Code   |   Cadence |   NRefits |   MeanSigmaHat |   Elapsed_s |   MeanAbsRelDiff_63v21 |   MaxAbsRelDiff_63v21 |   Corr_63v21 |
 |:-------|----------:|----------:|---------------:|------------:|-----------------------:|----------------------:|-------------:|
-| SPX    |        21 |       155 |     0.00952242 |     26.7124 |             0.00136987 |             0.0314237 |     0.999977 |
-| SPX    |        63 |        52 |     0.00952475 |     15.131  |             0.00136987 |             0.0314237 |     0.999977 |
+| SPX    |        21 |       155 |     0.00952242 |     21.7765 |             0.00136987 |             0.0314237 |     0.999977 |
+| SPX    |        63 |        52 |     0.00952475 |     12.3187 |             0.00136987 |             0.0314237 |     0.999977 |
 
-## 5. Window-length sensitivity (SPX, GJR-skewt: expanding vs fixed 2-year vs fixed 5-year)
+## 5. NKY missing-RV robustness (RealGARCH, QLIKE against RVProxy)
+Does the realized-information result depend on including NKY, or on the days its realized measure was recursion-imputed (2016-17 feed outage; causal Hansen-Lunde warm-up window)? `NKY_pct_days_imputed` is informational (Note column), not a loss.
 
-Executive Summary Section 4.1 names "fixed window or expanding window" explicitly, and the
-robustness section names "2 vs 5 years" as the fixed sizes to try. Unlike refit-cadence
-(check 4, correlation 0.99998 - barely matters), **window length is a real choice**: fixed
-windows deviate from expanding by 10% mean absolute relative difference (up to 60% at the
-single worst point), and the correlation with expanding drops to ~0.954. The 2020 COVID
-window (see `18_window_length_sensitivity.png`) makes the mechanism visible directly: the
-fixed 5-year window overshoots expanding by up to +2pp of daily sigma at the peak (a 2015-16
-observation still inside its 5-year lookback pulls the fit differently), then both fixed
-windows *undershoot* expanding for months afterward as COVID ages out of their lookback while
-expanding keeps it. This is direct evidence for the design choice already made: an expanding
-window is not interchangeable with a fixed one, and the GPH long-memory finding (d=0.50-0.63)
-that motivated choosing expanding is corroborated here, not just asserted.
-
-| Code | Window | Days | Mean sigma-hat | Mean abs rel diff vs expanding | Max abs rel diff | Corr vs expanding |
-|---|---|---|---|---|---|---|
-| SPX | expanding | - | 0.009522 | - | - | - |
-| SPX | fixed_2y | 504 | 0.009274 | 0.105 | 0.597 | 0.954 |
-| SPX | fixed_5y | 1260 | 0.009484 | 0.098 | 0.518 | 0.955 |
-
-## 6. Horizon extension (all six indices, GJR-skewt, 1-day vs 5-day cumulative)
-
-Executive Summary "Evaluation & Robustness": "extend forecasts to 5-day ahead and compare
-results." Genuine 5-day-ahead cumulative forecasts (`20_FORECASTS/GJR-skewt-h5__<CODE>_forecasts.csv`,
-`Horizon=5`) were produced for all six indices, not just SPX, since this directly compares
-against production forecast files B will evaluate. Method: SigmaHat_5d = sqrt(sum of the 5
-one-step-ahead variances from the same walk-forward fit); VaR/ES quantiles reuse the fitted
-skew-t shape parameters scaled by the 5-day aggregate sigma - an approximation (the true 5-day
-return distribution is a convolution of 5 marginals with time-varying variance, not itself
-skew-t), stated here rather than left implicit.
-
-| Code | QLIKE 1d | QLIKE 5d | Mean ann. vol 1d | Mean ann. vol 5d |
-|---|---|---|---|---|
-| SPX | 0.266 | 0.260 | 15.12% | 15.21% |
-| NDX | 0.246 | 0.219 | 20.12% | 20.26% |
-| UKX | 0.156 | 0.139 | 14.10% | 14.21% |
-| DAX | 0.188 | 0.139 | 17.91% | 18.04% |
-| NKY | 0.237 | 0.184 | 20.45% | 20.65% |
-| HSI | 0.183 | 0.146 | 20.78% | 20.88% |
-
-**Read this table carefully - QLIKE_5d being lower than QLIKE_1d on every index is NOT evidence
-the model forecasts better at 5 days than at 1 day.** QLIKE is scale-sensitive: the 5-day target
-(RVProxy summed over 5 days) is a coarser, relatively smoother quantity than any single day's
-target, and coarser targets mechanically produce lower average QLIKE regardless of forecast
-skill. The two QLIKE columns are **not comparable to each other** - use QLIKE_1d vs QLIKE_1d
-across models, and QLIKE_5d vs QLIKE_5d across models, never QLIKE_1d vs QLIKE_5d directly.
-The right-hand two columns are the genuinely informative check here: mean annualised volatility
-implied by the 1-day and 5-day forecasts agree to within 0.1-0.7 percentage points on every
-index - the model's long-run volatility estimate is stable across aggregation horizons, which
-is the actual consistency property worth reporting.
+| Comparison                 |   N_obs |      QLIKE |          RMSE | Note   |
+|:---------------------------|--------:|-----------:|--------------:|:-------|
+| all_six_markets            |   17310 |   0.191769 |   0.000227418 | nan    |
+| five_markets_excl_NKY      |   15095 |   0.187605 |   0.000222031 | nan    |
+| NKY_observed_RV_days       |    2176 |   0.22116  |   0.000263228 | nan    |
+| NKY_imputed_recursion_days |      39 |   0.163862 |   9.27851e-05 | nan    |
+| NKY_pct_days_imputed       |    3057 | nan        | nan           | 27.5%  |
