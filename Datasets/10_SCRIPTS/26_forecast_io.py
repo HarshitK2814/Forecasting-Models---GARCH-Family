@@ -240,14 +240,19 @@ def write_forecasts(df, model, code, base=None, spec=None, validate_first=True):
 def load_actuals(code):
     """The truth series B evaluates against, pulled straight from the analysis file.
 
-    Returns Date, Realized (close-to-close log return) and RVProxy (RV_Scaled, i.e. realized
-    variance already converted to the close-to-close scale so it is comparable with VarHat).
-    RVProxy is NaN wherever RV_Valid is False - B must drop those rows for QLIKE/MSE but
-    KEEP them for VaR backtests, which need only Realized.
+    Returns Date, Realized (close-to-close log return) and RVProxy (RV_Scaled_Causal, i.e.
+    realized variance converted to the close-to-close scale using the CAUSAL, expanding
+    Hansen-Lunde factor - see 15_build_analysis_dataset.py DECISION 5. RV_Scaled (the older
+    full-sample-constant factor) is look-ahead and must never feed an evaluation number;
+    2026-08-29 fix, since every model's QLIKE/MSE ultimately compares against this series.
+    RVProxy is NaN wherever RV_Valid is False or the causal factor's warm-up hasn't kicked in
+    yet - B must drop those rows for QLIKE/MSE but KEEP them for VaR backtests, which need
+    only Realized.
     """
     a = pd.read_csv(os.path.join(ANA, f"{code}_analysis.csv"),
                     parse_dates=["Date"], low_memory=False)
-    a["RVProxy"] = np.where(a["RV_Valid"].astype(bool), a["RV_Scaled"], np.nan)
+    rv_valid_causal = a["RV_Valid"].astype(bool) & a["ScaleFactor_HL_Causal"].notna()
+    a["RVProxy"] = np.where(rv_valid_causal, a["RV_Scaled_Causal"], np.nan)
     return a[["Date", "Return", "RVProxy", "InSample_B", "CommonDate_B",
               "BalancedRV_B", "RV_Valid", "CrisisLabel", "IsCrisis",
               "VolRegime", "VolRegime_ExAnte"]].rename(columns={"Return": "Realized"})

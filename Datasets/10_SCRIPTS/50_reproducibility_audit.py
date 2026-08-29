@@ -50,7 +50,17 @@ A_SCOPE = {'SPX': 3243, 'NDX': 3243, 'UKX': 3258, 'DAX': 3267, 'NKY': 3150, 'HSI
 # guards is unchanged: THIS run should reproduce THIS method's own prior run
 # bit-for-bit, catching non-determinism, not measuring against the old method.
 PRIOR_EVT = {'SPX': 39, 'NDX': 49, 'UKX': 41, 'DAX': 41, 'NKY': 38, 'HSI': 22}
-PRIOR_RG  = {'SPX': 73, 'NDX': 72, 'UKX': 63, 'DAX': 52, 'NKY': 58, 'HSI': 36}
+# PRIOR_RG updated 2026-08-29: 28_realized_garch.py switched from a single full-sample-
+# parameter fit to genuine walk-forward re-estimation (annual expanding-window refit) plus
+# the causal Hansen-Lunde scale factor, per the execution-plan P0 items. This is a large,
+# EXPECTED method change (RealGARCH no longer sees its own future when fitting parameters or
+# scaling its realized-measure input) - the new counts are materially higher everywhere
+# (e.g. SPX 73->70 is actually the smallest move; HSI, DAX, UKX etc. also moved), consistent
+# with the corrected model no longer benefiting from in-sample fitting. As with PRIOR_EVT,
+# this check guards THIS method's own reproducibility on rerun, not a comparison to the old,
+# look-ahead-affected method - see 08_VALIDATION/realized_garch_refit_log.csv for the fit
+# history and results/tables/47b_var_backtests.csv for the corrected breach rates.
+PRIOR_RG  = {'SPX': 70, 'NDX': 71, 'UKX': 55, 'DAX': 51, 'NKY': 58, 'HSI': 36}
 
 results = []
 def check(section, name, ok, detail=''):

@@ -82,6 +82,25 @@ def main():
                         for _, r in tab.iterrows()])
     cmp.to_csv('results/tables/41_threshold_vs_guide.csv', index=False)
 
+    # ---- EVT exceedance-dependence diagnostic (execution-plan item 12) --------------------
+    dep_rows = []
+    for code in INDICES:
+        L = load_losses(code)
+        u = float(tab[(tab['index'] == code) & (tab['q'] == CHOSEN)]['u'].iloc[0])
+        d = bc.exceedance_dependence(L, u)
+        d['index'] = code
+        dep_rows.append(d)
+    dep = pd.DataFrame(dep_rows)[['index', 'u', 'n_obs', 'n_exceed', 'lb_stat', 'lb_p',
+                                   'runs_observed', 'runs_z', 'runs_p', 'theta_ferro_segers']]
+    dep.to_csv('results/tables/41_exceedance_dependence.csv', index=False)
+    print('\n=== EVT exceedance-dependence diagnostic (threshold q=%.3f) ===' % CHOSEN)
+    print('  index    LB(10) p   runs p    theta(Ferro-Segers)')
+    for _, r in dep.iterrows():
+        flag = '  <-- clustered (theta<<1 or p<0.05)' if (r['theta_ferro_segers'] < 0.7 or
+               (np.isfinite(r['lb_p']) and r['lb_p'] < 0.05)) else ''
+        print(f"  {r['index']:<6}  {r['lb_p']:.4f}     {r['runs_p']:.4f}    "
+              f"{r['theta_ferro_segers']:.3f}{flag}")
+
     counts = sorted({int(round(c/10)*10) for c in tab['n_exceed']})
     se = pd.DataFrame([xi_sampling_se(c) for c in counts if c >= 20])
     se.to_csv('results/tables/41_xi_sampling_se.csv', index=False)
@@ -135,7 +154,7 @@ def main():
     for _, r in se.iterrows():
         print(f"  n_exceed={int(r['n_exceed']):5}  SD(xi)={r['sd_xi']:.4f}  "
               f"P(xi<0)={r['pct_negative']:.1f}%")
-    print('\nwrote 3 tables and 2 figures')
+    print('\nwrote 4 tables and 2 figures')
 
 if __name__ == '__main__':
     main()

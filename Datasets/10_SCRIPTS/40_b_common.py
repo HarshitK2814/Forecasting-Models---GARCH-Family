@@ -16,6 +16,74 @@ from scipy.optimize import minimize
 
 SEED = 42
 
+# ------------------------------------------------------------- EVT dependence diagnostic
+def exceedance_dependence(losses, u, max_lag=10):
+    """2026-08-29 addition (execution-plan item 12, EVT dependence diagnostics).
+
+    Marginal GPD goodness-of-fit (gpd_gof below) says nothing about whether threshold
+    exceedances I_t = 1{L_t > u} are temporally independent. POT/EVT implicitly leans on an
+    exceedance process that is close to a Poisson process in the limit; a genuinely clustered
+    tail (volatility persists, so a bad day is often followed by another bad day) violates
+    that and biases VaR/ES coverage even when xi/beta fit the exceedance sizes well.
+
+    Returns three diagnostics on the exceedance indicator:
+      lb_stat/lb_p    Ljung-Box test for autocorrelation in I_t at `max_lag` lags.
+      runs_z/runs_p   Wald-Wolfowitz runs test (fewer runs than expected under independence
+                      = clustering).
+      theta_ferro_segers   Ferro & Segers (2003) intervals estimator of the extremal index
+                      theta in [0,1]. theta=1: no clustering (each exceedance is its own
+                      "cluster"). theta<1: exceedances cluster; 1/theta is the expected
+                      cluster size. This is the number the plan asks be added if declustering
+                      needs to be discussed as a robustness check or a limitation.
+    """
+    L = np.asarray(losses, float)
+    I = (L > u).astype(int)
+    n_exceed = int(I.sum())
+    out = {'n_obs': len(I), 'n_exceed': n_exceed, 'u': float(u)}
+    if n_exceed < 10:
+        out.update(lb_stat=np.nan, lb_p=np.nan, runs_observed=np.nan, runs_z=np.nan,
+                    runs_p=np.nan, theta_ferro_segers=np.nan)
+        return out
+
+    from statsmodels.stats.diagnostic import acorr_ljungbox
+    lb = acorr_ljungbox(I, lags=[max_lag], return_df=True)
+    out['lb_stat'] = float(lb['lb_stat'].iloc[0])
+    out['lb_p'] = float(lb['lb_pvalue'].iloc[0])
+
+    # Wald-Wolfowitz runs test on the binary exceedance sequence: fewer runs than expected
+    # under independence is clustering.
+    runs = int(1 + np.sum(I[1:] != I[:-1]))
+    n1 = int(I.sum()); n0 = len(I) - n1
+    if n1 > 0 and n0 > 0 and (n1 + n0) > 1:
+        mean_r = 2.0 * n1 * n0 / (n1 + n0) + 1
+        var_r = (2.0 * n1 * n0 * (2 * n1 * n0 - n1 - n0)) / (((n1 + n0) ** 2) * (n1 + n0 - 1))
+        z = (runs - mean_r) / np.sqrt(var_r) if var_r > 0 else np.nan
+        p = 2 * (1 - stats.norm.cdf(abs(z))) if np.isfinite(z) else np.nan
+    else:
+        z, p = np.nan, np.nan
+    out['runs_observed'] = runs
+    out['runs_z'] = float(z) if np.isfinite(z) else np.nan
+    out['runs_p'] = float(p) if np.isfinite(p) else np.nan
+
+    # Ferro-Segers (2003) intervals estimator of the extremal index
+    idx = np.where(I == 1)[0]
+    T = np.diff(idx)  # inter-exceedance times, in observations, length n_exceed-1
+    N = len(T)
+    if N < 2:
+        theta = np.nan
+    elif T.max() <= 2:
+        num = 2.0 * (np.sum(T)) ** 2
+        den = N * np.sum(T.astype(float) ** 2)
+        theta = num / den if den > 0 else np.nan
+    else:
+        Tm1 = T.astype(float) - 1.0
+        num = 2.0 * (np.sum(Tm1)) ** 2
+        den = N * np.sum(Tm1 * (T - 2.0))
+        theta = num / den if den > 0 else np.nan
+    out['theta_ferro_segers'] = float(np.clip(theta, 0.0, 1.0)) if np.isfinite(theta) else np.nan
+    return out
+
+
 # ------------------------------------------------------------------ EVT / GPD
 def fit_gpd(losses, threshold_q=0.95):
     """POT GPD fit by MLE. losses: POSITIVE = bad, so pass -z for a left tail."""
@@ -169,22 +237,41 @@ def pinball_loss(actual, var_f, alpha):
     return u*(alpha - (u < 0).astype(float))
 
 # ------------------------------------------------------- model comparison
-def diebold_mariano(loss1, loss2, h=1, harvey=True):
-    """NEGATIVE statistic => model 1 has the lower loss."""
+def diebold_mariano(loss1, loss2, h=1, harvey=True, hac=True, max_lag=None):
+    """NEGATIVE statistic => model 1 has the lower loss.
+
+    2026-08-29 fix: the previous version's serial-correlation correction only ran for lag in
+    range(1, h), which is a no-op whenever h=1 - the DM statistic silently used the plain
+    single-period variance (as if the loss differential were white noise) for every 1-step-
+    ahead comparison in this project, i.e. every DM call actually made. Loss differentials can
+    be serially correlated even at h=1 (e.g. via persistence in the underlying loss series
+    itself), so hac=True (default) now always applies a Newey-West/Bartlett-kernel long-run
+    variance, with lag truncation L = max(h-1, floor(4*(n/100)^(2/9))) - the Newey-West (1994)
+    plug-in bandwidth, floored so it still nests the classical h-step overlap correction for
+    h>1. Set hac=False to recover the old (pre-fix) behaviour for comparison.
+    """
     l1 = np.asarray(loss1, float); l2 = np.asarray(loss2, float)
     m = np.isfinite(l1) & np.isfinite(l2); l1, l2 = l1[m], l2[m]; n = len(l1)
-    if n < 20: return {'stat': np.nan, 'p': np.nan, 'n': n, 'mean_diff': np.nan}
+    if n < 20: return {'stat': np.nan, 'p': np.nan, 'n': n, 'mean_diff': np.nan, 'lag': 0}
     d = l1 - l2; dbar = d.mean(); g0 = np.mean((d-dbar)**2); lrv = g0
-    for lag in range(1, h): lrv += 2*np.mean((d[lag:]-dbar)*(d[:-lag]-dbar))
+    if hac:
+        L = max(h - 1, int(np.floor(4 * (n / 100.0) ** (2.0 / 9.0))))
+        L = min(L, n - 2)
+        for lag in range(1, L + 1):
+            w = 1.0 - lag / (L + 1.0)   # Bartlett kernel weight
+            lrv += 2 * w * np.mean((d[lag:] - dbar) * (d[:-lag] - dbar))
+    else:
+        L = h - 1
+        for lag in range(1, h): lrv += 2*np.mean((d[lag:]-dbar)*(d[:-lag]-dbar))
     if lrv <= 0: lrv = g0
-    if lrv == 0: return {'stat': np.nan, 'p': np.nan, 'n': n, 'mean_diff': 0.0}
+    if lrv == 0: return {'stat': np.nan, 'p': np.nan, 'n': n, 'mean_diff': 0.0, 'lag': L}
     stat = dbar/np.sqrt(lrv/n)
     if harvey and n > h:
         stat *= np.sqrt((n + 1 - 2*h + h*(h-1)/n)/n)
         p = 2*(1 - stats.t.cdf(abs(stat), n-1))
     else:
         p = 2*(1 - stats.norm.cdf(abs(stat)))
-    return {'stat': float(stat), 'p': float(p), 'n': n, 'mean_diff': float(dbar)}
+    return {'stat': float(stat), 'p': float(p), 'n': n, 'mean_diff': float(dbar), 'lag': int(L)}
 
 def es_ratio(returns, var_f, es_f):
     """Realised mean loss on breach days / predicted ES on those days.

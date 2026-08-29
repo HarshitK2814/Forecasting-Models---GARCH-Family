@@ -26,9 +26,19 @@ SESSIONS={  # code -> (tz, [(start,end) local]) ; cash session only
  "NDX":("America/New_York",[("09:30","16:00")]),
  "UKX":("Europe/London",   [("08:00","16:30")]),
  "DAX":("Europe/Berlin",   [("09:00","17:30")]),
- "NKY":("Asia/Tokyo",      [("09:00","11:30"),("12:30","15:00")]),
+ "NKY":("Asia/Tokyo",      [("09:00","11:30"),("12:30","15:00")]),  # pre-2024-11-05 close; see windows_for()
  "HSI":("Asia/Hong_Kong",  [("09:30","12:00"),("13:00","16:00")]),
 }
+NKY_SESSION_CHANGE = "2024-11-05"  # TSE extended cash-session close from 15:00 to 15:30 JST
+
+def windows_for(code, date_str):
+    """Per-day session windows. Only NKY is date-dependent: the Tokyo Stock Exchange moved
+    its close from 15:00 to 15:30 JST effective 2024-11-05. Every other index's session hours
+    are unchanged across the sample, so this just returns the static SESSIONS entry for them."""
+    tz, windows = SESSIONS[code]
+    if code == "NKY" and date_str >= NKY_SESSION_CHANGE:
+        return tz, [("09:00", "11:30"), ("12:30", "15:30")]
+    return tz, windows
 SCALE=1000.0
 SAMPLES=[1,5,10,15,30]
 
@@ -70,16 +80,17 @@ frozen = []                     # audit log of every session this rule removes
 
 
 def process(code):
-    tz,windows=SESSIONS[code]
     files=sorted(glob.glob(os.path.join(CACHE,code,'BID_*.npy')))
     if not files: print(f"  [{code}] no cache"); return None
     rv_rows=[]; by_year_1={}; by_year_5={}
     kept=0; skipped=0
     for fp in files:
+        file_date=os.path.basename(fp).split('_')[1].replace('.npy','')
+        tz,windows=windows_for(code,file_date)
         d=load_day(code,fp)
         if d is None or d.empty: skipped+=1; continue
         d['ts_local']=d['ts_utc'].dt.tz_convert(tz)
-        d=d[session_mask(d['ts_local'].dt, windows)] if False else d[session_mask(pd.DatetimeIndex(d['ts_local']), windows)]
+        d=d[session_mask(pd.DatetimeIndex(d['ts_local']), windows)]
         if d.empty: skipped+=1; continue
         # drop stale padding: no volume AND no intrabar range
         d=d[(d['Volume']>0) | (d['High']!=d['Low'])]
