@@ -608,7 +608,10 @@ def build_handoff():
         ["A Gaussian innovation is insufficient", "Hill tail index 2.6-3.9, every estimate "
          "below 4 — the fourth moment does not exist."],
         ["The EVT stage is justified", "GPD shape xi stays positive AFTER volatility "
-         "standardisation, at 0.15-0.25."],
+         "standardisation: 0.15-0.25 on the EDA-stage rolling-standardised-return stand-in, "
+         "confirmed positive and narrower (0.05-0.16) once refit on genuine GJR-GARCH "
+         "residuals in 41_evt_threshold.py - see results/tables/41_threshold_stability.csv "
+         "for the per-index numbers at q=0.95."],
         ["Long memory is present", "GPH d on log RV is 0.50-0.63; ADF and KPSS both reject."],
         ["An AR(1) mean term is warranted", "Ljung-Box on returns rejects for 5 of 6 indices."],
         ["Use the level-plus-share realized block", "LogRV with LogRS_neg gives VIF ~95; "

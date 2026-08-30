@@ -85,7 +85,7 @@ OUTPUTS
   08_VALIDATION/realized_garch_refit_log.csv        walk-forward: every refit date, params, N used
   06_REALIZED_MEASURES/<CODE>_realized_garch_fit.csv   Date, Return, RVProxy, CondVar, CondVol, StdResid, RV_Imputed (walk-forward series)
   20_FORECASTS/RealGARCH__<CODE>_forecasts.csv                     contract-format walk-forward forecasts (PRIMARY, see 26_forecast_io.py)
-  20_FORECASTS/RealGARCH_FullSample_INSAMPLE__<CODE>_forecasts.csv contract-format full-sample-parameter forecasts (comparison only, NOT a result)
+  20_FORECASTS/_ARCHIVE_NOT_A_RESULT/RealGARCH_FullSample_INSAMPLE__<CODE>_forecasts.csv  comparison only, NOT a result, moved out of the main contract folder 2026-08-30
   20_FORECASTS/RealGARCH_ST__<CODE>_forecasts.csv                  skew-t innovation, walk-forward (robustness only)
   09_FIGURES/realized_garch_fit.png
   11_LOGS/phase20_realized_garch.log
@@ -489,9 +489,19 @@ def main():
               f"beta={row['beta']:.3f} gamma={row['gamma']:.3f} phi={row['phi']:.3f}  "
               f"({time.time()-t2:.1f}s)")
         fc_full = build_forecast_file(code, full_df)
+        # 2026-08-30 fix (flagged in code review of PR #2): this file was landing directly
+        # in 20_FORECASTS alongside the real contract files. Its Spec string says
+        # NOT-A-RESULT, but writers browsing the folder for forecast files have no reason
+        # to read Spec strings before opening a file, and 20_FORECASTS is exactly where
+        # they'd look. Written to an _ARCHIVE_NOT_A_RESULT subfolder instead - still
+        # contract-format and readable by fio.read_forecasts() for anyone who deliberately
+        # wants the "did the QLIKE advantage survive the fair rerun" comparison, but no
+        # longer discoverable by someone just listing 20_FORECASTS.
+        archive_dir = os.path.join(fio.FCDIR, '_ARCHIVE_NOT_A_RESULT')
         fio.write_forecasts(fc_full, model="RealGARCH_FullSample_INSAMPLE", code=code,
+                             base=archive_dir,
                              spec="RealGARCH11-logRVscaled-causal-studentt-FULLSAMPLE-NOT-A-RESULT")
-        print(f"    -> wrote archive comparison forecast file")
+        print(f"    -> wrote archive comparison forecast file to {archive_dir}")
 
         print(f"[{code}] walk-forward Realized GARCH-ST (skew-t innovation, robustness only) ...")
         t3 = time.time()
