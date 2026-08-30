@@ -90,16 +90,39 @@ def main():
         d = bc.exceedance_dependence(L, u)
         d['index'] = code
         dep_rows.append(d)
+    # 2026-08-30 fix (flagged in code review of PR #2, researcher-b/strict-window-downstream):
+    # the flag below was wrong on two counts. (1) It only ever looked at lb_p and theta,
+    # never runs_p, so a Ljung-Box-only signal could flag an index the runs test actively
+    # contradicts. (2) theta_ferro_segers clips to exactly 1.0 on all six indices here
+    # (every raw estimate came out above 1, the "no clustering" end of its range, so the
+    # clip destroys the ranking information rather than encoding "clustered") - it is
+    # DIAGNOSTIC, not a clustering signal, and must never gate the flag on its own.
+    #
+    # A defensible flag requires the runs test to agree on DIRECTION (runs_z < 0, i.e.
+    # fewer runs than independence predicts) AND at least one test to be significant.
+    # Checked against the actual six-index run: SPX has lb_p=0.049 (marginal) but
+    # runs_z=+0.25 (wrong sign, runs_p=0.80) - not evidence of clustering, despite the
+    # old flag lighting up on it. UKX has lb_p=0.499 (not significant alone) but
+    # runs_z=-2.15, runs_p=0.031 (right sign, significant) - genuine clustering evidence
+    # the old flag missed entirely. HSI has both tests significant with the right sign.
+    # The corrected flag reproduces exactly {HSI, UKX} as clustered, not {SPX, HSI}.
     dep = pd.DataFrame(dep_rows)[['index', 'u', 'n_obs', 'n_exceed', 'lb_stat', 'lb_p',
                                    'runs_observed', 'runs_z', 'runs_p', 'theta_ferro_segers']]
     dep.to_csv('results/tables/41_exceedance_dependence.csv', index=False)
     print('\n=== EVT exceedance-dependence diagnostic (threshold q=%.3f) ===' % CHOSEN)
-    print('  index    LB(10) p   runs p    theta(Ferro-Segers)')
+    print('  index    LB(10) p   runs p   runs_z   theta(FS, uninformative if 1.000)')
     for _, r in dep.iterrows():
-        flag = '  <-- clustered (theta<<1 or p<0.05)' if (r['theta_ferro_segers'] < 0.7 or
-               (np.isfinite(r['lb_p']) and r['lb_p'] < 0.05)) else ''
-        print(f"  {r['index']:<6}  {r['lb_p']:.4f}     {r['runs_p']:.4f}    "
+        clustered = (r['runs_z'] < 0) and (
+            (np.isfinite(r['lb_p']) and r['lb_p'] < 0.05) or
+            (np.isfinite(r['runs_p']) and r['runs_p'] < 0.05))
+        flag = '  <-- clustered (runs test agrees in direction, p<0.05)' if clustered else ''
+        print(f"  {r['index']:<6}  {r['lb_p']:.4f}     {r['runs_p']:.4f}   {r['runs_z']:+.3f}   "
               f"{r['theta_ferro_segers']:.3f}{flag}")
+    if (dep['theta_ferro_segers'] == 1.0).all():
+        print('  NOTE: theta_ferro_segers = 1.000 on every index because every raw estimate')
+        print('  exceeded 1 and clipped to the ceiling - it carries no discriminating')
+        print('  information here and should not be cited as evidence either way; the')
+        print('  Ljung-Box and runs tests above are the load-bearing diagnostics.')
 
     counts = sorted({int(round(c/10)*10) for c in tab['n_exceed']})
     se = pd.DataFrame([xi_sampling_se(c) for c in counts if c >= 20])
