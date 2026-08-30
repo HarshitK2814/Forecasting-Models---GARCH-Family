@@ -3,10 +3,11 @@
 Volatility and tail-risk forecasting across six Tier-1 equity indices, comparing
 **GARCH-EVT**, **Realized GARCH** and **Quantile Regression**.
 
-This repository holds the **dataset, its documentation, and Researcher A's modelling
-deliverables** — baseline GARCH/GJR/EGARCH, Realized GARCH, a rolling out-of-sample forecast
-engine, and robustness checks. GARCH-EVT and quantile regression are Researcher B's modules
-and are not yet fitted.
+This repository holds the full pipeline for both researchers: **dataset and documentation,
+Researcher A's modelling deliverables** — baseline GARCH/GJR/EGARCH, Realized GARCH, a rolling
+out-of-sample forecast engine, and robustness checks — **and Researcher B's** — GARCH-EVT,
+quantile regression, evaluation, crisis/regime analysis, and statistical comparison. All 15
+plan deliverables are coded, merged and tested as of 2026-08-30.
 
 | | |
 |---|---|
@@ -15,7 +16,8 @@ and are not yet fitted.
 | **Intraday / realized** | 2011-09 onward (DAX from 2013-09) |
 | **Primary sample** | B — all six indices, 2013-09-30 → 2026-08-21, 2,685 common days |
 | **Dataset status** | Complete and validated — 1,195 + 158 checks, **0 failures** |
-| **Model status** | Baseline GARCH/GJR/EGARCH ✅ · Realized GARCH ✅ · Rolling engine ✅ · Robustness checks ✅ · GARCH-EVT / Quantile Regression — **B's modules, not started.** See [Division of labour](#division-of-labour) |
+| **Model status** | Baseline GARCH/GJR/EGARCH ✅ · Realized GARCH ✅ (walk-forward re-estimated) · Rolling engine ✅ · Robustness checks ✅ · GARCH-EVT ✅ · Quantile Regression ✅ · Evaluation ✅ · Crisis/regime ✅ · Statistical tests ✅. See [Division of labour](#division-of-labour) |
+| **Reproducibility** | 45/45 unit tests pass; audit 31 checks, 30/31 locally (1 expected local-Python-version mismatch), 31/31 on the pinned environment |
 | **Data cost** | £0 — every source is free and keyless |
 
 ---
@@ -179,28 +181,22 @@ Per `Executive Summary.pdf`, the project splits between two researchers.
 | Data acquisition & cleaning | A | 40 h | ✅ **Complete** |
 | Realized volatility construction | A | 16 h | ✅ **Complete** (exceeds scope) |
 | Baseline GARCH & GJR/EGARCH | A | 24 h | ✅ **Complete** |
-| Realized GARCH | A | 24 h | ✅ **Complete** |
-| Rolling out-of-sample engine | A | 24 h | ✅ **Complete** (GARCH-family; Realized GARCH walk-forward is an open item — see below) |
-| Robustness checks | A | 16 h | ✅ **Complete** (6 checks — sub-sample, distribution, RV frequency, refit cadence, **window length, horizon extension**) |
-| GARCH-EVT | **B** | 24 h | ⬜ Ready to start — stage 1 done, see `06_REALIZED_MEASURES/<CODE>_std_resid.csv` |
-| Quantile regression | **B** | 16 h | ⬜ Ready to start |
-| Evaluation metrics | **B** | 24 h | ⬜ Ready to start — forecast files ready, see `20_FORECASTS/` |
-| Crisis / regime analysis | **B** | 16 h | ⬜ Ready to start — labels shipped |
-| Statistical tests (DM, MCS) | **B** | 12 h | ⬜ Ready to start |
+| Realized GARCH | A | 24 h | ✅ **Complete** — walk-forward annual expanding-window re-estimation (2026-08-29), not a single full-sample fit |
+| Rolling out-of-sample engine | A | 24 h | ✅ **Complete**, GARCH-family and Realized GARCH both walk-forward |
+| Robustness checks | A | 16 h | ✅ **Complete** (6 checks — sub-sample, distribution, RV frequency, refit cadence, window length, horizon extension) |
+| GARCH-EVT | **B** | 24 h | ✅ **Complete** — genuine GJR-GARCH residuals, POT threshold re-estimated (`41_evt_threshold.py`) |
+| Quantile regression | **B** | 16 h | ✅ **Complete** |
+| Evaluation metrics | **B** | 24 h | ✅ **Complete** — QLIKE/VaR/ES backtests, plus a strict common-evaluation-window variant (`47_evaluation.py`) |
+| Crisis / regime analysis | **B** | 16 h | ✅ **Complete** (`48_crisis_regime.py`) |
+| Statistical tests (DM, MCS) | **B** | 12 h | ✅ **Complete** — HAC/Newey-West-corrected Diebold-Mariano, Model Confidence Set, Basel traffic light (`49_model_comparison.py`) |
 
-**6 of 15 plan deliverables are complete — all of Researcher A's.** 92 hours outstanding, all
-on Researcher B's side. See `Datasets/00_DOCUMENTATION/RESEARCHER_A_SCOPE.md` for what was
-built, `RESEARCHER_A_DECISIONS.md` for what B needs to read before starting, and
-`EXECUTIVE_SUMMARY_ADDENDUM.md` for four places delivery differs from the Executive Summary's
-own text (free data sources instead of paid, 6 indices instead of 1-3, a fuller Realized GARCH
-spec than the doc's simplified equation, and the window-length/horizon-extension robustness
-items — named in the plan, closed in this session).
-
-**One open item inside A's "complete" scope**: the rolling engine's walk-forward
-re-estimation was run for the GARCH-family models only. Realized GARCH's custom optimiser
-(~85s/fit) makes a monthly walk-forward refit ~18 hours of compute; its forecast file instead
-uses full-sample parameters with a daily-updated (look-ahead-free) state, and a coarser
-quarterly/annual walk-forward is left as an overnight-batch candidate.
+**All 15 plan deliverables are complete and merged on `main`.** See
+`Datasets/00_DOCUMENTATION/RESEARCHER_A_SCOPE.md` for what A built,
+`RESEARCHER_A_DECISIONS.md` for the forecast-file contract B's code depends on, and
+`EXECUTIVE_SUMMARY_ADDENDUM.md` for every place delivery differs from the Executive Summary's
+own text — including two P0 look-ahead fixes closed 2026-08-29 (causal Hansen-Lunde scaling;
+walk-forward Realized GARCH, which closed the "one open item" this section used to describe)
+and a strict common-evaluation-window fix closed 2026-08-30 after code review.
 
 ---
 

@@ -293,14 +293,70 @@ them.** See `EXECUTIVE_SUMMARY_ADDENDUM.md` for the row-by-row reconciliation ta
 - [x] ~~NKY Realized GARCH must handle the 2016-17 gap~~ - done, see Phase 20.3.
 - [x] ~~Decide and state the treatment of non-synchronous sessions~~ - done, see Phase 23.3.
 - [x] ~~Window-length and horizon-extension robustness~~ - done, see Phase 25.
-- [ ] Re-estimate the POT threshold on the actual GARCH residuals once stage 1 is fitted -
-      **stage 1 is now fitted** (`06_REALIZED_MEASURES/<CODE>_std_resid.csv`); this is B's
-      next step, not A's.
-- [ ] Realized GARCH walk-forward re-estimation at a coarser (quarterly/annual) cadence -
-      compute-cost permitting, an overnight batch job.
+- [x] ~~Re-estimate the POT threshold on the actual GARCH residuals once stage 1 is fitted~~ -
+      done by B, `41_evt_threshold.py` (genuine GJR-GARCH residuals, not the EDA-stage
+      rolling-standardised-return stand-in). xi narrower and still positive: 0.05-0.16 at
+      q=0.95, vs the 0.15-0.25 stand-in band. See Phase 26.
+- [x] ~~Realized GARCH walk-forward re-estimation at a coarser (quarterly/annual)
+      cadence~~ - done 2026-08-29, `28_realized_garch.py` (annual expanding-window refit,
+      ~13 refits/index). Materially changed the headline VaR result - see Phase 26.
 - [x] ~~Unit tests for model-fitting functions~~ - done 2026-08-26, `tests/` (39 pytest tests:
       the EVT/backtest/loss-function library, the forecast-file contract, the Basel zone fn).
+      Now 45 tests, all passing (2026-08-30).
 - [x] ~~Environment reproducibility~~ - `requirements.txt` / `requirements_B.txt` exact pins +
       `50_reproducibility_audit.py`'s environment check. A Dockerfile was tried and dropped
       2026-08-26 (never build-verified; not worth maintaining unverified).
 - [ ] Optional: Dukascopy ASK side for mid-price RV; the 5 remaining FRED series.
+
+---
+
+# PART 4 — Look-ahead fixes, strict common window, review closeout (2026-08-29 to 08-30)
+
+Full detail: `EXECUTIVE_SUMMARY_ADDENDUM.md` (2026-08-29 and 2026-08-30 follow-ups). Merged via
+GitHub PRs #2, #3, #4 on `main`. Summary only, so this tracker does not fall out of step again:
+
+## Phase 26 — P0 look-ahead fixes and their headline consequence ✅
+- [x] 26.1 Causal Hansen-Lunde scaling (`RV_Scaled_Causal`, expanding factor, strictly-prior
+      observations only) replaces the full-sample-constant `RV_Scaled` everywhere a forecast
+      or evaluation consumes it.
+- [x] 26.2 Realized GARCH re-estimated walk-forward (annual expanding-window refit, ~13
+      refits/index) instead of once on the full sample - closes the open item above. Headline
+      consequence: RealGARCH's 99% VaR breach rate got materially worse under the fair refit
+      (multiple markets moved to RED on the Basel traffic light) while its QLIKE advantage over
+      GJR-skewt survived intact - the "variance accuracy != tail calibration" story is now
+      demonstrated honestly rather than resting on an in-sample parameter advantage.
+- [x] 26.3 NKY session-close fix (TSE extended its close 15:00->15:30 JST from 2024-11-05);
+      full NKY realized-measure pipeline rebuilt.
+- [x] 26.4 HAC/Newey-West Diebold-Mariano fix - the long-run-variance correction was a silent
+      no-op at h=1, i.e. every DM call actually made in this project.
+- [x] 26.5 EVT exceedance-dependence diagnostic added (Ljung-Box, runs test, Ferro-Segers
+      extremal index) - genuine tail clustering found in HSI and UKX.
+
+## Phase 27 — Strict common evaluation window ✅
+- [x] 27.1 B flagged (from independent review of PR #2) that RealGARCH's walk-forward burn-in
+      moved its valid-date window out of step with GJR-skewt/GARCH-EVT per index (DAX lost 502
+      days), distorting pooled breach rates and crisis-window coverage.
+- [x] 27.2 `strict_window()` added to `47_evaluation.py` (per-index intersection of the three
+      variance models' valid dates, QR deliberately excluded); propagated by B into
+      `48_crisis_regime.py` and `49_model_comparison.py`. Both unrestricted and strict tables
+      are kept side by side - nothing was overwritten, only added alongside.
+- [x] 27.3 `50_reproducibility_audit.py` extended with two new cross-script consistency checks
+      for the strict window; audit now 31 checks (30/31 locally - only the expected
+      Python-version environment mismatch fails; 31/31 on B's pinned environment).
+
+## Phase 28 — Three issues closed from B's review of the merged PR ✅
+- [x] 28.1 Exceedance-dependence console flag in `41_evt_threshold.py` was gated on
+      Ljung-Box and a saturated Ferro-Segers estimate alone, ignoring the runs test's sign -
+      it mislabelled SPX as clustered and missed UKX. Fixed to require the runs test to agree
+      on direction and at least one test to be significant; reproduces {HSI, UKX}.
+- [x] 28.2 Stale xi range (0.15-0.25, the EDA-stage stand-in) in
+      `25_build_figure_and_handoff_docs.py` / `Handoff_to_Researcher_B.pdf` updated to cite
+      both the stand-in and the confirmed genuine-residual range (0.05-0.16).
+- [x] 28.3 `RealGARCH_FullSample_INSAMPLE__*` archive-comparison forecast files were
+      discoverable in the live `20_FORECASTS` contract folder despite their Spec string saying
+      NOT-A-RESULT. Moved to `20_FORECASTS/_ARCHIVE_NOT_A_RESULT/` (both locally and on Drive).
+
+**Coding is complete against every plan deliverable as of 2026-08-30.** The only items left
+open anywhere in this tracker are the two optional/no-honest-alternative ones above (Dukascopy
+ASK side, the 5 remaining FRED series) and the write-up-only note (Bartlett-kernel DM change
+needs a sentence in the methodology section - not a code task).
