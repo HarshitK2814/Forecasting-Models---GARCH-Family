@@ -154,10 +154,45 @@ def main():
            for r in b1.itertuples()]
     dv = float(np.max(np.abs(np.array(rec) - b1['kupiec_p'].values)))
     check('consistency', 'Kupiec p recomputable from counts alone', dv < 1e-3, f'max dev={dv:.1e}')
+    # 2026-08-29: 47 and 49 each write TWO views - unrestricted (each model on its own
+    # sample-B coverage) and strict (per-index intersection of the three variance
+    # models). The cross-script check must compare like with like, or it fires on a
+    # difference that is by design. 49_basel.csv is the strict headline table, so it is
+    # checked against 47b_var_backtests_strict.csv; the unrestricted pair is checked
+    # separately. Falls back to the single-view files if either script predates the
+    # strict-window change.
     ba = pd.read_csv('results/tables/49_basel.csv')
-    j = b1.merge(ba, on=['index', 'model'], suffixes=('_47', '_49'))
-    check('consistency', 'scripts 47 and 49 agree on all breach counts',
-          (j['n_breach_47'] == j['n_breach_49']).all(), f'{len(j)} cells')
+    _s47 = 'results/tables/47b_var_backtests_strict.csv'
+    b47s = pd.read_csv(_s47) if os.path.exists(_s47) else bt
+    b47s = b47s[b47s['confidence'] == 0.99]
+    j = b47s.merge(ba, on=['index', 'model'], suffixes=('_47', '_49'))
+    mism = j[j['n_breach_47'] != j['n_breach_49']]
+    check('consistency', 'scripts 47 and 49 agree on breach counts (strict window)',
+          len(mism) == 0,
+          f'{len(j)} cells compared, {len(mism)} mismatched'
+          + ('' if len(mism) == 0 else
+             '  ' + '; '.join(f"{r['index']}/{r['model']} 47={r['n_breach_47']} "
+                              f"49={r['n_breach_49']}" for _, r in mism.iterrows())))
+
+    _u49 = 'results/tables/49_basel_unrestricted.csv'
+    if os.path.exists(_u49):
+        bau = pd.read_csv(_u49)
+        ju = b1.merge(bau, on=['index', 'model'], suffixes=('_47', '_49'))
+        mu = ju[ju['n_breach_47'] != ju['n_breach_49']]
+        check('consistency', 'scripts 47 and 49 agree on breach counts (unrestricted)',
+              len(mu) == 0,
+              f'{len(ju)} cells compared, {len(mu)} mismatched'
+              + ('' if len(mu) == 0 else
+                 '  ' + '; '.join(f"{r['index']}/{r['model']} 47={r['n_breach_47']} "
+                                  f"49={r['n_breach_49']}" for _, r in mu.iterrows())))
+
+    # The two views must not be silently identical either: if the strict window removed
+    # no days anywhere, one of the scripts is not applying it.
+    if os.path.exists(_s47) and os.path.exists('results/tables/49_strict_window.csv'):
+        sw = pd.read_csv('results/tables/49_strict_window.csv')
+        dropped = int(sw['dropped_for_common_window'].sum())
+        check('consistency', 'strict window actually removes days', dropped > 0,
+              f'{dropped} model-days dropped')
 
     print('\n=== 6. GUARDS AGAINST KNOWN TRAPS ===')
     vol = pd.read_csv('results/tables/47a_volatility_losses.csv')

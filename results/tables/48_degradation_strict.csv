@@ -1,6 +1,6 @@
 model,normal_rate_pct,crisis_rate_pct,ratio,crisis_days,n_unreportable_days,unreportable_windows
-GARCH-EVT,1.033,2.167,2.098,2676,95,Volmageddon|Yen_Carry_Unwind
-GJR-skewt,1.063,2.205,2.074,2676,95,Volmageddon|Yen_Carry_Unwind
+GARCH-EVT,1.049,2.196,2.094,2641,95,Volmageddon|Yen_Carry_Unwind
+GJR-skewt,1.08,2.234,2.068,2641,95,Volmageddon|Yen_Carry_Unwind
 RealGARCH,1.504,3.787,2.518,2641,95,Volmageddon|Yen_Carry_Unwind
 QR-Full,1.125,3.224,2.866,2171,86,Volmageddon|Yen_Carry_Unwind
-QR-Range,1.155,2.58,2.234,2635,95,Volmageddon|Yen_Carry_Unwind
+QR-Range,1.157,2.538,2.194,2600,95,Volmageddon|Yen_Carry_Unwind
