@@ -397,7 +397,7 @@ asked whether each result is worth including.
       Visually negligible (QLIKE moves ≤1.4% relative, no ranking changes) but the figure is
       now internally consistent.
 
-## Phase 31 — Maham's release review ✅
+## Phase 31 — the writing team's release review (Arham and Absar) ✅
 
 Fourteen points raised. Two were already closed by Phase 30 and the review predates them.
 The rest were verified against the CSVs before acting:
@@ -422,9 +422,10 @@ The rest were verified against the CSVs before acting:
 
 **Final selection: 8 figures, 7 tables, every exhibit on the strict common window.**
 
-## Open for the writing team, not a code task
+## Open — Researcher B's writer handoff, not a code task
 
-`HANDOFF_TO_WRITERS.md` is owned by a teammate and lives outside this repo. It still quotes
+`HANDOFF_TO_WRITERS.md` sits on Researcher B's (Maham's) account, outside this repo, so it
+was not edited and the writing team should not cite it until B refreshes it. It still quotes
 unrestricted GJR QLIKE (0.2695, 0.2517, 0.1567, 0.1893, 0.2447, 0.1849) where the strict
 values are **0.2702, 0.2517, 0.1567, 0.1920, 0.2477, 0.1849**; still says 3 of 60 for the
 pinball DM; and still carries the obsolete EVT full-sample-mu limitation. Refreshed strict
