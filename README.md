@@ -100,8 +100,8 @@ Datasets/
 ├── 05_RAW_MACRO/            22 keyless macro / risk series
 ├── 06_REALIZED_MEASURES/    daily realized measures, base + extended
 ├── 08_VALIDATION/           every table behind the reports
-├── 09_FIGURES/              ten diagnostic figures
-├── 10_SCRIPTS/              26 numbered, rerunnable scripts
+├── 09_FIGURES/              21 diagnostic figures
+├── 10_SCRIPTS/              52 numbered, rerunnable scripts
 └── 11_LOGS/                 manifests and run summaries
 ```
 

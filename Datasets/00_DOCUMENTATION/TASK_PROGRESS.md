@@ -360,3 +360,73 @@ GitHub PRs #2, #3, #4 on `main`. Summary only, so this tracker does not fall out
 open anywhere in this tracker are the two optional/no-honest-alternative ones above (Dukascopy
 ASK side, the 5 remaining FRED series) and the write-up-only note (Bartlett-kernel DM change
 needs a sentence in the methodology section - not a code task).
+
+---
+
+# PART 5 — Final output selection and release review (2026-08-31)
+
+## Phase 29 — "Final outputs" folder for the writing team ✅
+
+Arham asked for the four-folder `Output/` section to be replaced by a single folder holding
+only the figures and tables that go in the paper (5-8 figures, 5-7 tables), with Claude
+asked whether each result is worth including.
+
+- [x] 29.1 All 16 figures and 42 tables reviewed individually. First cut was 7 figures and
+      6 tables; `49_loss_metrics.png` was added as an eighth after review showed RMSE gives
+      the opposite sign to QLIKE on SPX, UKX and DAX — a second instance of the paper's own
+      "the metric determines the answer" argument.
+- [x] 29.2 Selection rationale written to `results/FINAL_OUTPUTS.md`, including what was
+      cut and why, and three results that belong in the text as a sentence rather than as a
+      table (`49_mcs`, `49_dm_pinball`, `41_exceedance_dependence`).
+- [x] 29.3 Drive restructured: `Output/` renamed `Final Output/`, holding only `figures/`
+      and `tables/`. Raw sub-folders trashed after confirming every file is tracked in git
+      or present locally (`06_MODEL_FITS` was not in git but exists in
+      `Datasets/06_REALIZED_MEASURES/`; its six `realized_garch_fit` Drive copies were stale
+      by ~15 hours).
+
+## Phase 30 — Two figure bugs found by verifying the manifest against the CSVs ✅
+
+- [x] 30.1 `49_loss_metrics.png` carried its caption as a hard-coded string literal while
+      its bars were computed from the data. It claimed RMSE said RealGARCH was 0.6% *better*
+      on UKX; it is 3.6% **worse** (QLIKE +17.9%, DM 4.33). The caption contradicted its own
+      chart and inverted the sign. Title is now derived from the data, and the exhibit index
+      is chosen from it rather than named in the string.
+- [x] 30.2 `49_qlike_vs_breach.png` took its y-axis from the strict common window but its
+      x-axis from `47a_volatility_losses.csv`, the unrestricted file — 8 of 18 plotted cells
+      had a different sample on each axis (DAX 3172 vs 2755). Now loads the strict file.
+      Visually negligible (QLIKE moves ≤1.4% relative, no ranking changes) but the figure is
+      now internally consistent.
+
+## Phase 31 — Maham's release review ✅
+
+Fourteen points raised. Two were already closed by Phase 30 and the review predates them.
+The rest were verified against the CSVs before acting:
+
+- [x] 31.1 Pinball DM significant count corrected 3/60 → **4/60** (DAX RealGARCH vs
+      QR-Range; NKY GARCH-EVT and GJR-skewt vs RealGARCH; HSI GARCH-EVT vs GJR-skewt).
+- [x] 31.2 Tail-clustering attribution corrected to **UKX and HSI** (matching 28.1, which
+      already had it right). SPX's Ljung-Box is marginal at 0.049 but its runs statistic
+      points the other way (z=+0.25), so SPX is not classified as clustered.
+- [x] 31.3 `43_var_breaches.png` demoted to the appendix list: its panel titles are the
+      per-model GARCH-EVT rates (SPX 1.203%) not the strict ones (1.231%), so the claim that
+      every selected figure was strict was false.
+- [x] 31.4 `45_qr_calibration.png` had the same problem (DAX QR-Range 1.133% vs 1.049%
+      strict). Regenerated on the strict window as `51_qr_calibration_strict.png`.
+- [x] 31.5 **RealGARCH-t vs RealGARCH-skew-t robustness added** — the main gap in the
+      shortlist. `51_final_release_exhibits.py`, paired dates. Skew-t cuts the 99% breach
+      rate on all six (mean 0.40pp) at essentially unchanged QLIKE, so the tail failure is
+      the innovation distribution rather than the realized measure. This is what licenses
+      reading `VaR = mu + sigma*q` as "a better sigma does not buy a better q".
+- [x] 31.6 Added a banner to `FINAL_OUTPUTS.md` telling readers to cite the CSVs, not the
+      manifest — a prose summary is always one regeneration behind.
+
+**Final selection: 8 figures, 7 tables, every exhibit on the strict common window.**
+
+## Open for the writing team, not a code task
+
+`HANDOFF_TO_WRITERS.md` is owned by a teammate and lives outside this repo. It still quotes
+unrestricted GJR QLIKE (0.2695, 0.2517, 0.1567, 0.1893, 0.2447, 0.1849) where the strict
+values are **0.2702, 0.2517, 0.1567, 0.1920, 0.2477, 0.1849**; still says 3 of 60 for the
+pinball DM; and still carries the obsolete EVT full-sample-mu limitation. Refreshed strict
+percentages: DAX QLIKE improvement **7.2%**, DAX RMSE disadvantage **-0.6%**, mean QLIKE
+improvement across markets **11.7%**. The scientific interpretation does not change.
