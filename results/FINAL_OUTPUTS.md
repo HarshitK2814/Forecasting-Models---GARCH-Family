@@ -4,7 +4,7 @@
 per Arham's spec of 2026-08-31. The folder previously called `Output/` was renamed and its
 raw sub-folders (`08_VALIDATION`, `09_FIGURES`, `20_FORECASTS`, `06_MODEL_FITS`) removed;
 this document lives in `Datasets/00_DOCUMENTATION/` on Drive so it does not clutter it.
-**Selected:** 2026-08-31 · **Revised:** 2026-08-31 after Maham's output review
+**Selected:** 2026-08-31 · **Revised:** 2026-08-31 after the writing team's review
 **Source of truth:** GitHub `main`, `results/figures/` and `results/tables/`
 
 Everything not in the Drive folder is still in this repository. Nothing was lost: the 43
@@ -12,7 +12,7 @@ tables, 18 figures and 56 forecast files are all tracked in git, and the untrack
 fits live locally in `Datasets/06_REALIZED_MEASURES/`.
 
 Every exhibit here is now genuinely on the **strict common evaluation window**. That was
-not true of the first cut — see "What Maham's review changed" at the end. Files are renamed
+not true of the first cut — see "What the writing team's review changed" at the end. Files are renamed
 `FIG1_…` / `TAB1_…` in paper order; the original filename is kept so each traces back to
 `results/`. The `FIG_`/`TAB_` prefixes exist only on Drive — the repo keeps the unprefixed
 names its scripts write, so do not rename the local files.
@@ -145,9 +145,9 @@ Ranked by how close they came. The first is the one to promote if anything gets 
 
 ---
 
-## What Maham's review changed (2026-08-31)
+## What the writing team's review changed (2026-08-31)
 
-Maham reviewed the first cut and raised fourteen points. Two had already been fixed hours
+Arham and Absar reviewed the first cut and raised fourteen points. Two had already been fixed hours
 earlier and the review predates them; the rest were acted on. Verified item by item
 against the CSVs:
 
@@ -165,20 +165,20 @@ against the CSVs:
   tracker item 28.1 already had it right as {HSI, UKX} — the manifest was the outlier.)
 - **FIG3 was not on the strict window.** `43_var_breaches.png` demoted to the appendix
   list with the discrepancy documented, and the FIG3 slot given to the RealGARCH-t vs
-  RealGARCH-skew-t exhibit Maham asked for.
+  RealGARCH-skew-t exhibit the review asked for.
 - **FIG7 was not on the strict window.** Regenerated from `47b_var_backtests_strict.csv`
   as `51_qr_calibration_strict.png`; DAX QR-Range now reads 1.049% and SPX 1.515%, matching
   TAB4/TAB5 exactly.
 - **RealGARCH-skew-t was missing.** Added as FIG3 and TAB7 via
   `Datasets/10_SCRIPTS/51_final_release_exhibits.py`, computed on paired dates. Reproduces
-  Maham's numbers exactly: 2.209/1.578, 2.183/1.476, 1.682/1.224, 1.844/1.627,
+  the review's numbers exactly: 2.209/1.578, 2.183/1.476, 1.682/1.224, 1.844/1.627,
   1.897/1.636, 1.136/1.010. A detail worth using: QLIKE is essentially unchanged between
   the two innovations, so the skew-t buys tail calibration at no cost in variance accuracy.
 - **"Basel green on three"** was already corrected to four earlier the same day.
 
-**Outstanding, for whoever owns the writer handoff**
-- `HANDOFF_TO_WRITERS.md` is owned by a teammate and lives outside this repo, so it was not
-  edited. It still
+**Outstanding — belongs to Researcher B (Maham), not editable by us**
+- `HANDOFF_TO_WRITERS.md` sits on B's account and outside this repo, so it was not edited.
+  **The writing team should not cite it until B refreshes it.** It still
   quotes **unrestricted** GJR QLIKE (0.2695, 0.2517, 0.1567, 0.1893, 0.2447, 0.1849) where
   the strict values are **0.2702, 0.2517, 0.1567, 0.1920, 0.2477, 0.1849**; still says
   3 of 60 for the pinball DM; and still carries the obsolete EVT full-sample-μ limitation.
