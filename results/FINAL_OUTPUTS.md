@@ -189,6 +189,11 @@ against the CSVs:
 Every file in `Final Output/` matches `results/figures/` or `results/tables/` on GitHub
 `main` byte for byte, verified after upload.
 
+**Open item on Drive:** all 7 tables are in place, but 4 of the 8 figures (FIG3, FIG4,
+FIG7, FIG8) still need a manual upload — PNGs of that size cannot be pushed through the
+Drive tooling in use. `Datasets/00_DOCUMENTATION/ACTION_REQUIRED_upload_four_figures.md`
+has the file-by-file instruction. The repo copies are correct; this affects Drive only.
+
 Regenerate with the scripts in `Datasets/10_SCRIPTS/` (41–51). `51_final_release_exhibits.py`
 must run after 47 and 49, since it reads their strict-window output.
 `50_reproducibility_audit.py` checks 31 conditions; it passes 31/31 on the pinned
