@@ -207,7 +207,12 @@ def main():
                  fontsize=9.5)
     fig.savefig('results/figures/49_scorecard.png'); plt.close(fig)
 
-    vol = pd.read_csv('results/tables/47a_volatility_losses.csv')
+    # Must be the strict window, like `bt` above: the breach rate on the y-axis of
+    # 49_qlike_vs_breach is strict, so a QLIKE on the x-axis measured over a longer
+    # sample would put the two axes on different samples for 8 of the 18 cells.
+    _vol_strict = 'results/tables/47a_volatility_losses_strict.csv'
+    vol = pd.read_csv(_vol_strict if os.path.exists(_vol_strict)
+                      else 'results/tables/47a_volatility_losses.csv')
     fig, ax = plt.subplots(figsize=(7.4, 5.0), constrained_layout=True)
     for j, m in enumerate(VOL_MODELS):
         q = [vol[(vol['index'] == c) & (vol['model'] == m)]['QLIKE'].iloc[0] for c in INDICES]
@@ -247,18 +252,37 @@ def main():
     fig, ax = plt.subplots(figsize=(8.0, 4.0), constrained_layout=True)
     mets = ['QLIKE', 'RMSE', 'MAE', 'MAPE']
     x = np.arange(len(INDICES)); w = 0.2
+    red = {}
     for k, met in enumerate(mets):
         imp = []
         for c in INDICES:
             gg = vol[(vol['index'] == c) & (vol['model'] == 'GJR-skewt')][met].iloc[0]
             rr = vol[(vol['index'] == c) & (vol['model'] == 'RealGARCH')][met].iloc[0]
             imp.append(100*(gg-rr)/gg)
+        red[met] = dict(zip(INDICES, imp))
         ax.bar(x + (k-1.5)*w, imp, w, label=met, color=PAL[k], alpha=0.9)
     ax.set_xticks(x); ax.set_xticklabels(INDICES)
     ax.set_ylabel('% reduction in loss, RealGARCH vs GJR-skew-t')
+    # Pick the exhibit index from the data rather than hard-coding it: the widest
+    # QLIKE-minus-RMSE gap among indices where the two metrics disagree on sign.
+    _split = [c for c in INDICES
+              if red['QLIKE'][c] > 0 > red['RMSE'][c]] or list(INDICES)
+    _c = max(_split, key=lambda c: red['QLIKE'][c] - red['RMSE'][c])
+    _dmtxt = ''
+    _dmf = 'results/tables/47a_dm_volatility.csv'
+    if os.path.exists(_dmf):
+        _dm = pd.read_csv(_dmf)
+        _r = _dm[(_dm['index'] == _c) & (_dm.model_1 == 'GJR-skewt')
+                 & (_dm.model_2 == 'RealGARCH')]
+        if len(_r) and np.isfinite(_r.iloc[0]['p']):
+            _p = float(_r.iloc[0]['p'])
+            _dmtxt = (f"  (DM {float(_r.iloc[0]['dm_stat']):.2f}, "
+                      + (f"p<0.0001)" if _p < 1e-4 else f"p={_p:.4f})"))
+    _rm = red['RMSE'][_c]
     ax.set_title('The volatility loss function is not a neutral choice.\n'
-                 'On UKX, RMSE says RealGARCH is 0.6% better; QLIKE says 19.3% '
-                 '(DM 6.46, p<0.0001).', fontsize=9)
+                 f'On {_c}, RMSE says RealGARCH is {abs(_rm):.1f}% '
+                 f'{"worse" if _rm < 0 else "better"}; '
+                 f'QLIKE says {red["QLIKE"][_c]:.1f}% better.{_dmtxt}', fontsize=9)
     ax.legend(fontsize=8, ncol=4); ax.grid(alpha=0.25, lw=0.5, axis='y')
     fig.savefig('results/figures/49_loss_metrics.png'); plt.close(fig)
 

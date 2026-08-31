@@ -17,7 +17,10 @@ the original filename is kept in the name so it traces back to the full results 
 opposite orders on them.** Realized GARCH has the lowest QLIKE on all six indices (best
 volatility forecasts), and simultaneously the worst 99% VaR breach rate on five of six —
 Basel *red* on four markets. GARCH-EVT is the mirror image: middling QLIKE, best-calibrated
-tail, Basel *green* on three and never red.
+tail, Basel *green* on four and never red.
+
+Every number below was checked against the CSVs on 2026-08-31, not carried over from an
+earlier draft.
 
 Every selection below either sets that claim up, demonstrates it, or qualifies it.
 
@@ -27,14 +30,14 @@ Every selection below either sets that claim up, demonstrates it, or qualifies i
 
 | # | File | What it shows | Section |
 |---|---|---|---|
-| 1 | `FIG1_41_threshold_stability.png` | GPD shape ξ vs POT threshold q, ±1 sampling SE. ξ is stable across 0.90–0.975 then explodes with sampling noise. | Methods — justifies q=0.95 |
-| 2 | `FIG2_41_qq_gpd.png` | GPD QQ plots of exceedances, all six indices. KS p = 0.49–0.95 everywhere. | Methods — EVT fit is valid |
+| 1 | `FIG1_41_threshold_stability.png` | GPD shape ξ vs POT threshold q, ±1 sampling SE (≈0.062). ξ drifts gently and stays inside the band from 0.90 to 0.975, then becomes erratic above it as the exceedance count collapses. | Methods — justifies q=0.95 |
+| 2 | `FIG2_41_qq_gpd.png` | GPD QQ plots of exceedances, all six indices. KS p = 0.49–0.95 at q=0.95; no index rejects. | Methods — EVT fit is valid |
 | 3 | `FIG3_43_var_breaches.png` | GARCH-EVT 99% VaR vs realised returns, six panels, breaches marked, crisis windows shaded. | Results — what the model does |
 | 4 | **`FIG4_49_qlike_vs_breach_HEADLINE.png`** | **QLIKE (x) vs 99% breach rate (y). The two axes rank the models in opposite orders. This is the paper's thesis in one scatter.** | **Results — headline** |
-| 5 | `FIG5_49_basel.png` | Basel traffic light, 6 indices × 5 models. RealGARCH red on 4, GARCH-EVT green on 3 and never red. | Results — regulatory payoff |
+| 5 | `FIG5_49_basel.png` | Basel traffic light, 6 indices × 5 models. RealGARCH red on 4 of 6; GARCH-EVT green on 4, amber on 2, never red. | Results — regulatory payoff |
 | 6 | `FIG6_48_crisis_heatmap.png` | Breach rate by regime (Normal, China/Oil, Q4-2018, COVID, 2022 rates), pooled over six indices. Every model degrades; RealGARCH and QR-Full worst (7.1% and 7.9% in COVID vs 1.0% target). | Results — regime conditioning |
 | 7 | `FIG7_45_qr_calibration.png` | QR-Full and QR-Range breach rates at 99/97.5/95%. The fifth model family's own calibration result. | Results — quantile regression |
-| 8 | `FIG8_49_loss_metrics.png` | RealGARCH vs GJR-skew-t under four loss functions. RMSE gives the **opposite sign** to QLIKE on SPX, UKX and DAX — on UKX, RMSE says RealGARCH is 0.6% *worse*, QLIKE says 19.3% better (DM 6.46, p<0.0001). | Discussion — the loss function is not neutral |
+| 8 | `FIG8_49_loss_metrics.png` | RealGARCH vs GJR-skew-t under four loss functions. RMSE gives the **opposite sign** to QLIKE on SPX, UKX and DAX — on UKX, RMSE says RealGARCH is 3.6% *worse* where QLIKE says 17.9% better (DM 4.33, p<0.0001). | Discussion — the loss function is not neutral |
 
 **Why these eight and not the others.** 1–2 defend the two methodological choices a
 referee will actually challenge (threshold selection, distributional fit). 3 is the only
@@ -93,7 +96,7 @@ Ranked by how close they came. The first is the one to promote if anything gets 
 
 ### Two things to do to these before they go in the manuscript
 
-1. **TAB4 is 91 rows — too long for a main-text table.** Filter to `confidence == 0.99`
+1. **TAB4 is 90 rows — too long for a main-text table.** Filter to `confidence == 0.99`
    (30 rows, one per index × model) for the paper and put the 97.5% and 95% rows in an
    appendix. The 99% level is where the models actually separate.
 2. **TAB6 has two regimes flagged `reportable = False`** — Volmageddon (n=53) and
@@ -130,6 +133,32 @@ Ranked by how close they came. The first is the one to promote if anything gets 
   in the results.
 - Per-index EVT diagnostics (`42_evt_diagnostics_*.csv`, ~420 KB each) and all forecast
   files — raw output, never printed.
+
+---
+
+## Two bugs found while verifying this selection (both fixed 2026-08-31)
+
+Checking the manifest's numbers against the CSVs turned up two real defects in
+`49_model_comparison.py`, not just documentation slips. Both are fixed and the affected
+figures regenerated; `49_basel.csv`, `49_mcs.csv`, `49_dm_pinball.csv` and
+`49_strict_window.csv` were byte-identical after the rerun, so no table changed.
+
+1. **`49_loss_metrics.png` carried a hard-coded title.** The caption read "On UKX, RMSE
+   says RealGARCH is 0.6% better; QLIKE says 19.3% (DM 6.46, p<0.0001)" as a frozen string
+   literal, while the bars were computed from the data. All three numbers were stale —
+   almost certainly from before the walk-forward RealGARCH and causal-scaling fixes. The
+   correct values are RMSE **−3.6%** (RealGARCH *worse*), QLIKE **+17.9%**, DM **4.33**.
+   The caption contradicted its own chart and would have put wrong numbers in the paper.
+   The title is now computed from the data, and the exhibit index is chosen from it rather
+   than hard-coded.
+2. **The headline figure mixed two evaluation windows.** `49_qlike_vs_breach.png` took its
+   y-axis (breach rate) from the strict common window but its x-axis (QLIKE) from
+   `47a_volatility_losses.csv`, the *unrestricted* file — so 8 of the 18 plotted cells had
+   a different sample on each axis, DAX worst at 3172 vs 2755 observations. The same `vol`
+   frame fed FIG8. Now loads the strict file, matching the fallback pattern already used
+   for the backtests. The effect on FIG4 is visually negligible (QLIKE moves at most 1.4%
+   relative, no ranking changes) — the conclusion never depended on it — but the figure is
+   now internally consistent and matches the tables beside it.
 
 ---
 
