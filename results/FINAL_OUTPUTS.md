@@ -14,7 +14,8 @@ fits live locally in `Datasets/06_REALIZED_MEASURES/`.
 Every exhibit here is now genuinely on the **strict common evaluation window**. That was
 not true of the first cut — see "What Maham's review changed" at the end. Files are renamed
 `FIG1_…` / `TAB1_…` in paper order; the original filename is kept so each traces back to
-`results/`.
+`results/`. The `FIG_`/`TAB_` prefixes exist only on Drive — the repo keeps the unprefixed
+names its scripts write, so do not rename the local files.
 
 > **Do not cite numbers from this document.** Cite the CSVs. This is a selection rationale,
 > and a prose summary will always be one regeneration behind the tables.
@@ -160,7 +161,8 @@ against the CSVs:
 **Fixed in response**
 - **Pinball DM count was wrong.** This document said 3 of 60; the CSV has **4**. Corrected.
 - **Exceedance clustering was misattributed.** This document said SPX and HSI; the
-  defensible reading is **UKX and HSI**. Corrected, with the SPX nuance stated.
+  defensible reading is **UKX and HSI**. Corrected, with the SPX nuance stated. (The project
+  tracker item 28.1 already had it right as {HSI, UKX} — the manifest was the outlier.)
 - **FIG3 was not on the strict window.** `43_var_breaches.png` demoted to the appendix
   list with the discrepancy documented, and the FIG3 slot given to the RealGARCH-t vs
   RealGARCH-skew-t exhibit Maham asked for.
@@ -174,8 +176,9 @@ against the CSVs:
   the two innovations, so the skew-t buys tail calibration at no cost in variance accuracy.
 - **"Basel green on three"** was already corrected to four earlier the same day.
 
-**Outstanding, not mine to edit**
-- `HANDOFF_TO_WRITERS.md` is owned by a teammate and lives outside this repo. It still
+**Outstanding, for whoever owns the writer handoff**
+- `HANDOFF_TO_WRITERS.md` is owned by a teammate and lives outside this repo, so it was not
+  edited. It still
   quotes **unrestricted** GJR QLIKE (0.2695, 0.2517, 0.1567, 0.1893, 0.2447, 0.1849) where
   the strict values are **0.2702, 0.2517, 0.1567, 0.1920, 0.2477, 0.1849**; still says
   3 of 60 for the pinball DM; and still carries the obsolete EVT full-sample-μ limitation.
