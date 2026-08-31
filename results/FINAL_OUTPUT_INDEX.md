@@ -52,6 +52,15 @@ some counts here differ from earlier drafts.
    to estimate a 1% breach rate from, so their rates are noise rather than evidence. Drop
    those rows or label them explicitly; do not let them into a headline comparison.
 
+## Which file to quote, if you go back to `results/tables/`
+
+Six tables ship in both flavours — `47a_volatility_losses`, `47b_var_backtests`,
+`48_crisis_by_index`, `48_crisis_pooled`, `48_degradation`, `48_volregime_pooled`. Where a
+`_strict` twin exists, **quote the twin.**
+
+One exception to watch: `49_basel.csv` is **already the strict table**; its loose twin is
+named `49_basel_unrestricted.csv`. There is no `49_basel_strict.csv` to look for.
+
 ## Notes
 
 - The `FIG_` and `TAB_` prefixes exist only here, to fix the reading order. The repository
