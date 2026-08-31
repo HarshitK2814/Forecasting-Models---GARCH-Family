@@ -28,5 +28,5 @@ determinism,GPD fit is bit-identical on repeat,True,
 determinism,seeded Acerbi-Szekely reproduces exactly,True,
 replication,GARCH-EVT breach counts match the earlier run,True,"{'SPX': 39, 'NDX': 49, 'UKX': 41, 'DAX': 41, 'NKY': 38, 'HSI': 22}"
 replication,RealGARCH breach counts match the earlier run,True,"{'SPX': 70, 'NDX': 71, 'UKX': 55, 'DAX': 51, 'NKY': 58, 'HSI': 36}"
-artefacts,tables written,True,42
-artefacts,figures written,True,16
+artefacts,tables written,True,43
+artefacts,figures written,True,18
