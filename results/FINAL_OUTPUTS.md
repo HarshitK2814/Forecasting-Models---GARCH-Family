@@ -190,10 +190,10 @@ against the CSVs:
 Every file in `Final Output/` matches `results/figures/` or `results/tables/` on GitHub
 `main` byte for byte, verified after upload.
 
-**Open item on Drive:** all 7 tables are in place, but 4 of the 8 figures (FIG3, FIG4,
-FIG7, FIG8) still need a manual upload — PNGs of that size cannot be pushed through the
-Drive tooling in use. `Datasets/00_DOCUMENTATION/ACTION_REQUIRED_upload_four_figures.md`
-has the file-by-file instruction. The repo copies are correct; this affects Drive only.
+**Drive sync is complete as of 2026-08-31.** All 8 figures and all 7 tables are present in
+`Final Output/` and every one was byte-size checked against the repo after upload. The four
+figures that could not be pushed through the tooling (FIG3, FIG4, FIG7, FIG8) were uploaded
+by hand and verified: 127,880 / 175,785 / 139,773 / 110,426 bytes respectively.
 
 Regenerate with the scripts in `Datasets/10_SCRIPTS/` (41–51). `51_final_release_exhibits.py`
 must run after 47 and 49, since it reads their strict-window output.
