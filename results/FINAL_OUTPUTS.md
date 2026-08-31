@@ -170,7 +170,8 @@ against the CSVs:
 - **RealGARCH-skew-t was missing.** Added as FIG3 and TAB7 via
   `Datasets/10_SCRIPTS/51_final_release_exhibits.py`, computed on paired dates. Reproduces
   Maham's numbers exactly: 2.209/1.578, 2.183/1.476, 1.682/1.224, 1.844/1.627,
-  1.897/1.636, 1.136/1.010.
+  1.897/1.636, 1.136/1.010. A detail worth using: QLIKE is essentially unchanged between
+  the two innovations, so the skew-t buys tail calibration at no cost in variance accuracy.
 - **"Basel green on three"** was already corrected to four earlier the same day.
 
 **Outstanding, not mine to edit**
