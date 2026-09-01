@@ -303,16 +303,23 @@ def main():
                          'COVID_Crash', 'Rate_Shock_2022'] if o in t.index]
     t = t.reindex(order)[MODELS]
     fig, ax = plt.subplots(figsize=(7.6, 3.6), constrained_layout=True)
-    im = ax.imshow(t.values, cmap='RdYlGn_r', vmin=0, vmax=max(6, np.nanmax(t.values)),
-                   aspect='auto')
+    vmax = max(6, np.nanmax(t.values))
+    im = ax.imshow(t.values, cmap='RdYlGn_r', vmin=0, vmax=vmax, aspect='auto')
     ax.set_xticks(range(len(MODELS))); ax.set_xticklabels(MODELS, fontsize=8, rotation=15)
     ax.set_yticks(range(len(t))); ax.set_yticklabels(t.index, fontsize=8)
     for i in range(len(t)):
         for j in range(len(MODELS)):
             v = t.values[i, j]
             if np.isfinite(v):
+                # RdYlGn_r passes through pale yellow around the middle of the
+                # range (v ~ 3-4 here), and pale yellow is light -- a raw value
+                # threshold (v > 3) put white text on exactly those cells and
+                # made them unreadable. Read the cell's actual rendered color
+                # and pick white/black from its luminance instead.
+                r, g, b, _ = im.cmap(im.norm(v))
+                lum = 0.299*r + 0.587*g + 0.114*b
                 ax.text(j, i, f'{v:.2f}', ha='center', va='center', fontsize=8,
-                        color='white' if v > 3 else '#222')
+                        color='white' if lum < 0.5 else '#222')
     fig.colorbar(im, ax=ax, label='breach rate %')
     ax.set_title('99% VaR breach rate by regime, pooled over six indices, common window. Target 1.00%.',
                  fontsize=9)
