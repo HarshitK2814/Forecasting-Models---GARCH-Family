@@ -8,6 +8,11 @@ intersection of the dates on which GARCH-EVT, GJR-skew-t and Realized GARCH all 
 valid forecast. That is what makes the numbers comparable across models, and it is why
 some counts here differ from earlier drafts.
 
+`FIG3` and `TAB7` narrow it once more: the two Realized GARCH variants are first paired on
+their own common dates, and that pairing is then intersected with the same window. Both
+steps are needed. The pairing makes the comparison fair; the intersection makes its
+RealGARCH-t baseline the number `TAB4` prints for the same cell.
+
 > **Cite the CSVs, not this file.** This is an index. Any prose summary of a result will
 > eventually fall behind the table it describes.
 >

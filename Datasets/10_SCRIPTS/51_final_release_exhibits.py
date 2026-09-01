@@ -17,6 +17,11 @@ EXHIBIT 1 - Realized GARCH innovation robustness
   99% breach rate on every index, which is what licenses the VaR = mu + sigma*q
   decomposition in the discussion.
 
+  The pair is then restricted to the strict three-model window W_i, not merely to
+  the two variants' own common dates. Pairing alone is a valid experiment but it
+  is not the window the rest of the release reports, and on NDX and UKX it admits
+  9 and 11 days that precede the 2013-09-30 start of sample B.
+
 EXHIBIT 2 - Quantile-regression calibration on the strict window
   45_qr_calibration.png is built from 44_qr_summary.csv, i.e. each specification's
   own forecast dates. That is correct as a within-QR diagnostic but it disagrees
@@ -54,13 +59,31 @@ def _valid(model, code):
     return f[f['Valid'].astype(bool)].set_index('Date').sort_index()
 
 
+def _strict_index(c):
+    """W_i - the same per-index window 47_evaluation builds for the strict tables.
+
+    Intersecting with GJR-skewt also reapplies the sample-B reference calendar that
+    47's common_window() imposes, which is what removes RealGARCH's pre-2013-09-30
+    head. That head is real: on NDX and UKX the RealGARCH file carries 9 and 11
+    valid days before sample B opens.
+    """
+    i = _valid('GARCH-EVT', c).index
+    for m in ('GJR-skewt', 'RealGARCH'):
+        i = i.intersection(_valid(m, c).index)
+    return i
+
+
 def realgarch_innovation():
     """RealGARCH-t vs RealGARCH-skew-t on identical dates, per index."""
     rows = []
     for c in INDICES:
         a, b = _valid('RealGARCH', c), _valid('RealGARCH_ST', c)
-        i = a.index.intersection(b.index)          # pair them, never compare on
-        a, b = a.loc[i], b.loc[i]                  # different sets of days
+        # Pair the two variants, then drop to the strict three-model window. The
+        # pairing alone is a fair experiment but it is not the paper's window: it
+        # let 9 NDX and 11 UKX pre-sample-B days in, so the RealGARCH-t baseline
+        # disagreed with the same cell of TAB4. Both steps, in this order.
+        i = a.index.intersection(b.index).intersection(_strict_index(c))
+        a, b = a.loc[i], b.loc[i]
         for col, alpha, lab in LEVELS:
             for name, d in (('RealGARCH-t', a), ('RealGARCH-skew-t', b)):
                 br = (d['Realized'] < d[col]).astype(int)
