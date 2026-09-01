@@ -11,7 +11,8 @@ Everything not in the Drive folder is still in this repository. Nothing was lost
 tables, 18 figures and 56 forecast files are all tracked in git, and the untracked model
 fits live locally in `Datasets/06_REALIZED_MEASURES/`.
 
-Every exhibit here is now genuinely on the **strict common evaluation window**. That was
+Every exhibit here is now genuinely on the **strict common evaluation window**, including
+FIG3/TAB7, which reached it one revision later than the rest. That was
 not true of the first cut — see "What the writing team's review changed" at the end. Files are renamed
 `FIG1_…` / `TAB1_…` in paper order; the original filename is kept so each traces back to
 `results/`. The `FIG_`/`TAB_` prefixes exist only on Drive — the repo keeps the unprefixed
@@ -169,6 +170,16 @@ against the CSVs:
 - **FIG7 was not on the strict window.** Regenerated from `47b_var_backtests_strict.csv`
   as `51_qr_calibration_strict.png`; DAX QR-Range now reads 1.049% and SPX 1.515%, matching
   TAB4/TAB5 exactly.
+- **FIG3/TAB7 paired the two RealGARCH variants but never intersected that pairing with
+  the strict window** — caught by Absar on 2026-09-01, after the rest of the release was
+  signed off. The pairing was statistically fair, but it was not the paper's sample: on NDX
+  and UKX it carried 9 and 11 RealGARCH days from 2013-09-13 to 09-27, all of them before
+  sample B opens on 2013-09-30. The RealGARCH-t baseline therefore disagreed with TAB4's
+  own cell (NDX 2.183 vs 2.189, UKX 1.682 vs 1.688). Relabelling the exhibit
+  "pairwise-common RealGARCH dates" was the other option on the table and was rejected: an
+  accurate label on an out-of-sample-window number is still an out-of-sample-window number.
+  `51_final_release_exhibits.py` now intersects with W_i. All 18 RealGARCH-t cells match
+  TAB4 exactly. The result is unchanged — skew-t still cuts the 99% breach rate on 6 of 6.
 - **RealGARCH-skew-t was missing.** Added as FIG3 and TAB7 via
   `Datasets/10_SCRIPTS/51_final_release_exhibits.py`, computed on paired dates. Reproduces
   the review's numbers exactly: 2.209/1.578, 2.183/1.476, 1.682/1.224, 1.844/1.627,
